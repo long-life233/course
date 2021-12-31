@@ -677,4 +677,8 @@ https://v3.cn.vuejs.org/guide/typescript-support.html#%E6%B3%A8%E8%A7%A3-props
 3.todos添加数据
 
 在app.vue中定义添加todo的方法，将方法作为属性传递给header组件
+
+4.todos鼠标移入高亮显示操作
+
+
 ```

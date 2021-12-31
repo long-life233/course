@@ -1,15 +1,15 @@
 <template>
-    <li>
+    <li @mouseenter="moveIn" @mouseleave="moveOut" :style="'background-color:'+liBgColor">
         <label>
             <input :checked="todo?.isCompleted" type="checkbox" />
             <span>{{todo?.title}}</span>
         </label>
-        <button class="btn btn-danger">删除</button>
+        <button class="btn btn-danger" v-show="flag">删除</button>
     </li>
 </template>
 
 <script lang="ts">
-import { defineComponent,PropType  } from 'vue';
+import { computed, defineComponent,PropType ,ref } from 'vue';
 import Todo from '../types/todo';
 
 export default defineComponent({
@@ -17,6 +17,29 @@ export default defineComponent({
         // todo: Object as ()=> Todo // 函数返回的是Todo类型
         todo: {
             type: Object as PropType<Todo>
+        }
+    },
+    setup(){
+        // 定义移入标识，true代表移入
+        const flag = ref(false)
+        // 定义移入移出的事件方法
+        const moveIn = ()=>{
+            flag.value = true
+        }
+        // 定义移入移出的事件方法
+        const moveOut = ()=>{
+            flag.value = false
+        }
+        // li背景颜色
+        const liBgColor = computed(()=>{
+            return flag.value?'#ddd':''
+        })
+
+        return {
+            flag,
+            liBgColor,
+            moveIn,
+            moveOut
         }
     }
 });
