@@ -1,7 +1,7 @@
 <template>
     <li @mouseenter="moveIn" @mouseleave="moveOut" :style="'background-color:'+liBgColor">
         <label>
-            <input :checked="todo?.isCompleted" type="checkbox" />
+            <input :checked="todo?.isCompleted" @change="changeCheck(index)" type="checkbox" />
             <span>{{todo?.title}}</span>
         </label>
         <button class="btn btn-danger" v-show="flag" @click="deleteTodo(index)">删除</button>
@@ -41,13 +41,15 @@ export default defineComponent({
 
         // 接收祖组件app传递过来的deleteTodo方法
         const  deleteTodo:any = inject('deleteTodo')
-
+        // 接收祖组件app传递过来的改变check选中方法
+        const changeCheck:any = inject('changeCheck')
         return {
             flag,
             liBgColor,
             moveIn,
             moveOut,
-            deleteTodo
+            deleteTodo,
+            changeCheck
         }
     }
 });

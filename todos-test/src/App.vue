@@ -3,13 +3,13 @@
     <div class="todo-wrap">
       <Header :addTodo="addTodo"></Header>
       <List :todos="todos" ></List>
-      <Footer></Footer>
+      <Footer :footerData="footerData" :deleteCheck="deleteCheck" :checkAll="checkAll"></Footer>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs,provide } from 'vue';
+  import { defineComponent, reactive, toRefs,provide, computed, onMounted, watch } from 'vue';
   import Footer from "./components/Footer.vue"
   import Header from "./components/Header.vue"
   import List from "./components/List.vue"
@@ -42,9 +42,66 @@
       }
       // 为孙组件（app-》list-》item）provide一个删除todo方法
       provide('deleteTodo',deleteTodo)
+
+      // 定义一个改变check的方法
+      const changeCheck = (index:number)=>{
+        state.todos[index].isCompleted = !state.todos[index].isCompleted
+      }
+      provide('changeCheck',changeCheck)
+
+      // 计算Footer数据，包括是否全选，已完成数，总todos数
+      const footerData = computed(()=>{
+        // todos check选中的个数
+        const checkNum = state.todos.filter(item=>item.isCompleted).length
+        // todos所有的个数
+        const allNum = state.todos.length
+        // 是否全选
+        let isCheckAll = false
+        if(allNum === 0) {
+          isCheckAll = false
+        }else{
+          isCheckAll = checkNum === allNum
+        }
+        return {
+          checkNum,
+          allNum,
+          isCheckAll
+        }
+      })
+
+      // 清除所有选中方法
+      const deleteCheck=()=>{
+        const notCheck = state.todos.filter(item=>item.isCompleted===false)
+        state.todos = notCheck
+      }
+
+      // checkAll方法
+      const checkAll = (checkAll:boolean)=>{
+        state.todos.forEach(item=>item.isCompleted = checkAll)
+      }
+
+      // 缓存数据
+      onMounted(()=>{
+        let todos = localStorage.getItem('todos') as string
+        if(todos){
+          state.todos = JSON.parse(todos)
+        }
+      })
+      // 监视todos数据，发生变化就缓存到浏览器
+      watch(()=>state.todos,()=>{
+        console.log(123);
+
+        localStorage.setItem('todos',JSON.stringify(state.todos))
+      },{
+        deep:true
+      })
+
       return {
         ...toRefs(state),
-        addTodo
+        addTodo,
+        deleteCheck,
+        footerData,
+        checkAll
       }
     }
   });

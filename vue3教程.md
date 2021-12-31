@@ -685,4 +685,17 @@ https://v3.cn.vuejs.org/guide/typescript-support.html#%E6%B3%A8%E8%A7%A3-props
 5.todos删除数据
 
 在app.vue中定义删除todo的方法，使用provide/inject将方法作传递给item组件
+
+6.全选全不选操作
+
+在app里计算已选数，总数，是否全选；
+把这些数据包在一个对象传给footer里。
+
+7.清除所有选中数据
+
+app里定义方法，传给footer
+
+8.使用浏览器缓存
+
+监视state.todos的变化，保存到localStorage中
 ```

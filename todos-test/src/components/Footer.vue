@@ -1,12 +1,12 @@
 <template>
     <div class="todo-footer">
         <label>
-            <input type="checkbox" />
+            <input type="checkbox" :checked="footerData.isCheckAll" @change="checkAll(!footerData.isCheckAll)"/>
         </label>
         <span>
-            <span>已完成0</span> / 全部2
+            <span>已完成{{footerData.checkNum}}</span> / 全部{{footerData.allNum}}
         </span>
-        <button class="btn btn-danger">清除已完成任务</button>
+        <button class="btn btn-danger" @click="delCheck">清除已完成任务</button>
     </div>
 </template>
 
@@ -14,7 +14,30 @@
     import { defineComponent } from 'vue';
 
     export default defineComponent({
-
+      props:{
+        footerData:{
+          type:Object,
+          default:()=>{
+            return {}
+          }
+        },
+        deleteCheck:{
+          type:Function,
+          required:true
+        },
+        checkAll:{
+          type:Function,
+          required:true
+        }
+      },
+      setup(props){
+        const delCheck = ()=>{
+          props.deleteCheck()
+        }
+        return {
+          delCheck
+        }
+      }
     });
 </script>
 
