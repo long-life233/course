@@ -4,12 +4,12 @@
             <input :checked="todo?.isCompleted" type="checkbox" />
             <span>{{todo?.title}}</span>
         </label>
-        <button class="btn btn-danger" v-show="flag">删除</button>
+        <button class="btn btn-danger" v-show="flag" @click="deleteTodo(index)">删除</button>
     </li>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent,PropType ,ref } from 'vue';
+import { computed, defineComponent,PropType ,ref ,inject} from 'vue';
 import Todo from '../types/todo';
 
 export default defineComponent({
@@ -17,6 +17,10 @@ export default defineComponent({
         // todo: Object as ()=> Todo // 函数返回的是Todo类型
         todo: {
             type: Object as PropType<Todo>
+        },
+        index:{
+            type:Number,
+            required:true
         }
     },
     setup(){
@@ -35,11 +39,15 @@ export default defineComponent({
             return flag.value?'#ddd':''
         })
 
+        // 接收祖组件app传递过来的deleteTodo方法
+        const  deleteTodo:any = inject('deleteTodo')
+
         return {
             flag,
             liBgColor,
             moveIn,
-            moveOut
+            moveOut,
+            deleteTodo
         }
     }
 });

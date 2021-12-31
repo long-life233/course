@@ -2,14 +2,14 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <Header :addTodo="addTodo"></Header>
-      <List :todos="todos"></List>
+      <List :todos="todos" ></List>
       <Footer></Footer>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs } from 'vue';
+  import { defineComponent, reactive, toRefs,provide } from 'vue';
   import Footer from "./components/Footer.vue"
   import Header from "./components/Header.vue"
   import List from "./components/List.vue"
@@ -36,7 +36,12 @@
       const addTodo = (todo:InterfaceTodo)=>{
         state.todos.unshift(todo)
       }
-
+      // 定义一个删除todo的方法
+      const deleteTodo = (index:number)=>{
+        state.todos.splice(index,1)
+      }
+      // 为孙组件（app-》list-》item）provide一个删除todo方法
+      provide('deleteTodo',deleteTodo)
       return {
         ...toRefs(state),
         addTodo
