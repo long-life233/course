@@ -1,23 +1,5 @@
-### 资料 
-
-官网
-https://v3.cn.vuejs.org/
-
-笔记
-https://24kcs.github.io/vue3_study/
-https://juejin.cn/post/7023275396388880414
-
-视频
-typescript+vue3
-https://www.bilibili.com/video/BV1ra4y1H7ih
-vue2+vue3
-https://www.bilibili.com/video/BV1Zy4y1K7SH
-
 ### 创建vue3项目
 使用脚手架创建
-
-### 组合式API
-
 
 ### defineComponent函数
 ```html
@@ -110,7 +92,7 @@ export default {
 
 `const proxy = reactive(obj): 接收一个普通对象然后返回该普通对象的响应式代理器对象`
 
-操作proxy的属性都会触发模板的响应式更新（直接操作proxy把它的引用地址给改了，还触发啥响应式)
+操作proxy的属性都会触发模板的响应式更新（但如果直接操作proxy把它的引用地址给改了，还触发啥响应式)
 ```html
 <template>
   <h2>name: {{state.name}}</h2>
