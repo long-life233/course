@@ -1,7 +1,7 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header></Header>
+      <Header :addTodo="addTodo"></Header>
       <List :todos="todos"></List>
       <Footer></Footer>
     </div>
@@ -32,9 +32,14 @@
           {id:3,title:'奥迪',isCompleted:false},
         ]
       })
+      // 定义一个添加todo的方法
+      const addTodo = (todo:InterfaceTodo)=>{
+        state.todos.unshift(todo)
+      }
 
       return {
-        ...toRefs(state)
+        ...toRefs(state),
+        addTodo
       }
     }
   });

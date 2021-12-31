@@ -672,4 +672,9 @@ https://v3.cn.vuejs.org/guide/typescript-support.html#%E7%B1%BB%E5%9E%8B%E5%A3%B
           }
       });
 https://v3.cn.vuejs.org/guide/typescript-support.html#%E6%B3%A8%E8%A7%A3-props
+
+
+3.todos添加数据
+
+在app.vue中定义添加todo的方法，将方法作为属性传递给header组件
 ```
