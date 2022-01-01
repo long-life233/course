@@ -1,5 +1,20 @@
 module.exports = {
     title: '教程',
+    // plugins: [
+    //     [
+    //         '@vuepress/last-updated',
+    //         {
+    //             transformer: (timestamp, lang) => {
+    //                 // 不要忘了安装 moment
+    //                 const moment = require('moment')
+    //                 moment.locale(lang)
+    //                 // 太装了
+    //                 // return moment(timestamp).format('YYYY年MM月DD日 HH:mm:ss 星期E'); 
+    //                 return moment(timestamp).format('MMMM Do YYYY, h:mm:ss a')
+    //             }
+    //         }
+    //     ]
+    // ],
     themeConfig: {
         logo: '/logo.png',
         nav: [
@@ -8,6 +23,7 @@ module.exports = {
         // displayAllHeaders: true, // 默认值：false
         sidebarDepth: 2,
         lastUpdated: '最后更新于', // string | boolean
+        
         sidebar: {
             '/vue3/': [
                 {
