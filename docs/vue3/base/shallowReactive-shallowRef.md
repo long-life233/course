@@ -1,4 +1,4 @@
-### shallowReactive和shallowRef
+# shallowReactive和shallowRef
 shallowReactive与shallowRef
   shallowReactive: 只处理了对象内最外层属性的响应式(改变第一层属性，会触发响应式)
   shallowRef: 创建一个跟踪自身 .value 变化的 ref，但不会使其值也变成响应式的。（改变.value会触发响应式，但改变.value.xx不会触发响应式）

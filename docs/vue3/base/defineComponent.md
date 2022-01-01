@@ -1,5 +1,5 @@
 
-### defineComponent函数
+# defineComponent函数
 ```html
 <script lang="ts">
     // defineComponent函数，目的是定义一个组件，内部可以传入一个配置对象

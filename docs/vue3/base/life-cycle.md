@@ -1,5 +1,5 @@
 
-### 生命周期
+# 生命周期
 ```js
 beforeCreate -> 使用 setup()
 created -> 使用 setup()

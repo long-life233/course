@@ -1,4 +1,4 @@
-### readonly 与 shallowReadonly
+# readonly 与 shallowReadonly
 readonly:
 深度只读数据
 获取一个对象 (响应式或纯对象) 或 ref 并返回原始代理的只读代理。

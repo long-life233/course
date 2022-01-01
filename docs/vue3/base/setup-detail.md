@@ -1,4 +1,4 @@
-### setup细节
+# setup细节
 1. 在beforeCreate钩子之前执行；此时组件对象还没有创建
 
 2. 不能使用this

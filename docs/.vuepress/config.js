@@ -3,32 +3,46 @@ module.exports = {
     themeConfig: {
         logo: '/logo.png',
         nav: [
-            { text: 'vue3', link: '/vue3/1.创建vue3项目.md' },
-            { text: 'blender', link: '/blender/Blender教程.md' }
+            { text: 'vue3', link: '/vue3/' }
         ],
+        // displayAllHeaders: true, // 默认值：false
+        sidebarDepth:2,
+        lastUpdated: '最后更新于', // string | boolean
         sidebar: {
-            '/vue3/':[
-                '1.创建vue3项目.md',
-                '2.defineComponent函数.md',
-                '3.setup.md',
-                '4.ref.md',
-                '5.reactive.md',
-                '6.比较vue2和vue3的响应式.md',
-                '7.setup细节.md',
-                '8.计算属性与监视函数.md',
-                '9.生命周期.md',
-                '10.自定义hook.md',
-                '11.toRefs.md',
-                '12.shallowReactive和shallowRef.md',
-                '13.readonly 与 shallowReadonly.md',
-                '14.新组件.md',
-                '15.toRaw,markRaw,toRef,customRef,provide_inject.md',
-                '16.响应式数据的判断.md',
-                '17.todoList练习.md',
+            '/vue3/': [
+                {
+                    title: "基础部分",
+                    collapsable: true,
+                    children: [
+                        '',
+                        'base/compare-vue2-and-vue3',
+                        'base/computed-watch',
+                        'base/create-vue3-project',
+                        'base/defineComponent',
+                        'base/hook',
+                        'base/life-cycle',
+                        'base/new-compoent',
+                        'base/reactive',
+                        'base/readonly-shallowReadonly',
+                        'base/ref',
+                        'base/responsvie',
+                        'base/setup-detail',
+                        'base/setup',
+                        'base/shallowReactive-shallowRef',
+                        'base/toRaw-markRaw-toRef-customRef-provide-inject',
+                        'base/toRefs'
+
+                    ]
+                },
+                {
+                    title:"练习",
+                    collapsable:true,
+                    children:[
+                        'project/todoList-exercise'
+                    ]
+                }
             ],
-            '/blender/':[
-                'Blender教程.md'
-            ]
+            
         }
     },
     description: 'thunderpowers-course',// 网站的描述，它将会以 <meta> 标签渲染到当前页面的 HTML 中
