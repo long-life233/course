@@ -3,7 +3,8 @@ module.exports = {
     themeConfig: {
         logo: '/logo.png',
         nav: [
-            { text: 'vue3', link: '/vue3/' }
+            { text: 'vue3', link: '/vue3/' },
+            { text: 'blender', link: '/blender/' }
         ],
         sidebarDepth: 2,
         lastUpdated: '最后更新于', // string | boolean
@@ -42,7 +43,9 @@ module.exports = {
                     ]
                 }
             ],
-
+            '/blender/':[
+                ''
+            ]
         }
     },
     description: 'thunderpowers-course',// 网站的描述，它将会以 <meta> 标签渲染到当前页面的 HTML 中
