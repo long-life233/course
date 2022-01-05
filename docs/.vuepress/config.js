@@ -1,10 +1,10 @@
 module.exports = {
-    title: '教程',
+    title: '启迪',
     themeConfig: {
         logo: '/logo.png',
         nav: [
             { text: 'vue3', link: '/vue3/' },
-            { text: 'blender', link: '/blender/' }
+            { text: 'talk', link: '/thinking/' }
         ],
         sidebarDepth: 2,
         lastUpdated: '最后更新于', // string | boolean
@@ -44,12 +44,12 @@ module.exports = {
                     ]
                 }
             ],
-            '/blender/':[
+            '/thinking/':[
                 ''
             ]
         }
     },
-    description: 'thunderpowers-course',// 网站的描述，它将会以 <meta> 标签渲染到当前页面的 HTML 中
+    description: "lusang's blog",// 网站的描述，它将会以 <meta> 标签渲染到当前页面的 HTML 中
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }],// 浏览器标签的icon，/表示在public目录下去找
     ]
