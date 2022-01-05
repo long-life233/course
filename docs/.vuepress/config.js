@@ -17,6 +17,7 @@ module.exports = {
                     children: [
                         '',
                         'base/compare-vue2-and-vue3',
+                        'base/use-v-model-in-diy-component',
                         'base/computed-watch',
                         'base/create-vue3-project',
                         'base/defineComponent',
