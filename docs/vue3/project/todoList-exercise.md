@@ -1,4 +1,4 @@
-# todoList练习
+## todoList练习1
 ```
 1.拆分组件
 
@@ -62,3 +62,5 @@ app里定义方法，传给footer
 
 监视state.todos的变化，保存到localStorage中
 ```
+
+## todoList练习2
