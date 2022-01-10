@@ -6,9 +6,8 @@ const props = defineProps({
   index:Number
 })
 
-
-
 const changeCheck = inject('changeCheck')
+const deleteItem = inject('deleteItem')
 
 </script>
 
@@ -18,7 +17,7 @@ const changeCheck = inject('changeCheck')
       <input @change="changeCheck($event.target.checked,index)" :checked="item.isCheck" type="checkbox" />
       <span>{{item.title}}</span>
     </label>
-    <button class="btn btn-danger" style="display:none">删除</button>
+    <button @click="deleteItem(index)" class="btn btn-danger">删除</button>
   </li>
 </template>
 
