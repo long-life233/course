@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 const emit = defineEmits(['checkAll','deleteComplete'])
-defineProps({
+const prop = defineProps({
   completeNum:Number,
   allNum:Number,
   isCheckAll:Boolean
 })
+console.log(prop,"prop");
 const checkAll = (value)=>{
   emit('checkAll',value)
 }

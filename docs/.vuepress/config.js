@@ -13,7 +13,7 @@ module.exports = {
             '/vue3/': [
                 {
                     title: "基础部分",
-                    collapsable: true,
+                    collapsable: false,
                     children: [
                         '',
                         'base/compare-vue2-and-vue3',
@@ -38,14 +38,23 @@ module.exports = {
                 },
                 {
                     title: "练习",
-                    collapsable: true,
+                    collapsable: false,
                     children: [
                         'project/todoList-exercise'
                     ]
                 }
             ],
             '/thinking/':[
-                ''
+                {
+                    title:"练习写作",
+                    collapsable:false,
+                    children:[
+                        '',
+                        'a/write.md',
+                        'a/vue3-todoList-summary'
+                    ]
+                }
+               
             ]
         }
     },
