@@ -50,8 +50,10 @@ module.exports = {
                     collapsable:false,
                     children:[
                         '',
-                        'a/write.md',
-                        'a/vue3-todoList-summary'
+                        'article/2022.1.11-write',
+                        'article/2022.1.11-vue3-todoList-summary',
+                        'article/2022.1.11-community-project-summary',
+                        'article/2021.1.11-the-little-red-writing-book-exercise'
                     ]
                 }
                
