@@ -66,5 +66,36 @@ module.exports = {
     description: "lusang's blog",// 网站的描述，它将会以 <meta> 标签渲染到当前页面的 HTML 中
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }],// 浏览器标签的icon，/表示在public目录下去找
-    ]
+    ],
+    plugins: [
+        ['demo-code', {
+            jsLibs: [ // 引入的js库
+                // umd
+                'https://unpkg.com/tua-storage/dist/TuaStorage.umd.js',
+            ],
+            cssLibs: [ // 引入的css库
+                'https://unpkg.com/animate.css@3.7.0/animate.min.css',
+            ],
+            showText: '显示完整代码',
+            hideText: '收起代码',
+            styleStr: 'text-decoration: underline;',
+            minHeight: 200,
+            onlineBtns: {
+                codepen: true,
+                jsfiddle: true,
+                codesandbox: true,
+            },
+            jsfiddle: {
+                framework: 'library/pure', // default
+                // framework: 'vue/2.6.11',
+            },
+            codesandbox: {
+                deps: { 'lodash': 'latest' },
+                json: '',
+                query: '',
+                embed: '',
+            },
+            demoCodeMark: 'demo' // ::: 标记
+        }]
+    ],
 }
