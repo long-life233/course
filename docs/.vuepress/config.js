@@ -56,7 +56,8 @@ module.exports = {
                         'article/2021.1.11-the-little-red-writing-book-exercise',
                         'article/2022.1.12-big-error-in-sourceTree',
                         'article/2022.1.12-my-and-other',
-                        'article/2022.1.13-good-html'
+                        'article/2022.1.13-good-html',
+                        'article/2022.1.14-if-she-is-better-than-me'
                     ]
                 }
                
