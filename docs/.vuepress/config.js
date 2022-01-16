@@ -6,7 +6,7 @@ module.exports = {
             { text: 'vue3', link: '/vue3/' },
             { text: 'talk', link: '/thinking/' }
         ],
-        sidebarDepth: 2,
+        sidebarDepth: 3,
         lastUpdated: '最后更新于', // string | boolean
         
         sidebar: {
@@ -57,7 +57,8 @@ module.exports = {
                         'article/2022.1.12-big-error-in-sourceTree',
                         'article/2022.1.12-my-and-other',
                         'article/2022.1.13-good-html',
-                        'article/2022.1.14-if-she-is-better-than-me'
+                        'article/2022.1.14-if-she-is-better-than-me',
+                        'article/2022.1.16-0-base-front-end'
                     ]
                 }
                
