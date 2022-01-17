@@ -58,7 +58,9 @@ module.exports = {
                         'article/2022.1.12-my-and-other',
                         'article/2022.1.13-good-html',
                         'article/2022.1.14-if-she-is-better-than-me',
-                        'article/2022.1.16-0-base-front-end'
+                        'article/2022.1.16-0-base-front-end',
+                        'article/2022.1.17-css-layout',
+                        'article/2022.1.17-js-advanced'
                     ]
                 }
                
