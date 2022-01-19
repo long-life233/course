@@ -60,7 +60,8 @@ module.exports = {
                         'article/2022.1.14-if-she-is-better-than-me',
                         'article/2022.1.16-0-base-front-end',
                         'article/2022.1.17-css-layout',
-                        'article/2022.1.17-js-advanced'
+                        'article/2022.1.17-js-advanced',
+                        'article/2022.1.20-love-you-feel-sad'
                     ]
                 }
                
