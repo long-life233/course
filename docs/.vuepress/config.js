@@ -4,6 +4,7 @@ module.exports = {
         logo: '/logo.png',
         nav: [
             { text: 'vue3', link: '/vue3/' },
+            { text:'java',link:'/java/' },
             { text: 'talk', link: '/thinking/' }
         ],
         sidebarDepth: 3,
@@ -66,6 +67,16 @@ module.exports = {
                     ]
                 }
                
+            ],
+            '/java/':[
+                {
+                    title:"基础",
+                    collapsable:false,
+                    children:[
+                        '',
+                        'article/one-day'
+                    ]
+                }
             ]
         }
     },
