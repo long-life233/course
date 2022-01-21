@@ -62,7 +62,8 @@ module.exports = {
                     collapsable:false,
                     children:[
                         '',
-                        'article/one-day'
+                        'article/1-day',
+                        'article/2-day'
                     ]
                 }
             ],
