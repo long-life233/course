@@ -63,7 +63,9 @@ module.exports = {
                     children:[
                         '',
                         'article/1-day',
-                        'article/2-day'
+                        'article/2-day',
+                        'article/3-day',
+                        'article/4-day'
                     ]
                 }
             ],
@@ -73,7 +75,8 @@ module.exports = {
             ],
             '/sundry/': [
                 '',
-                'article/2022.1.12-big-error-in-sourceTree'
+                'article/2022.1.12-big-error-in-sourceTree',
+                'article/2022.1.24-read-book-meaning'
             ],
             '/other/': [
                 '',
