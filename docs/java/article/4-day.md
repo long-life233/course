@@ -1,97 +1,243 @@
-# 面向对象编程（上）2
+# 面向对象编程（中）
 
-## this的使用
+## 继承性
 
-this是什么
-```
-它在方法内部使用，即这个方法所属对象的引用
-
-它在构造器内部使用，表示该构造器正在初始化的对象
-
-this 可以调用类的属性、方法和构造器
-```
-this调用本类构造器
 ```java
-class Person{ // 定义Person类
-    private String name ;
-    private int age ;
-    public Person(){ // 无参构造器
-        System.out.println("新对象实例化") ;
-    }
-    public Person(String name){
-        this(); // 调用本类中的无参构造器
-        this.name = name ;
-    }
-    public Person(String name,int age){
-        this(name) ; // 调用有一个参数的构造器
-        this.age = age;
-    }
-    public String getInfo(){
-        return "姓名：" + name + "，年龄：" + age ;
+class Person {
+    public String name;
+    public int age;
+    public Date birthDate;
+
+    public String getInfo() {
+        return "xx";
     }
 }
-```
-> 注意：可以在类的构造器中使用"this(形参列表)"的方式，调用本类中重载的其他的构造器！
 
-## 关键字：package、import的使用
-
-- package语句作为Java源文件的第一条语句，指明该文件中定义的类所在
-的包。(若缺省该语句，则指定为无名包)。它的格式为：
-`package 顶层包名.子包名;`
-
-举例：pack1/pack2/PackageTest.java
-```java
-package pack1.pack2; //指定类PackageTest属于包pack1.pack2
-public class PackageTest{
-    public void display(){
-        System.out.println("in method display()");
-    }
+class Student extends Person {
+    public String school;
 }
 ```
-- 包对应于文件系统的目录，package语句中，用 “.” 来指明包(目录)的层次
-- 包通常用小写单词标识。通常使用所在公司域名的倒置：com.atguigu.xxx
 
-包的作用
+## 方法重写
 
-- 包帮助管理大型软件系统：将功能相近的类划分到同一个包中。
-
-- 包可以包含类和子包，划分项目层次，便于管理
-
-- 解决类命名冲突的问题
-
-- 控制访问权限
-
-## JDK中主要的包介绍
-
-- java.lang--包含一些Java语言的核心类，如String、Math、Integer、 System和Thread，提供常用功能
-- java.net----包含执行与网络相关的操作的类和接口
-- java.io ----包含能提供多种输入/输出功能的类。
-- java.util----包含一些实用工具类，如定义系统特性、接口的集合框架类、使用与日期日历相关的函数。
-- java.text----包含了一些java格式化相关的类
-- java.sql----包含了java进行JDBC数据库编程的相关类/接口
-- java.awt----包含了构成抽象窗口工具集（abstract window toolkits）的多个类，这些类被用来构建和管理应用程序的图形用户界面(GUI)。 B/S C/S
-
-## 关键字import
-
-- 为使用定义在不同包中的Java类，需用import语句来引入指定包层次下所需要的类或全部类(.*)。import语句告诉编译器到哪里去寻找类。
-- 语法格式
-`import 报名.类名;`
-- 应用举例：
-```java
-import pack1.pack2.Test; //import pack1.pack2.*;表示引入pack1.pack2包中的所有结构
-public class PackTest{
-    public static void main(String args[]){
-        Test t = new Test(); //Test类在pack1.pack2包中定义
-        t.display();
-    } 
-}
 ```
+定义：
+
+    在子类中可以根据需要对从父类中继承来的方法进行改造，也称
+    为方法的重置、覆盖。在程序执行时，子类的方法将覆盖父类的方法。
+
+要求：
+
+    1. 子类重写的方法必须和父类被重写的方法具有相同的方法名称、参数列表
+    2. 子类重写的方法的返回值类型不能大于父类被重写的方法的返回值类型
+    3. 子类重写的方法使用的访问权限不能小于父类被重写的方法的访问权限
+            子类不能重写父类中声明为private权限的方法
+
+    4. 子类方法抛出的异常不能大于父类被重写方法的异常
+
+ 注意：
+
+    子类与父类中同名同参数的方法必须同时声明为非static的(即为重写)，或者同时声明为
+    static的（不是重写）。因为static方法是属于类的，子类无法覆盖父类的方法。
+```
+
+## 四种访问权限修饰符
+```
+修饰符      类内部      同一个包    不同包的子类    同一个工程
+private     Yes
+(缺省)      Yes         Yes
+protected   Yes         Yes         Yes
+public      Yes         Yes         Yes             Yes
+```
+
+## 关键字：super
+
+```
+super可用于访问父类中定义的属性
+
+super可用于调用父类中定义的成员方法
+
+super可用于在子类构造器中调用父类的构造器
+
 注意：
-1. 在源文件中使用import显式的导入指定包下的类或接口
-2. 声明在包的声明和类的声明之间。
-3. 如果需要导入多个类或接口，那么就并列显式多个import语句即可
-4. 举例：可以使用java.util.*的方式，一次性导入util包下所有的类或接口。
-5. 如果导入的类或接口是java.lang包下的，或者是当前包下的，则可以省略此import语句。
-6. 如果在代码中使用不同包下的同名的类。那么就需要使用类的全类名的方式指明调用的是哪个类。
-7. 如果已经导入java.a包下的类。那么如果需要使用a包的子包下的类的话，仍然需要导入。
-8. import static组合的使用：调用指定类或接口下的静态的属性或方法
+
+尤其当子父类出现同名成员时，可以用super表明调用的是父类中的成员
+super的追溯不仅限于直接父类
+```
+
+关键字super举例
+```java
+class Person {
+    protected String name = "张三";
+    protected int age;
+    public String getInfo() {
+        return "Name: " + name + "\nage: " + age;
+    }
+}
+class Student extends Person {
+    protected String name = "李四";
+    private String school = "New Oriental";
+
+    public String getSchool() {
+        return school;
+    }
+
+    public String getInfo() {
+        // ===========================================
+        return super.getInfo() + "\nschool: " + school;
+        // ===========================================
+    }
+}
+```
+
+调用父类构造器
+```java
+public class Person {
+    private String name;
+    private int age;
+    private Date birthDate;
+
+    public Person(String name, int age, Date d) {
+        this.name = name;
+        this.age = age;
+        this.birthDate = d;
+    }
+
+    public Person(String name, int age) {
+        this(name, age, null);
+    }
+
+    public Person(String name, Date d) {
+        this(name, 30, d);
+    }
+
+    public Person(String name) {
+        this(name, 30);
+    }
+}
+```
+
+## 多态
+其实很简单，就是你规定一个对象是什么类型，然后你用一个更大的类型来描述这个对象，也是可以的
+
+`Person p = new Student()`
+
+## instanceof 
+判断一个实例是不是属于这个类型。如果是属于a类型，那么大于a的类型也属于了。
+
+`new Student() instanceof Object`
+
+## 对象类型转换
+```java
+// 基本数据类型的Casting： 
+//     自动类型转换：小的数据类型可以自动转换成大的数据类型
+//     如long g=20; double d=12.0f 
+//     
+//     强制类型转换：可以把大的数据类型强制转换(casting)成小的数据类型
+//     如 float f=(float)12.0; int a=(int)1200L
+
+// Java对象的强制类型转换
+
+Object obj = "Hello";
+String objStr = (String) obj;
+```
+还有个例子
+```java
+public class Test {
+    public void method(Person e) { // 设Person类中没有getschool() 方法
+    // System.out.pritnln(e.getschool()); //非法,编译时错误
+        if (e instanceof Student) {
+            Student me = (Student) e; // 将e强制转换为Student类型
+            System.out.pritnln(me.getschool());
+        }
+    }
+
+    public static void main(String[] args) {
+        Test t = new Test();
+        Student m = new Student();
+        t.method(m);
+    }
+}
+```
+
+## Object类使用
+
+Object类中的主要结构
+
+```
+NO.         方法名称                             类型        描述
+1       public  Object()                        构造器      构造器
+2       public boolean equals(Object obj)       普通方法    对象比较
+3       public int hashCode()                   普通方法    取得Hash码 
+4       public String toString()                普通方法    对象打印时调用
+```
+
+## ==操作符与equals方法
+
+- 基本类型比较值:只要两个变量的值相等，即为true
+    - `int a=5; if(a==6){…}`
+    - 引用类型比较引用(是否指向同一个对象)：只有指向同一个对象时，==才返回true。
+```java
+Person p1=new Person();
+Person p2=new Person();
+if (p1==p2){…}
+```
+
+equals方法
+
+- equals()：所有类都继承了Object，也就获得了equals()方法。还可以重写。
+- 只能比较引用类型，其作用与“==”相同,比较是否指向同一个对象。
+- 格式:obj1.equals(obj2)
+
+- 特例：当用equals()方法进行比较时，对类File、String、Date及包装类（Wrapper Class）来说，是比较类型及内容而不考虑引用的是否是同一个对象；
+    - 原因：在这些类中重写了Object类的equals()方法。
+
+
+## toString()方法
+
+- toString()方法在Object类中定义，其返回值是String类型，返回类名和它的引用地址。
+- 在进行String与其它类型数据的连接操作时，自动调用toString()方法
+```java
+Date now=new Date();
+System.out.println(“now=”+now); // 相当于
+System.out.println(“now=”+now.toString());
+```
+- 可以根据需要在用户自定义类型中重写toString()方法如String 类重写了toString()方法，返回字符串的值。
+```java
+s1=“hello”;
+System.out.println(s1);//相当于System.out.println(s1.toString());
+```
+- 基本类型数据转换为String类型时，调用了对应包装类的toString()方法
+`int a=10; System.out.println(“a=”+a);`
+
+## 包装类的使用
+- 针对八种基本数据类型定义相应的引用类型—包装类（封装类）
+- 有了类的特点，就可以调用类中的方法，Java才是真正的面向对象
+
+```
+基本数据类型    包装类
+byte            Byte
+short           Short
+int             Integer
+long            Long
+float           Float
+double          Double
+boolean         Boolean
+char            Character
+```
+
+- 基本数据类型包装成包装类的实例 ---装箱
+    - 通过包装类的构造器实现
+    `int i = 500; Integer t = new Integer(i);`
+    - 还可以通过字符串参数构造包装类对象：
+    ` Float f = new Float(“4.56”);`
+    `Long l = new Long(“asdf”); //NumberFormatException`
+- 获得包装类对象中包装的基本类型变量 ---拆箱
+    - 调用包装类的.xxxValue()方法：`boolean b = bObj.booleanValue();`
+- JDK1.5之后，支持自动装箱，自动拆箱。但类型必须匹配
+- 字符串转换成基本数据类型
+    - 通过包装类的构造器实现：`int i = new Integer(“12”);`
+    - 通过包装类的parseXxx(String s)静态方法：`Float f = Float.parseFloat(“12.1”);`
+- 基本数据类型转换成字符串
+    - 调用字符串重载的valueOf()方法：`String fstr = String.valueOf(2.34f);`
+    - 更直接的方式：`String intStr = 5 + “”`
