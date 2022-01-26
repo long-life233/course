@@ -157,3 +157,37 @@ public void print() {
 常量名要大写，内容不可修改。——如同古代皇帝的圣旨。
  static final：全局常量
 ```
+
+## 抽象类和抽象方法
+
+ 用abstract关键字来修饰一个类，这个类叫做抽象类。 
+
+ 用abstract来修饰一个方法，该方法叫做抽象方法。 
+
+抽象方法：只有方法的声明，没有方法的实现。以分号结束：
+比如：public abstract void talk(); 
+
+ 含有抽象方法的类必须被声明为抽象类。
+
+ 抽象类不能被实例化。抽象类是用来被继承的，抽象类的子类必须重
+写父类的抽象方法，并提供方法体。若没有重写全部的抽象方法，仍
+为抽象类。
+
+ 不能用abstract修饰变量、代码块、构造器；
+
+ 不能用abstract修饰私有方法、静态方法、final的方法、final的类。
+
+举例；
+```java
+abstract class A {
+    abstract void m1();
+    public void m2() {
+        System.out.println("A类中定义的m2方法");
+    } 
+}
+class B extends A {
+    void m1() {
+        System.out.println("B类中定义的m1方法");
+    } 
+}
+```
