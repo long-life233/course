@@ -65,7 +65,8 @@ module.exports = {
                         'article/1-day',
                         'article/2-day',
                         'article/3-day',
-                        'article/4-day'
+                        'article/4-day',
+                        'article/5-day'
                     ]
                 }
             ],
