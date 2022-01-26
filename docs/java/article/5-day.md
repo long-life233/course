@@ -126,3 +126,34 @@ class Person {
 
 ## 关键字final
 
+在Java中声明类、变量和方法时，可使用关键字final来修饰,表示“最终的”。 
+
+final标记的类不能被继承。提高安全性，提高程序的可读性。 
+
+String类、System类、StringBuffer类 
+
+final标记的方法不能被子类重写。
+
+比如：Object类中的getClass()。 
+
+final标记的变量(成员变量或局部变量)即称为常量。名称大写，且只
+能被赋值一次。 
+
+final标记的成员变量必须在声明时或在每个构造器中或代码块中显式赋
+值，然后才能使用。 
+
+final double MY_PI = 3.14;
+
+```
+3. final修饰变量——常量
+class A {
+private final String INFO = "atguigu"; //声明常量
+public void print() {
+//The final field A.INFO cannot be assigned
+//INFO = "尚硅谷";
+} }
+
+
+常量名要大写，内容不可修改。——如同古代皇帝的圣旨。
+ static final：全局常量
+```
