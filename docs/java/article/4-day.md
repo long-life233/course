@@ -241,3 +241,7 @@ char            Character
 - 基本数据类型转换成字符串
     - 调用字符串重载的valueOf()方法：`String fstr = String.valueOf(2.34f);`
     - 更直接的方式：`String intStr = 5 + “”`
+
+
+## native关键字
+说明这个方法是原生函数（用c/c++写的）
