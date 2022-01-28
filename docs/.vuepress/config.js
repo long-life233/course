@@ -89,7 +89,10 @@ module.exports = {
                 'article/2022.1.15-but-she-not-love-you',
                 'article/2022.1.20-how-speak-fluently',
                 'article/2022.1.20-love-you-feel-sad',
-                'article/2022.1.20-talk-show-wow'
+                'article/2022.1.20-talk-show-wow',
+                'article/2022.1.22-morning-body-impluse',
+                'article/2022.1.22-my-talk-show',
+                'article/2022.1.26-i-decide-leave-she'
             ]
         }
     },
