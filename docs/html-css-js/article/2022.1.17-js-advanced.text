@@ -1,0 +1,2960 @@
+# JS进阶
+
+## 直角三角形
+描述
+请补全JavaScript代码，要求在页面上渲染出一个直角三角形，三角形换行要求使用"br"实现。三角形如下：
+*
+**
+***
+```js
+<div class='triangle'></div>
+
+<script>
+    var triangle = document.querySelector('.triangle');
+    // 补全代码
+    let str = ''
+    for(let i=1;i<=3;i++){
+        for(let j=1;j<=i;j++){
+            str += "*"
+            
+        }
+            str += "<br/>"
+    }
+    triangle.innerHTML = str
+</script>
+```
+
+
+## 文件扩展名
+
+请补全JavaScript代码，要求以字符串的形式返回文件名扩展名，文件名参数为"filename"。
+
+```js
+        <script>
+            const _getExFilename = (filename) => {
+                // 补全代码
+                let index = filename.lastIndexOf('.')
+                let extendName = filename.substr(index)
+                return extendName
+            }
+        </script>
+```
+
+## 分隔符
+
+请补全JavaScript代码，要求返回参数数字的千分位分隔符字符串。
+
+输入：
+_comma(12300)
+复制
+输出：
+'12,300'
+
+法一，运用js
+```js
+    function _comma(number) {
+        // 补全代码
+        let arr = Math.abs(number).toString().split('').reverse();
+        let i = 3;
+        while (i<arr.length) {
+            arr.splice(i, 0, ',')
+            i += 4
+        }
+        let str = arr.reverse().join('')
+        return number>0?str:'-'+str
+    }
+
+```
+法二，运用正则表达式
+```js
+   function _comma(number) {
+        // 补全代码
+        return ('' + number).replace(/\d{1,3}(?=(\d{3})+$)/g, (val) => val+',')
+    }
+```
+
+## 单向绑定
+
+请补全JavaScript代码，要求每当id为"input"的输入框值发生改变时触发id为"span"的标签内容同步改变。
+注意：
+1. 必须使用DOM0级标准事件（onchange）
+```html
+<body>
+    <input id="input" type="text" />
+    <span id="span"></span>
+
+    <script type="text/javascript">
+        // 补全代码
+        let input = document.querySelector("#input")
+        let span = document.querySelector("#span")
+        input.addEventListener('change',(e)=>{
+            span.innerText = e.target.value
+        })
+    </script>
+</body>
+```
+
+## 创建数组
+请补全JavaScript代码，要求返回一个长度为参数值并且每一项值都为参数值的数组。
+注意：
+1. 请勿直接使用for/while
+```html
+        <script type="text/javascript">
+            const _createArray = (number) => {
+                // 补全代码
+                return new Array(number).fill(number)
+            }
+        </script>
+```
+
+## 判断版本
+
+请补全JavaScript代码，该函数接收两个参数分别为旧版本、新版本，当新版本高于旧版本时表明需要更新，返回true，否则返回false。
+注意：
+1. 版本号格式均为"X.X.X"
+2. X∈[0,9]
+3. 当两个版本号相同时，不需要更新
+
+```html
+    <script type="text/javascript">
+        const _shouldUpdate = (oldVersion, newVersion) => {
+            // 补全代码
+            return parseInt(newVersion.replaceAll('.', '')) > parseInt(oldVersion.replaceAll('.', '')) ? true : false
+        }
+    </script>
+```
+
+## 无重复数组
+
+请补全JavaScript代码，实现一个函数，要求如下：
+1. 根据输入的数字范围[start,end]和随机数个数"n"生成随机数
+2. 生成的随机数存储到数组中，返回该数组
+3. 返回的数组不能有相同元素
+注意：
+1. 不需要考虑"n"大于数字范围的情况
+
+```html
+    <script>
+        const _getUniqueNums = (start,end,n) => {
+            // 补全代码
+            let arr = []
+            for(let i = 0;i< n;i++){
+                    let randomNum = Math.random()*(end-start)+start
+                    if(!arr.includes(randomNum)){
+                        arr.push(randomNum)
+                    }
+            }
+            return arr
+        }
+    </script>
+```
+
+## 数组排序
+
+请补全JavaScript代码，根据预设代码中的数组，实现以下功能：
+1. 列表只展示数组中的name属性
+2. 实现点击"销量升序"按钮，列表内容按照销量升序重新渲染
+3. 实现点击"销量降序"按钮，列表内容按照销量降序重新渲染
+注意：
+1. 必须使用DOM0级标准事件（onclick）
+
+```html
+<body>
+    <button class='up'>销量升序</button>
+    <button class='down'>销量降序</button>
+    <ul></ul>
+
+    <script>
+        var cups = [
+            { type: 1, price: 100, color: 'black', sales: 3000, name: '牛客logo马克杯' },
+            { type: 2, price: 40, color: 'blue', sales: 1000, name: '无盖星空杯' },
+            { type: 4, price: 60, color: 'green', sales: 200, name: '老式茶杯' },
+            { type: 3, price: 50, color: 'green', sales: 600, name: '欧式印花杯' }
+        ]
+        var ul = document.querySelector('ul');
+        var upbtn = document.querySelector('.up');
+        var downbtn = document.querySelector('.down');
+        // 补全代码
+        let ulInner = ''
+        // 初次显示
+        function show_ul(cups){
+            ulInner = ''
+            cups.forEach(item=>ulInner+=item.name+'<br/>')
+            ul.innerHTML = ulInner
+        }
+        show_ul(cups)
+        // 升序排序
+        upbtn.onclick=()=>{
+            cups.sort((x,y)=>(x.sales-y.sales))
+            show_ul(cups)
+        }
+        // 降序排列
+        downbtn.onclick=()=>{
+            cups.sort((x,y)=>(y.sales - x.sales))
+            show_ul(cups)
+        }
+    </script>
+</body>
+```
+
+## 新数组
+请补全JavaScript代码，该函数接受两个参数分别为数组、索引值，要求在不改变原数组的情况下返回删除了索引项的新数组。
+
+```html
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            const _delete = (array,index) => {
+                // 补全代码
+                let arr = array.concat([])
+                arr.splice(index,0,1)
+                return arr
+            }
+        </script>
+    </body>
+</html>
+```
+
+
+## 计数器
+请补全JavaScript代码，要求每次调用函数"closure"时会返回一个新计数器。每当调用某个计数器时会返回一个数字且该数字会累加1。
+注意：
+1. 初次调用返回值为1
+2. 每个计数器所统计的数字是独立的
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            const closure = () => {
+                // 补全代码
+                const closure = () => {
+                // 补全代码
+                let count=1;
+                return function(){
+                    return count++
+                }
+            }
+            }
+        </script>
+    </body>
+</html>
+```
+
+
+## 动态列表渲染
+请补全JavaScript代码，将预设代码中的"people"数组渲染在页面中。实现下面的列表：
+牛油1号 20岁
+牛油2号 21岁
+牛油3号 19岁
+```html
+    <body>
+        <ul></ul>
+
+        <script>
+            var people = [
+                { name: '牛油1号', id: 1, age: 20 },
+                { name: '牛油2号', id: 2, age: 21 },
+                { name: '牛油3号', id: 3, age: 19 },
+            ]
+            var ul = document.querySelector('ul');
+            // 补全代码
+            ul.innerTHML = people
+        </script>
+    </body>
+```
+
+
+## 模板字符串
+
+请补全JavaScript代码，实现以下功能：
+1. 根据已有的person对象的注册时间求出距离当前时间的天数（天数向下取整）。
+2. 将获得的天数和person数据拼接成字符串，作为h2标签的内容。
+注意：使用模板字符串进行字符串拼接，字符串最终内容如：尊贵的牛客网2级用户小丽您好，您已经注册牛客网3天啦~
+```html
+    <body>
+        <h2></h2>
+
+        <script>
+            var person = {
+                level: '2',
+                name: '小丽',
+                registTime: '2021-11-01',
+            }
+            var h2 = document.querySelector('h2');
+            // 补全代码
+            
+        </script>
+    </body>
+```
+
+
+
+## 类继承
+请补全JavaScript代码，完成类的继承。要求如下：
+1. "Chinese"类继承于"Human"类
+2. "Human"类实现一个函数"getName"，返回该实例的"name"属性
+3. "Chinese"类构造函数有两个参数，分别为"name"、"age"
+4. "Chinese"类实现一个函数"getAge"，返回该实例的"age"属性
+
+```html
+    <body>
+    	
+        <script type="text/javascript">
+            class Human {
+                constructor(name) {
+                    this.name = name
+                    this.kingdom = 'animal'
+                    this.color = ['yellow', 'white', 'brown', 'black']
+                }
+                // 补全代码
+                
+            }
+
+            // 补全代码
+            class Chinese {
+                
+            }
+        </script>
+    </body>
+```
+
+
+## 参数解析器
+```shell
+请补全JavaScript代码，要求将字符串参数URL中的参数解析并以对象的形式返回。
+示例1
+输入：
+getParams('https://nowcoder.com/online?id=1&salas=1000')
+复制
+输出：
+{id:1, salas: 100}
+```
+```html
+        <script>
+            const _getParams = (url) => {
+                // 补全代码
+                let obj = {}
+                url.split('?')[1].split('&').forEach(item=>{
+                    let key = item.split('=')[0]
+                    let value = item.split('=')[1]
+                    obj[key] = value
+                })
+                return obj;
+            }
+        </script>
+```
+
+
+## 生成页码
+请补全JavaScript代码，要求根据参数动态生成"li"标签页码并插入"ul"标签下。要求如下：
+1. "allItem"为总数据项个数，"pageItem"为每页的数据项个数
+2. "li"标签内容为当前页码数，页码从1开始
+示例1
+输入：
+_createPage(13,2)
+复制
+输出：
+"li"长度为7，"li"内容依次为"1","2","3","4","5","6","7"
+```html
+    <body>
+    	<ul id="ul">
+            
+        </ul>
+        <script type="text/javascript">
+            const _createPage = (allItem, pageItem) => {
+                // 补全代码
+                
+            }
+        </script>
+    </body>
+```
+
+
+## 总成绩排名
+请补全JavaScript代码，要求将数组参数中的对象以总成绩(包括属性"chinese"、"math"、"english")从高到低进行排序并返回。
+
+```html
+    <body>
+    	
+        <script type="text/javascript">
+        const _rank = array => {
+            // 补全代码
+            
+        }
+        </script>
+    </body>
+```
+
+## 子字符串频次
+请补全JavaScript代码，该函数接受两个参数分别为字符串、子字符串，要求返回子字符串在字符串中出现的频次。
+```html
+        <script>
+            const _searchStrIndexOf = (str, target) => {
+                // 补全代码
+                // 补全代码
+                let arr = str.split(target)
+                return arr.length-1
+            }
+        </script>
+```
+
+## 继承
+
+```html
+        <script type="text/javascript">
+            function Human(name) {
+                this.name = name
+                this.kingdom = 'animal'
+                this.color = ['yellow', 'white', 'brown', 'black']
+            }
+            
+            function Chinese(name,age) {
+                Human.call(this,name)
+                this.age = age
+                this.color = 'yellow'
+            }
+
+            // 补全代码
+            Human.prototype.getName = function(){
+                return this.name
+            }
+            
+            Chinese.prototype.__proto__ = Human.prototype;
+            Human.prototype.getAge = function(){
+                return this.age
+            }
+        </script>
+```
+
+## 判断斐波那契数组
+请补全JavaScript代码，要求以Boolean的形式返回参数数组是否为斐波那契数列。在数学上，斐波那契数列以如下方法定义：F(0)=0，F(1)=1, F(n)=F(n - 1)+F(n - 2)（n ≥ 2，n ∈ N）
+注意：
+1. [0,1,1]为最短有效斐波那契数列
+
+```html
+        <script type="text/javascript">
+            const _isFibonacci = array => {
+                // 补全代码
+                if(array[0] === 0 && array[1] === 1 && array.length>=3){
+                    for(let i = 2;i < array.length;i++){
+                        if(array[i] = array[i-1] + array[i-2]){
+                            return true
+                        }else{
+                            return false
+                        }
+                    }
+                }else{
+                    return false
+                }
+            }
+        </script>
+```
+
+## 数组扁平化
+请补全JavaScript代码，要求将数组参数中的多维数组扩展为一维数组并返回该数组。
+注意：
+1. 数组参数中仅包含数组类型和数字类型
+```html
+        <script>
+            const _flatten = arr => {
+                // 补全代码
+                return arr.flat(Infinity)
+            }
+        </script>
+```
+
+
+## 数组过滤
+请补全JavaScript代码，要求根据下拉框选中的条件变换重新渲染列表中展示的商品，且只展示符合条件的商品。
+注意：
+1. 必须使用DOM0级标准事件（onchange）
+2. 建议使用ES6的filter方法
+```html
+    <body>
+        <select name="" id="">
+            <option value="0">请选择销量范围</option>
+            <option value="1">&lt100</option>
+            <option value="2">100~500</option>
+            <option value="3">&gt500</option>
+        </select>
+        <ul>
+            <li>牛客logo马克杯</li>
+            <li>无盖星空杯</li>
+            <li>老式茶杯</li>
+            <li>欧式印花杯</li>
+        </ul>
+
+        <script>
+            var cups = [
+                { type: 1, price: 100, color: 'black', sales: 60, name: '牛客logo马克杯' },
+                { type: 2, price: 40, color: 'blue', sales: 100, name: '无盖星空杯' },
+                { type: 4, price: 60, color: 'green', sales: 200, name: '老式茶杯' },
+                { type: 3, price: 50, color: 'green', sales: 600, name: '欧式印花杯' }
+            ]
+            var select = document.querySelector('select');
+            var ul = document.querySelector('ul');
+            // 补全代码
+            
+        </script>
+    </body>
+```
+
+## 判断质数
+请补全JavaScript代码，要求在Number对象的原型对象上添加"_isPrime"函数，该函数判断调用的对象是否为一个质数，是则返回true，否则返回false。
+```html
+        <script type="text/javascript">
+        	// 补全代码
+        	
+        </script>
+```
+
+## 验证是否是身份证
+请补全JavaScript代码，要求以Boolean的形式返回字符串参数是否符合身份证标准。
+注意：
+1. 无需考虑地区信息、出生日期、顺序码与校验码的验证
+示例1
+输入：
+_isCard('21062319980907888X')
+复制
+输出：
+true
+```html
+        <script>
+            const _isCard = number => {
+                // 补全代码
+                // 正则表达式：
+                var idcardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+                return idcardReg.test(String(number))
+            }
+        </script>
+```
+
+## Symbol
+请补全JavaScript代码，要求以键/值对的对象形式返回参数数组。要求如下：
+1. 键名的数据类型为Symbol
+2. 键值为当前数组项
+3. Symbol的描述为当前数组项
+4. 返回普通对象
+```html
+        <script type="text/javascript">
+            const _symbolKey = array => {
+                // 补全代码
+                let obj = {}
+                array.forEach(item=>{
+                    obj[Symbol(item)] = item
+                })
+                return obj
+            }
+        </script>
+```
+
+## 相同的Set
+请补全JavaScript代码，要求以boolean的形式返回两个Set对象参数是否一样，是则返回true，否则返回false。
+```html
+        <script>
+            const _isSameSet = (s1, s2) => {
+                 // 补全代码
+                 if(s1.size != s2.size) return false;
+                 for(let ele in s1){
+                    if(!s2.has(ele)) return false;
+                 }
+                   return true
+            }
+        </script>
+```
+
+## Getter
+请补全JavaScript代码，完成名为"Rectangle"的矩形类。要求如下：
+1. 构造函数只包含两个参数，依次为"height"、"width"
+2. 设置Getter，当获取该对象的"area"属性时，返回该对象"height"与"width"属性的乘积
+示例1
+输入：
+new Rectangle(12,12).area
+复制
+输出：
+144
+```html
+<script type="text/javascript">
+    class Rectangle {
+        // 补全代码
+        constructor(height,width){
+            this.height = height;
+            this.width = width
+        }
+        get area(){
+            return this.height * this.width
+        }
+    }
+</script>
+```
+
+
+## 控制动画
+请补全代码，要求当滑动id为"range"的滑块控件时可以改变id为"rect"的矩形旋转速度。要求如下：
+1. id为"rect"的矩形初始动画周期为10秒
+2. id为"range"的滑块控件默认值为1、最小值为、最大值为10、滑动间隔为1
+3. 当滑动滑块值为1时，矩形动画周期为10秒、当...，为...、当滑动滑块值为10时，矩形动画周期为1秒
+注意：
+1. 必须使用DOM0级标准事件（onchange）
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <style type="text/css">
+            #rect {
+                width: 120px;
+                height: 100px;
+                background-color: black;
+                /*补全代码*/
+    
+            }
+            @keyframes rect {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 补全代码 -->
+    	<div id="rect"></div>
+        <input id="range" />
+        
+        <script type="text/javascript">
+            // 补全代码
+            range.onchange=function(){
+                if(rect.style.animation){
+                     rect.style.animation = '1s rect'
+                }
+               
+                else{
+                    rect.style.animation = ''
+                }
+                    
+            }
+        </script>
+    </body>
+</html>
+```
+
+## Map保存节点
+请补全JavaScript代码，要求将页面中的"p"标签以键名的形式保存在Map对象中，键名所对应的键值为该"p"标签的文字内容。
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	<p>1</p>
+        <script type="text/javascript">
+            const _elementKey = () => {
+                // 补全代码
+                let map = new Map()
+                map.set('p',p.innerText)
+            }
+        </script>
+    </body>
+</html>
+```
+
+## 全选
+
+请补全JavaScript代码，实现以下效果：
+1. 选中"全选"框，以下所有选项全部勾选。
+2. 把"全选"框从选中状态勾选成未选中状态，其他复选框全部取消选中效果。
+3. 当其他复选框全部选中，"全选框"为选中状态。
+4. 当其他复选框有一个未选中，"全选框"取消选中状态。
+注意：
+1. 必须使用DOM0级标准事件（onchange）
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+    <body>
+        <ul>
+            <li>全选<input type='checkbox' id='all'></li>
+            <li>Java<input type='checkbox' class='item'></li>
+            <li>javaScript<input type='checkbox' class='item'></li>
+            <li>C++<input type='checkbox' class='item'></li>
+            <li>python<input type='checkbox' class='item'></li>
+            <li>.net<input type='checkbox' class='item'></li>
+        </ul>
+
+        <script>
+            // 补全代码
+            li.onclick=function(e){
+                lis.forEach(item=>item.checked=e.target.checked)
+            }
+        </script>
+    </body>
+</html>
+```
+
+## 回文字符串
+请补全JavaScript代码，要求以boolean的形式返回参数字符串是否为回文字符串。
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            const _isPalindrome = string => {
+                // 补全代码
+                let arr = string.split('')
+                let reverseArr = arr.reverse()
+                return arr == reverseArr
+            }
+        </script>
+    </body>
+</html>
+```
+
+## Proxy计数器
+请补全JavaScript代码，请给参数对象添加拦截代理功能，并返回这个代理，要求每当通过代理调用该对象拥有的属性时，"count"值加1，否则减1。
+```html
+        <script type="text/javascript">
+            let count = 0
+            const _proxy = object => {
+                // 补全代码
+                const p = new Proxy(object,{
+                    get(obj,prop){
+                        if(prop in obj){
+                            count ++
+                        }else{
+                            count --
+                        }
+                    }
+                })
+                return p
+            }
+        </script>
+```
+
+## Proxy拦截器
+请补全JavaScript代码，请给参数对象添加拦截代理功能并返回这个代理。要求如下：
+1. 该函数接收多个参数，首个参数为对象，从第二个参数（包括）往后皆是该对象的属性名
+2. 通过该函数给首个参数对象添加拦截器功能，每当该对象访问到该函数第二个参数（包括）往后的属性时，返回"noright"字符串，表示无权限。
+```html
+        <script type="text/javascript">
+            const _proxy = (object,...prototypes) => {
+                // 补全代码
+                new Proxy(object,{
+                    set(obj,prop,value){
+                        if([...prototypes].includes(prop)){
+                            return 'noright'
+                        }
+                    }
+                })
+            }
+        </script>
+```
+
+## 监听对象
+请补全JavaScript代码，要求如下：
+1. 监听对象属性的变化
+2. 当"person"对象的属性发生变化时，页面中与该属性相关的数据同步更新
+注意：
+1. 必须使用Object.defineProperty实现且触发set方法时更新视图
+2. 可以使用预设代码"_render"函数
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+        <ul></ul>
+
+        <script>
+            var ul = document.querySelector('ul');
+            var person = { sex: '男', age: '25', name: '王大锤', height: 28, weight: 32 };
+            const _render = element => {
+                var str = `<li>姓名：<span>${person.name}</span></li>
+                           <li>性别：<span>${person.sex}</span></li>
+                           <li>年龄：<span>${person.age}</span></li>
+                           <li>身高：<span>${person.height}</span></li>
+                           <li>体重：<span>${person.weight}</span></li>`
+                element.innerHTML = str;
+            }
+            _render(ul);
+            // 补全代码
+            obj.definePropty(obj,props)
+        </script>
+    </body>
+</html>
+```
+
+
+## 购买面板
+请补全JavaScript代码，要求如下：
+1. 当点击"-"按钮时，商品数量减1
+2. 当点击"+"按钮时，商品数量加1
+3. 每当点击任意按钮时，购物面板中相关信息必须同步更新
+注意：
+1. 必须使用DOM0级标准事件（onclick）
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	<table>
+            <thead>
+                <caption>
+                    商品
+                </caption>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>炸鸡</td>
+                    <td>28元</td>
+                    <td><button id="zjtaiduola">-</button></td>
+                    <td><span id="zjsl">0</span></td>
+                    <td><button id="zjtaishaola">+</button></td>
+                </tr>
+                <tr>
+                    <td>可乐</td>
+                    <td>5元</td>
+                    <td><button id="kltaiduola">-</button></td>
+                    <td><span id="klsl">0</span></td>
+                    <td><button id="kltaishaola">+</button></td>
+                </tr>
+                <tr>
+                    <td>总价：</td>
+                    <td><span id="total">0</span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <script type="text/javascript">
+            // 补全代码
+            onclick
+        </script>
+    </body>
+</html>
+```
+
+
+## 接口
+请补全JavaScript代码，完成函数的接口功能。要求如下：
+1. 函数接收两种类型的参数，分别为"get?"和"update?name=xxx&to=yyy"，"name"、"to"为参数，"xxx"、"yyy"分别为参数对应的值。
+2. 当参数为"get?"时，返回data数据
+3. 当参数为"update?name=xxx&to=yyy"时，将data中所有"name"为"xxx"的项，更改为"name"值为"yyy"
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            let data = [
+                {name: 'nowcoder1'},
+                {name: 'nowcoder2'}
+            ]
+            
+            const _api = string => {
+                // 补全代码
+                split,join.push
+            }
+        </script>
+    </body>
+</html>
+```
+
+
+
+## 切换tab栏目
+请补全JavaScript代码，实现效果如下：
+1. 当点击某个栏目（题库、面试、学习、求职）时，该栏目背景色变为'#25bb9b'，其它栏目背景色位'#fff'。
+2. 当选中某个栏目时，下方内容就展示索引值相同的类名为".items"的"li"元素
+注意：
+1. 必须使用DOM0级标准事件（onclick）
+2. 已使用自定义属性存储了栏目的索引值。点击栏目获取索引值，使用索引值控制类名为"items"下的"li"元素
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+
+            .options li {
+                float: left;
+                width: 100px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                border: solid 1px #ddd;
+            }
+
+            .items li {
+                width: 405px;
+                height: 405px;
+                display: none;
+                border: solid 1px #ddd;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class='options'>
+            <li data-type="0" style='background-color: #25bb9b;'>题库</li>
+            <li data-type="1">面试</li>
+            <li data-type="2">学习</li>
+            <li data-type="3">求职</li>
+        </ul>
+        <ul class='items'>
+            <li style="display: block;">牛客题库，包含编程题、选择题等</li>
+            <li>为你的面试提供一站式服务</li>
+            <li>校招学习来牛客</li>
+            <li>求职中有什么难题，可以联系我们</li>
+        </ul>
+
+        <script>
+            var options = document.querySelector('.options');
+            var optionItems = [].slice.call(document.querySelectorAll('.options li'));
+            var items = [].slice.call(document.querySelectorAll('.items li'));
+            // 补全代码
+            onclick,index,e.target.style.xx=xx
+        </script>
+    </body>
+</html>
+```
+
+
+
+## 双向绑定
+请补全JavaScript代码，要求如下：
+1. 监听对象属性的变化
+2. 当"person"对象属性发生变化时，页面中与该属性相关的数据同步更新
+3. 将输入框中的值与"person"的"weight"属性绑定且当输入框的值发生变化时，页面中与该属性相关的数据同步更新
+注意：
+1. 必须使用Object.defineProperty实现且触发set方法时更新视图
+2. 必须使用DOM0级标准事件（oninput）
+3. 可以使用预设代码"_render"函数
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+        <input type="text">
+        <ul></ul>
+
+        <script>
+            var ul = document.querySelector('ul');
+            var person = { sex: '男', age: '25', name: '王大锤', height: 28, weight: 32 };
+            var inp = document.querySelector('input');
+            inp.value = person.weight;
+            const _render = () => {
+                var str = `<li>姓名：<span>${person.name}</span></li>
+                           <li>性别：<span>${person.sex}</span></li>
+                           <li>年龄：<span>${person.age}</span></li>
+                           <li>身高：<span>${person.height}</span></li>
+                           <li>体重：<span>${person.weight}</span></li>`
+                ul.innerHTML = str;
+                inp.value = person.weight;
+            }
+            _render(ul);
+            // 补全代码
+            obj.definedPropty
+        </script>
+    </body>
+</html>
+```
+
+
+## 高频数据类型
+请补全JavaScript代码，要求找到参数数组中出现频次最高的数据类型，并且计算出出现的次数，要求以数组的形式返回。
+注意：
+1. 基本数据类型之外的任何引用数据类型皆为"object"
+2. 当多种数据类型出现频次相同时将结果拼接在返回数组中，出现次数必须在数组的最后
+示例1
+输入：
+__findMostType([0,0,'',''])
+复制
+输出：
+['number','string',2]或['string','number',2]
+
+```html
+        <script type="text/javascript">
+            const _findMostType = array => {
+                // 补全代码
+                typeof incetanceof
+            }
+        </script>
+```
+
+
+## 字体高亮
+请补全JavaScript代码，实现一个搜索字体高亮的效果。要求如下：
+1. 在input框中输入要搜索的内容，当点击查询按钮时，被搜索的字体样式变为加粗，背景色变为'yellow'
+2. 重新输入搜索文字，点击查询按钮时，去掉上一次的搜索效果，高亮显示效果只加在本次搜索文字上
+3. 如果搜索不到相关内容，清除之前的效果
+注意：
+1. 需要加粗的文字请使用b标签包裹
+2. 必须使用DOM0级标准事件（onclick）
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <input type="text">
+        <button style="margin-right: 80px">查询</button>
+        <div class="text" style="margin-top: 70px">
+            牛客网隶属于北京牛客科技有限公司，牛客网成立于 2014 年 9 月，是以科技和创新驱动的教育科技公司。牛客网坚持以前沿技术服务于技术、以人工智能和大数据提升学习效率，专注探索在线教育创新模式，致力于为技术求职者提供能力提升解决方案，同时为企业级用户提供更高效的招聘解决方案，并为二者搭建桥梁，构建从学习到职业的良性生态圈。
+    发展至今，牛客网在技术类求职备考、社群交流、企业招聘服务等多个垂直领域影响力均在行业中遥遥领先，产品矩阵包括IT题库、在线编程练习、线上课程、交流社区、竞赛平台、笔面试服务、ATS系统等，用户覆盖全国高校百万IT学习者并在高速增长中，同时也为京东、百度、腾讯、滴滴、今日头条、华为等200多家企业提供校园招聘、编程竞赛等线上服务，并收获良好口碑。
+        </div>
+
+        <script>
+            var text = document.querySelector(".text");
+            var search = document.querySelector("input");
+            const btn = document.querySelector("button");
+            btn.onclick = () => {
+                // 补全代码
+                p.innerText.replace('xx','xxxx')
+            }
+        </script>
+    </body>
+</html>
+```
+
+## 虚拟DOM
+请补全JavaScript代码，要求将对象参数转换为真实的DOM结构并返回。
+注意：
+1. tag为标签名称、props为属性、children为子元素、text为标签内容
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+
+        <script>
+            var vnode = {
+                tag: 'ul',
+                props: {
+                    class: 'list'
+                },
+                text: '',
+                children: [
+                    {
+                        tag: "li",
+                        props: {
+                            class: "item"
+                        },
+                        text: '',
+                        children: [
+                            {
+                                tag: undefined,
+                                props: {},
+                                text: '牛客网',
+                                children: []
+                            }
+                        ]
+                    },
+                    {
+                        tag: "li",
+                        props: {},
+                        text: '',
+                        children: [
+                            {
+                                tag: undefined,
+                                props: {},
+                                text: 'nowcoder',
+                                children: []
+                            }
+                        ]
+                    }
+                ]
+            }
+            const _createElm = vnode => {
+                // 补全代码
+                ddd
+            }
+        </script>
+    </body>
+</html>
+```
+## DOM节点查找
+描述
+查找两个节点的最近的一个共同父节点，可以包括节点自身
+输入描述：
+oNode1 和 oNode2 在同一文档中，且不会为相同的节点
+```js
+function commonParentNode(oNode1, oNode2) {
+    ddd
+}
+```
+
+
+
+## 获取url参数
+描述
+获取 url 中的参数
+1. 指定参数名称，返回该参数的值 或者 空字符串
+2. 不指定参数名称，返回全部的参数对象 或者 {}
+3. 如果存在多个同名参数，则返回数组
+4. 不支持URLSearchParams方法
+示例1
+输入：
+
+`http://www.nowcoder.com?key=1&key=2&key=3&test=4#hehekey`
+
+复制
+输出：
+[1, 2, 3]
+
+```js
+function getUrlParam(sUrl, sKey) {
+    ddd
+}
+```
+
+## 修改this指向
+
+描述
+封装函数 f，使 f 的 this 指向指定的对象
+示例1
+输入：
+无
+复制
+输出：
+无
+
+```js
+function bindThis(f, oTarget) {
+    ddd
+}
+```
+
+## 根据包名，在指定空间中创建对象
+```shell
+描述
+根据包名，在指定空间中创建对象
+输入描述：
+namespace({a: {test: 1, b: 2}}, 'a.b.c.d')
+输出描述：
+{a: {test: 1, b: {c: {d: {}}}}}
+```
+```js
+function namespace(oNamespace, sPackage) {
+    ddd
+}
+```
+
+
+## 数组去重
+
+描述
+为 Array 对象添加一个去除重复项的方法
+示例1
+输入：
+[false, true, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN]
+复制
+输出：
+[false, true, undefined, null, NaN, 0, 1, {}, {}, 'a']
+
+```js
+Array.prototype.uniq = function () {
+    return [...new Set(this)];
+}
+```
+
+
+## 斐波那契数列
+
+用 JavaScript 实现斐波那契数列函数,返回第n个斐波那契数。 f(1) = 1, f(2) = 1 等
+```js
+function fibonacci(n) {
+    ddd
+}
+```
+
+## 时间格式化输出
+描述
+按所给的时间格式输出指定的时间
+格式说明
+对于 2014.09.05 13:14:20
+yyyy: 年份，2014
+yy: 年份，14
+MM: 月份，补满两位，09
+M: 月份, 9
+dd: 日期，补满两位，05
+d: 日期, 5
+HH: 24制小时，补满两位，13
+H: 24制小时，13
+hh: 12制小时，补满两位，01
+h: 12制小时，1
+mm: 分钟，补满两位，14
+m: 分钟，14
+ss: 秒，补满两位，20
+s: 秒，20
+w: 星期，为 ['日', '一', '二', '三', '四', '五', '六'] 中的某一个，本 demo 结果为 五
+示例1
+输入：
+formatDate(new Date(1409894060000), 'yyyy-MM-dd HH:mm:ss 星期w')
+复制
+输出：
+2014-09-05 13:14:20 星期五
+
+ddd
+## 获取字符串长度
+描述
+如果第二个参数 bUnicode255For1 === true，则所有字符长度为 1
+否则如果字符 Unicode 编码 > 255 则长度为 2
+示例1
+输入：
+'hello world, 牛客', false
+复制
+输出：
+17
+```js
+function strLength(s, bUnicode255For1) {
+    ddd
+}
+```
+
+## 邮箱字符串判断
+描述
+判断输入是否是正确的邮箱格式
+输入描述：
+邮箱字符串
+输出描述：
+true表示格式正确
+```js
+function isAvailableEmail(sEmail) {
+    ddd
+}
+```
+
+## 计数
+
+描述
+统计数组 arr 中值等于 item 的元素出现的次数
+示例1
+输入：
+[1, 2, 4, 4, 3, 4, 3], 4
+复制
+输出：
+3
+```js
+function count(arr, item) {
+ddd
+}
+```
+
+## 查找重复元素
+描述
+找出数组 arr 中重复出现过的元素（不用考虑返回顺序）
+示例1
+输入：
+[1, 2, 4, 4, 3, 3, 1, 5, 3]
+复制
+输出：
+[1, 3, 4]
+```js
+function duplicates(arr) {
+ddd
+}
+```
+
+## 计时器
+实现一个打点计时器，要求
+1、从 start 到 end（包含 start 和 end），每隔 100 毫秒 console.log 一个数字，每次数字增幅为 1
+2、返回的对象中需要包含一个 cancel 方法，用于停止定时操作
+3、第一个数需要立即输出
+```js
+function count(start, end) {
+ddd
+}
+```
+
+## 流程控制
+实现 fizzBuzz 函数，参数 num 与返回值的关系如下：
+1、如果 num 能同时被 3 和 5 整除，返回字符串 fizzbuzz
+2、如果 num 能被 3 整除，返回字符串 fizz
+3、如果 num 能被 5 整除，返回字符串 buzz
+4、如果参数为空或者不是 Number 类型，返回 false
+5、其余情况，返回参数 num
+示例1
+输入：
+15
+复制
+输出：
+fizzbuzz
+```js
+function fizzBuzz(num) {
+ddd
+}
+```
+
+## 函数传参
+描述
+将数组 arr 中的元素作为调用函数 fn 的参数
+示例1
+输入：
+function (greeting, name, punctuation) {return greeting + ', ' + name + (punctuation || '!');}, ['Hello', 'Ellie', '!']
+复制
+输出：
+Hello, Ellie!
+
+```js
+function argsAsArray(fn, arr) {
+ddd
+}
+```
+
+## 函数上下文
+描述
+将函数 fn 的执行上下文改为 obj 对象
+示例1
+输入：
+function () {return this.greeting + ', ' + this.name + '!!!';}, {greeting: 'Hello', name: 'Rebecca'}
+复制
+输出：
+Hello, Rebecca!!!
+```js
+function speak(fn, obj) {
+ddd
+}
+```
+
+## 返回函数
+描述
+实现函数 functionFunction，调用之后满足如下条件：
+1、返回值为一个函数 f
+2、调用返回的函数 f，返回值为按照调用顺序的参数拼接，拼接字符为英文逗号加一个空格，即 ', '
+3、所有函数的参数数量为 1，且均为 String 类型
+示例1
+输入：
+functionFunction('Hello')('world')
+复制
+输出：
+Hello, world
+
+```js
+function functionFunction(str) {
+ddd
+}
+```
+
+## 使用闭包
+描述
+实现函数 makeClosures，调用之后满足如下条件：
+1、返回一个函数数组 result，长度与 arr 相同
+2、运行 result 中第 i 个函数，即 result[i]()，结果与 fn(arr[i]) 相同
+示例1
+输入：
+[1, 2, 3], function (x) { 
+	return x * x; 
+}
+复制
+输出：
+4
+```js
+function makeClosures(arr, fn) {
+ddd
+}
+```
+
+## 二次封装函数
+描述
+已知函数 fn 执行需要 3 个参数。请实现函数 partial，调用之后满足如下条件：
+1、返回一个函数 result，该函数接受一个参数
+2、执行 result(str3) ，返回的结果与 fn(str1, str2, str3) 一致
+示例1
+输入：
+var sayIt = function(greeting, name, punctuation) {     return greeting + ', ' + name + (punctuation || '!'); };  partial(sayIt, 'Hello', 'Ellie')('!!!');
+复制
+输出：
+Hello, Ellie!!!
+```js
+function partial(fn, str1, str2) {
+ddd
+}
+```
+
+
+
+## 使用arguments
+描述
+函数 useArguments 可以接收 1 个及以上的参数。请实现函数 useArguments，返回所有调用参数相加后的结果。本题的测试参数全部为 Number 类型，不需考虑参数转换。
+示例1
+输入：
+1, 2, 3, 4
+复制
+输出：
+10
+
+```js
+function useArguments() {
+ddd
+}
+```
+
+## 使用apply调用函数
+描述
+实现函数 callIt，调用之后满足如下条件
+1、返回的结果为调用 fn 之后的结果
+2、fn 的调用参数为 callIt 的第一个参数之后的全部参数
+示例1
+输入：
+无
+复制
+输出：
+无
+
+```js
+function callIt(fn) {
+    ddd
+}
+```
+
+## 二次封装函数
+描述
+实现函数 partialUsingArguments，调用之后满足如下条件：
+1、返回一个函数 result
+2、调用 result 之后，返回的结果与调用函数 fn 的结果一致
+3、fn 的调用参数为 partialUsingArguments 的第一个参数之后的全部参数以及 result 的调用参数
+示例1
+输入：
+无
+复制
+输出：
+无
+
+```js
+function partialUsingArguments(fn) {
+ddd
+}
+```
+
+## 柯里化
+描述
+已知 fn 为一个预定义函数，实现函数 curryIt，调用之后满足如下条件：
+1、返回一个函数 a，a 的 length 属性值为 1（即显式声明 a 接收一个参数）
+2、调用 a 之后，返回一个函数 b, b 的 length 属性值为 1
+3、调用 b 之后，返回一个函数 c, c 的 length 属性值为 1
+4、调用 c 之后，返回的结果与调用 fn 的返回值一致
+5、fn 的参数依次为函数 a, b, c 的调用参数
+示例1
+输入：
+var fn = function (a, b, c) {return a + b + c}; curryIt(fn)(1)(2)(3);
+复制
+输出：
+6
+```js
+function curryIt(fn) {
+ddd
+}
+```
+
+## 模块
+描述
+完成函数 createModule，调用之后满足如下要求：
+1、返回一个对象
+2、对象的 greeting 属性值等于 str1， name 属性值等于 str2
+3、对象存在一个 sayIt 方法，该方法返回的字符串为 greeting属性值 + ', ' + name属性值
+
+```js
+function createModule(str1, str2) {
+ddd
+}
+```
+
+## 二进制转换
+描述
+获取数字 num 二进制形式第 bit 位的值。注意：
+1、bit 从 1 开始
+2、返回 0 或 1
+3、举例：2 的二进制为 10，第 1 位为 0，第 2 位为 1
+示例1
+输入：
+128, 8
+复制
+输出：
+1
+
+```js
+function valueAtBit(num, bit) {
+ddd
+}
+```
+
+## 二进制转换
+描述
+给定二进制字符串，将其换算成对应的十进制数字
+示例1
+输入：
+'11000000'
+复制
+输出：
+192
+```js
+function base10(str) {
+ddd
+}
+```
+
+## 二进制转换
+描述
+将给定数字转换成二进制字符串。如果字符串长度不足 8 位，则在前面补 0 到满8位。
+示例1
+输入：
+65
+复制
+输出：
+01000001
+```js
+function convertToBinary(num) {
+ddd
+}
+```
+
+## 乘法
+描述
+求 a 和 b 相乘的值，a 和 b 可能是小数，需要注意结果的精度问题
+示例1
+输入：
+3, 0.0001
+复制
+输出：
+0.0003
+```js
+function multiply(a, b) {
+ddd
+}
+```
+
+## 改变上下文
+描述
+将函数 fn 的执行上下文改为 obj，返回 fn 执行后的值
+示例1
+输入：
+alterContext(function() {return this.greeting + ', ' + this.name + '!'; }, {name: 'Rebecca', greeting: 'Yo' })
+复制
+输出：
+Yo, Rebecca!
+```js
+function alterContext(fn, obj) {
+ddd
+}
+```
+
+## 批量改变对象的属性
+描述
+给定一个构造函数 constructor，请完成 alterObjects 方法，将 constructor 的所有实例的 greeting 属性指向给定的 greeting 变量。
+示例1
+输入：
+var C = function(name) {this.name = name; return this;}; 
+var obj1 = new C('Rebecca'); 
+alterObjects(C, 'What\'s up'); obj1.greeting;
+复制
+输出：
+What's up
+
+```js
+function alterObjects(constructor, greeting) {
+ddd
+}
+```
+
+## 属性遍历
+描述
+找出对象 obj 不在原型链上的属性(注意这题测试例子的冒号后面也有一个空格~)
+1、返回数组，格式为 key: value
+2、结果数组不要求顺序
+示例1
+输入：
+var C = function() {this.foo = 'bar'; this.baz = 'bim';}; 
+C.prototype.bop = 'bip'; 
+iterate(new C());
+复制
+输出：
+["foo: bar", "baz: bim"]
+
+```js
+function iterate(obj) {
+ddd
+}
+```
+
+## 判断是否包含数字
+描述
+给定字符串 str，检查其是否包含数字，包含返回 true，否则返回 false
+示例1
+输入：
+'abc123'
+复制
+输出：
+true
+
+```js
+function containsNumber(str) {
+ddd
+}
+```
+
+## 检查重复字符串
+描述
+给定字符串 str，检查其是否包含连续重复的字母（a-zA-Z），包含返回 true，否则返回 false
+示例1
+输入：
+'rattler'
+复制
+输出：
+true
+```js
+function containsRepeatingLetter(str) {
+ddd
+}
+```
+
+## 判断是否以元音字母结尾
+描述
+给定字符串 str，检查其是否以元音字母结尾
+1、元音字母包括 a，e，i，o，u，以及对应的大写
+2、包含返回 true，否则返回 false
+示例1
+输入：
+'gorilla'
+复制
+输出：
+true
+```js
+function endsWithVowel(str) {
+ddd
+}
+```
+
+## 获取指定字符串
+描述
+给定字符串 str，检查其是否包含 连续3个数字，请使用正则表达式实现。
+1、如果包含，返回最先出现的 3 个数字的字符串
+2、如果不包含，返回 false
+
+示例1
+输入：
+'9876543'
+复制
+输出：
+987
+
+```js
+function captureThreeNumbers(str) {
+ddd
+}
+```
+
+## 判断是否符合指定格式
+描述
+给定字符串 str，检查其是否符合如下格式
+1、XXX-XXX-XXXX
+2、其中 X 为 Number 类型
+示例1
+输入：
+'800-555-1212'
+复制
+输出：
+true
+```js
+function matchesPattern(str) {
+ddd
+}
+```
+
+## 判断是否符合USD格式
+描述
+给定字符串 str，检查其是否符合美元书写格式
+1、以 $ 开始
+2、整数部分，从个位起，满 3 个数字用 , 分隔
+3、如果为小数，则小数部分长度为 2
+4、正确的格式如：$1,023,032.03 或者 $2.03，错误的格式如：$3,432,12.12 或者 $34,344.3
+示例1
+输入：
+'$20,933,209.93'
+复制
+输出：
+true
+```js
+function isUSD(str) {
+ddd
+}
+```
+
+## 颜色字符串转换
+描述
+将 rgb 颜色字符串转换为十六进制的形式，如 rgb(255, 255, 255) 转为 #ffffff
+1. rgb 中每个 , 后面的空格数量不固定
+2. 十六进制表达式使用六位小写字母
+3. 如果输入不符合 rgb 格式，返回原始输入
+示例1
+输入：
+'rgb(255, 255, 255)'
+复制
+输出：
+#ffffff
+
+```js
+function rgb2hex(sRGB) {
+    ddd
+}
+```
+
+## 将字符串转换为驼峰格式
+描述
+css 中经常有类似 background-image 这种通过 - 连接的字符，通过 javascript 设置样式的时候需要将这种样式转换成 backgroundImage 驼峰格式，请完成此转换功能
+1. 以 - 为分隔符，将第二个起的非空单词首字母转为大写
+2. -webkit-border-image 转换后的结果为 webkitBorderImage
+示例1
+输入：
+'font-size'
+复制
+输出：
+fontSize
+
+```js
+function cssStyle2DomStyle(sName) {
+    split upperCase
+}
+```
+
+## 购物车
+```
+描述
+HTML模块为一个简化版的购物车，tbody为商品列表，tfoot为统计信息，系统会随机在列表中生成一些初始商品信息
+1、请完成add函数，在列表后面显示items商品信息。参数items为{name: String, price: Number}组成的数组
+2、请完成bind函数，点击每一行的删除按钮(包括通过add增加的行)，从列表中删除对应行
+3、请注意同步更新统计信息，价格保留小数点后两位
+4、列表和统计信息格式请与HTML示例保持一致
+5、不要直接手动修改HTML中的代码
+6、不要使用第三方库
+```
+
+html
+```html
+<table id="jsTrolley">
+    <thead><tr><th>名称</th><th>价格</th><th>操作</th></tr></thead>
+    <tbody>
+        <tr><td>产品1</td><td>10.00</td><td><a href="javascript:void(0);">删除</a></td></tr>
+        <tr><td>产品2</td><td>30.20</td><td><a href="javascript:void(0);">删除</a></td></tr>
+        <tr><td>产品3</td><td>20.50</td><td><a href="javascript:void(0);">删除</a></td></tr>
+    </tbody>
+    <tfoot><tr><th>总计</th><td colspan="2">60.70(3件商品)</td></tr></tfoot>
+</table>
+```
+css
+```css
+body,html{
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #000000;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+thead{
+    background: #3d444c;
+    color: #ffffff;
+}
+td,th{
+    border: 1px solid #e1e1e1;
+    padding: 0;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+```
+js
+```js
+function add(items) {
+    ddddd
+}
+
+function bind() {
+    ddd
+}
+```
+
+## 表格排序
+```
+描述
+系统会在tbody中随机生成一份产品信息表单，如html所示。
+请完成 sort 函数，根据参数的要求对表单所有行进行重新排序。
+1、type为id、price或者sales，分别对应第1 ~ 3列
+2、order为asc或者desc，asc表示升序，desc为降序
+3、例如 sort('price', 'asc') 表示按照price列从低到高排序
+4、所有表格内容均为数字，每一列数字均不会重复
+5、不要使用第三方插件
+```
+
+html
+```html
+<table>
+    <thead>
+        <tr><th>id</th><th>price</th><th>sales</th></tr>
+    </thead>
+    <tbody id="jsList">
+        <tr><td>1</td><td>10.0</td><td>800</td></tr>
+        <tr><td>2</td><td>30.0</td><td>600</td></tr>
+        <tr><td>3</td><td>20.5</td><td>700</td></tr>
+        <tr><td>4</td><td>40.5</td><td>500</td></tr>
+        <tr><td>5</td><td>60.5</td><td>300</td></tr>
+        <tr><td>6</td><td>50.0</td><td>400</td></tr>
+        <tr><td>7</td><td>70.0</td><td>200</td></tr>
+        <tr><td>8</td><td>80.5</td><td>100</td></tr>
+    </tbody>
+</table>
+```
+css
+```css
+body,html{
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #000000;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+thead{
+    background: #3d444c;
+    color: #ffffff;
+}
+td,th{
+    border: 1px solid #e1e1e1;
+    padding: 0;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+```
+js
+```js
+function sort(type, order) {
+dddddd
+}
+```
+
+## 替换链接
+```shell
+页面中存在id=jsContainer的DOM元素。
+该DOM元素内会给出一段随机文本，可能包含一些链接，比如`https://www.baidu.com`，或者 `www.baidu.com?from=onlineExam`，如果出现链接文本，请给该链接文本加上链接标签，用户点击后能直接在新窗口中打开该链接。
+请完成 link 函数，完成该功能
+1、container只有纯文本内容，不包含其他dom元素
+2、识别所有以`http://、https://或者www.开始的链接`
+3、所有www.开头的链接，默认使用 http 协议
+4、所有链接在新窗口打开
+```
+
+html
+```html
+<div id="jsContainer">
+这里会给出一段随机文本，可能包含一些链接，比如`https://www.baidu.com，或者 www.baidu.com?from=onlineExam`，如果出现链接文本，请给该链接文本加上链接标签，用户点击后能直接在新窗口中打开该链接。
+</div>
+```
+css
+```css
+a {
+    color: #00bc9b;
+}
+```
+js
+```js
+function link() {
+    ddd
+}
+```
+
+## 倒计时
+```
+描述
+倒计时是web开发中常见的组件，请完成second和render两个函数，完成倒计时的显示部分
+1、second函数的输入为整数，返回{day: Int, hour: Int, min: Int, second: Int}
+2、render函数的输入为second函数的输出，将数据在页面对应的DOM元素上显示出来，格式如html所示
+3、如果day为0，隐藏对应的DOM元素，否则显示（请直接使用已经实现的css代码）
+4、数值不足两位，前面补充0
+```
+html
+```html
+<div id="jsCountdown">
+    <span>01天</span>
+    <span>02:</span>
+    <span>03:</span>
+    <span>04</span>
+</div>
+```
+css
+```css
+.hide{
+	display: none;
+}
+```
+js
+```js
+function second(second) {
+    ddd
+}
+
+function render(data) {
+    ddd
+}
+```
+
+## 双色球机选一注
+描述
+双色球由33个红球和16个蓝球组成，1注双色球包括6个不重复的红球和1个蓝球。
+请阅读给出的页面和代码，完成 randomFn 函数，实现“随机一注”功能，要求如下：
+函数返回：
+  1.以字符串形式输出“随机一注”结果，选中的红蓝球用"|"隔开，红球在前，号码间用半角逗号隔开，如"06,10,13,18,23,27|05"
+  2.红球和蓝球号码排列顺序 需与页面展示的顺序对应
+页面交互：
+  1.将选中的红球和蓝球（页面中对应DOM元素）用class="active"高亮
+  2.将选中的球按号码从小到大排列，移至所属组的前方，结果如示意图所示
+  3.每次执行 randomFn 函数，输出符合要求且不完全重复
+<img src="https://uploadfiles.nowcoder.com/images/20180912/56_1536742847965_6A5DCE935C2B11A7798DAD3BC7BBD64B" />
+
+<img src="https://uploadfiles.nowcoder.com/images/20180912/56_1536742847965_6A5DCE935C2B11A7798DAD3BC7BBD64B" />
+注意：
+1、请使用原生JavaScript操作DOM元素，不要增加、删除DOM元素或修改css
+2、请使用ES5语法
+3、答题时不要使用第三方插件
+4、运行浏览器为chrome浏览器
+5、
+// 可能涉及的点
+
+// element.className
+// element.classList
+// element.classList.add
+// element.classList.remove
+// element.getAttribute
+// element.setAttribute
+// element.innerHTML
+// element.insertBefore
+// element.parentNode
+
+// document.querySelector
+// document.querySelectorAll
+// document.getElementsByTagName
+// document.getElementsByClassName
+
+// Array.sort
+// Array.push
+// Array.join
+// Array.indexOf
+// Array.forEach
+// Array.map
+
+// Math.random
+// Math.floor
+
+// Number.toString()
+
+html
+```html
+<div class="main">
+    <div class="balls red">
+        <span>红球</span>
+        <div class="balls-wp">
+            <b>01</b>
+            <b>02</b>
+            <b>03</b>
+            <b>04</b>
+            <b>05</b>
+            <b>06</b>
+            <b>07</b>
+            <b>08</b>
+            <b>09</b>
+            <b>10</b>
+            <b>11</b>
+            <b>12</b>
+            <b>13</b>
+            <b>14</b>
+            <b>15</b>
+            <b>16</b>
+            <b>17</b>
+            <b>18</b>
+            <b>19</b>
+            <b>20</b>
+            <b>21</b>
+            <b>22</b>
+            <b>23</b>
+            <b>24</b>
+            <b>25</b>
+            <b>26</b>
+            <b>27</b>
+            <b>28</b>
+            <b>29</b>
+            <b>30</b>
+            <b>31</b>
+            <b>32</b>
+            <b>33</b>
+        </div>
+    </div>
+    <div class="balls blue">
+        <span>蓝球</span>
+        <div class="balls-wp">
+            <b>01</b>
+            <b>02</b>
+            <b>03</b>
+            <b>04</b>
+            <b>05</b>
+            <b>06</b>
+            <b>07</b>
+            <b>08</b>
+            <b>09</b>
+            <b>10</b>
+            <b>11</b>
+            <b>12</b>
+            <b>13</b>
+            <b>14</b>
+            <b>15</b>
+            <b>16</b>
+        </div>
+    </div>
+</div>
+```
+css
+```css
+.main .balls {
+    width: 450px;
+    padding: 30px 10px 10px;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 4px;
+}
+
+.main .balls:after {
+    content: '\20';
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+.main .balls span {
+    position: absolute;
+    left: 12px;
+    top: 5px;
+    font-size: 13px;
+}
+
+.main b {
+    float: left;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    background: #FFF;
+    border: 1px solid;
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.main .red .active {
+    background: #f56c6c;
+    color: #FFF;
+}
+
+.main .blue .active {
+    background: #3a8ee6;
+    color: #FFF;
+}
+
+.main .red {
+    background: #feeff0;
+}
+
+.main .red b {
+    border-color: #f56c6c;
+}
+
+.main .blue {
+    background: #ecf8ff;
+}
+
+.main .blue b {
+    border-color: #3a8ee6;
+}
+```
+js
+```js
+randomFn();
+
+function randomFn() {
+ddd
+}
+```
+
+## 智能提示
+本题展示了一个简化版的搜索框智能提示功能，请按照如下要求完成suggest函数。
+1、当输入框的值发生变化时，系统会调用suggest函数，用于显示/隐藏智能提示数据，参数items为一个字符串数组。
+2、当items中的字符串和输入框的值匹配时，将匹配的数据依次渲染在ul下的li节点中，并显示.js-suggest节点，否则移除ul下的所有li节点，并隐藏.js-suggest节点
+3、输入框的值需要移除两侧空白再进行匹配
+4、输入框的值为空时，按照全部不匹配处理
+5、字符串使用模糊匹配，比如"北大"能匹配"北大"和"北京大学"，但不能匹配"大北京"，即按照 /北.*?大.*?/ 这个正则进行匹配
+6、通过在.js-suggest节点上添加/移除 hide 这个class来控制该节点的隐藏/显示
+7、当前界面是执行 suggest(['不匹配数据', '根据输入框的值', '从给定字符串数组中筛选出匹配的数据，依次显示在li节点中', '如果没有匹配的数据，请移除所有li节点，并隐藏.js-suggest节点']) 后的结果
+8、请不要手动修改html和css
+9、不要使用第三方插件
+10、请使用ES5语法
+
+html
+```html
+<div class="search">
+    <div><input type="text" class="js-input" value="的"></div>
+    <div class="js-suggest">
+        <ul>
+            <li>根据输入框的值</li>
+            <li>从给定字符串数组中筛选出匹配的数据，依次显示在li节点中</li>
+            <li>如果没有匹配的数据，请移除所有li节点，并隐藏.js-suggest节点</li>
+        </ul>
+    </div>
+</div>
+```
+css
+```css
+.search{
+    position: relative;
+}
+.js-input{
+    width: 450px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #cccccc;
+    outline: none;
+}
+.js-suggest{
+    width: 466px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    position: absolute;
+    left: 0;
+    top: 39px;
+}
+.js-suggest.hide{
+    display: none;
+}
+.js-suggest ul{
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.js-suggest ul li{
+    color: #000;
+    font: 14px arial;
+    line-height: 25px;
+    padding: 0 8px;
+    position: relative;
+    cursor: default;
+}
+.js-suggest ul li:hover{
+    background: #f0f0f0;
+}
+```
+js
+```js
+function suggest(items) {
+ddd
+}
+```
+
+## 文字输出
+页面上存在id为jsBlink的下划线闪动节点，请按照如下需求实现 output 函数
+1、函数 output 接收一个字符串参数，每隔200毫秒在闪动节点之前逐个显示字符
+2、请新建span节点放置每个字符，其中span必须存在class "word"，并随机加上 color1 ~ color24 中的任一个class（请使用系统随机函数）
+3、每次输出指定字符串前，请将闪动节点之前的所有其他节点移除
+4、不要销毁或者重新创建闪动节点
+5、如果输出字符为空格、<、>，请分别对其进行HTML转义，如果是\n请直接输出<br />，其他字符不需要做处理
+6、请不要手动调用output函数
+7、当前界面为系统执行 output('hello world\n你好世界') 之后，最终的界面，过程请参考以下图片
+8、请不要手动修改html和css
+9、不要使用第三方插件
+10、请使用ES5语法
+<img src="https://uploadfiles.nowcoder.com/images/20180824/56_1535099604420_D0FC796DE87B7EF8F145CF2346FC2531" />
+
+```js
+ddd
+```
+## 分页
+描述
+本题展示了一个分页组件，界面中存在id=jsContainer的节点A，系统会随机实例化各种Pagination实例，请按照如下要求补充完成Pagination函数。
+1、最多连续显示5页，居中高亮显示current页（如demo1所示)
+2、total <= 1 时，隐藏该组件（如demo2所示）
+3、如果total<=5，则显示全部页数，隐藏“首页”和“末页”元素（如demo3所示）
+4、当current居中不足5页，向后(前)补足5页，隐藏“首页”(“末页”)元素(如demo4和demo5所示)
+5、total、current均为正整数，1 <= current <= total
+6、当前界面中，节点A为系统执行 new Pagination(节点A，20, 10) 后的展示效果
+7、请不要手动修改html和css
+8、不要使用第三方插件
+
+html
+```html
+<div>
+    <div id="jsContainer">
+        <ul class="pagination">
+            <li>首页</li>
+            <li>8</li>
+            <li>9</li>
+            <li class="current">10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>末页</li>
+        </ul>
+    </div>
+
+    <div class="demo">
+        <div>(Demo1) total: 10，current: 4</div>
+        <ul class="pagination">
+            <li>首页</li>
+            <li>2</li>
+            <li>3</li>
+            <li class="current">4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>末页</li>
+        </ul>
+    </div>
+
+    <div class="demo">
+        <div>(Demo2) total: 0，current: 0</div>
+        <ul class="pagination hide"></ul>
+    </div>
+
+    <div class="demo">
+        <div>(Demo3) total: 3，current: 2</div>
+        <ul class="pagination">
+            <li>1</li>
+            <li class="current">2</li>
+            <li>3</li>
+        </ul>
+    </div>
+
+    <div class="demo">
+        <div>(Demo4) total: 10，current: 2</div>
+        <ul class="pagination">
+            <li>1</li>
+            <li class="current">2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>末页</li>
+        </ul>
+    </div>
+
+    <div class="demo">
+        <div>(Demo5) total: 10，current: 9</div>
+        <ul class="pagination">
+            <li>首页</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li class="current">9</li>
+            <li>10</li>
+        </ul>
+    </div>
+</div>
+```
+css
+```css
+.demo{
+    margin-bottom: 20px;
+    border: 1px solid #ebedf0;
+    border-radius: 2px;
+    padding: 10px;
+}
+.demo div{
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.pagination{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    list-style: none;
+    display: inline-block;
+}
+.pagination.hide{
+    display: none;
+}
+.pagination li{
+    position: relative;
+    display: inline-block;
+    float: left;
+    height: 32px;
+    margin: 0;
+    padding: 0 15px;
+    line-height: 30px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top-width: 1.02px;
+    border-left: 0;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+}
+.pagination li:first-child{
+    border-left: 1px solid #d9d9d9;
+    border-radius: 4px 0 0 4px;
+}
+.pagination li:last-child{
+    border-radius: 0 4px 4px 0;
+}
+.pagination li:first-child{
+    box-shadow: none !important;
+}
+.pagination li.current{
+    border-color: #1890ff;
+    color: #1890ff;
+    border-left: 1px solid #1890ff;
+}
+.pagination li.current:not(:first-child) {
+    margin-left: -1px;
+}
+```
+js
+```js
+function Pagination(container, total, current) {
+    this.total = total;
+    this.current = current;
+    this.html = html;
+    this.val = val;
+    this.el = null; //TODO: 创建分页组件根节点
+    if (!this.el) return;
+
+    this.el.innerHTML = this.html();
+    container.appendChild(this.el);
+    this.el.className = ''; //TODO: 判断是否需要隐藏当前元素
+
+    function html() {
+        if (this.total <= 1) return '';
+        
+        //TODO: 生成组件的内部html字符串
+        return '';
+    }
+ddd
+    function val(current) {
+        if (arguments.length === 0) return this.current;
+        if (current < 1 || current > this.total || current === this.current) return;
+        this.current = current;
+        this.el.innerHTML = this.html();
+    };
+}
+```
+
+## 移动控制
+
+描述
+界面中存在id=jsContainer的节点A，系统会随机生成id为jsLayout的 m行 x n列 表格(m >= 1, n >= 1)，并随机选中一个td节点，请按照如下需求实现bind函数
+1、bind 函数为document绑定keydown事件，当系统触发上(键值38)下(键值40)左(键值37)右(键值39)按键时，请找到当前选中的td节点，并根据当前指令切换高亮节点，具体效果参考以下图片
+2、在第一列往左移动则到达最后一列；在最后一列往右移动则到达第一列；在第一行往上移动则到达最后一行；在最后一行往下移动则到达第一行；
+3、请不要手动调用bind函数
+4、当前界面为系统在节点A中生成 9 * 9 表格并随机选中一个td节点后的效果
+5、请不要手动修改html和css，请不要修改js中的事件绑定方式
+6、不要使用第三方插件
+
+<img src="https://uploadfiles.nowcoder.com/images/20200109/56_1578559651879_F79F98F69BF869A4E4CD476EE11795B1" />
+
+html
+```html
+<div id="jsContainer">
+    <table class="game">
+        <tbody>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td class="current"></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+    </table>
+</div>
+```
+css
+```css
+table.game {
+    font-size: 14px;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+table.game td {
+    border: 1px solid #e1e1e1;
+    padding: 0;
+    height: 30px;
+    text-align: center;
+}
+table.game td.current{
+    background: #1890ff;
+}
+```
+js
+```js
+function bind() {
+
+    document.onkeydown = event => {
+        if (!event) return;
+        var code = event.keyCode || '';
+        if (!{'37': 1, '38': 1, '39': 1, '40': 1}[code]) return;
+        event.preventDefault && event.preventDefault();
+        //TODO: 请实现按键控制
+        ddd
+    };
+}
+```
+
+## dom节点转成json数据
+描述
+页面上存在id=jsContainer的节点A，系统会随机在节点A中生成文档片段，请按照如下需求实现 dom2json 函数
+1、dom2json需要分析整个节点A的dom结构，并将其结构转换为对应的json对象
+2、需要获取dom结构的标签名称(tag)，所有属性(attributes)，子节点(children)
+3、文档片段中的属性形式均为 name="value"，解析之后的格式为{name: value}, 属性值为String类型，不需要做解析
+4、随机生成的文档片段中，只包含 nodeType 为1(element)和3(text)的节点，不需要考虑其他节点类型
+5、纯文本也视为一个节点, json格式为 {tag: 'text', content: '文本内容'}，content为文本内容执行trim后的结果，如果该结果为空，则忽略当前节点
+6、返回结果中的标签名称不区分大小写
+7、如果节点不包含属性值或者子节点，其对应的结果中需要保留attributes以及children字段，例如 {tag: 'div', attributes: {}, children: []}
+8、当前界面执行dom2json之后的结果为如下图所示
+9、请不要手动修改html和css
+10、不要使用第三方插件
+<img src="https://uploadfiles.nowcoder.com/images/20200817/56_1597637560042_D6935BDF5534EB0D7C4F62186165A19B" />
+
+html
+```html
+<div id="jsContainer">
+    <ul class="js-test" id="jsParent">
+        <li data-index="0">1</li>
+        <li data-index="1">2</li>
+    </ul>
+    <span style="font-weight: bold;">3</span>
+    4
+</div>
+```
+css
+```css
+body{
+    margin: 0;
+    font-size: 14px;
+}
+```
+js
+```js
+function dom2json() {
+ddd
+}
+```
+
+## 设置标签
+
+本题展示了一个简化版的标签输入框，功能如下：
+1、当用户输入内容并敲回车键时，将输入框的内容在输入框前显示成标签，并清空输入框内容
+2、当用户敲删除键时，如果输入框当前没有内容，则删除前一个标签
+3、标签需要去掉字符串两端的多余的空格
+4、标签不能为空字符串
+5、标签不能重复，如果输入已存在的内容相同的标签，则不添加，并清空输入框
+6、请补充完成tagInput.init、tagInput.bindEvent、tagInput.addTag、tagInput.removeTag函数，实现上面的需求
+7、相关键码值，回车键=13，删除键=8
+8、请不要手动修改html和css
+9、不要使用第三方插件
+10、请使用ES5语法
+
+<img src="https://uploadfiles.nowcoder.com/images/20190815/56_1565836688438_96FDEF4066B040FA34DF866E733CDFFF" />
+
+html
+```html
+<div class="tag-input">
+    <span class="tag">前端</span>
+    <span class="tag">编程题</span>
+    <span class="tag">示例</span>
+    <span class="tag">标签</span>
+    <input type="text" class="js-input" maxlength="6" placeholder="请输入标签">
+</div>
+```
+css
+```css
+.tag-input{
+    position: relative;
+    border: 1px solid #cccccc;
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row wrap;
+}
+.js-input{
+    width: 450px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 16px;
+    padding: 0;
+    margin: 5px 0;
+    outline: none;
+    border: none;
+    width: 6.5em;
+    height: 24px;
+    line-height: 24px;
+}
+.tag{
+    padding: 0 10px;
+    margin: 5px 5px 5px 0;
+    background: #25bb9b;
+    color: #ffffff;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+```
+js
+```js
+var tagInput = {
+    isInited: false,
+    init: init,
+    bindEvent: bindEvent,
+    addTag: addTag,
+    removeTag: removeTag
+};
+tagInput.init();
+
+function init() {
+    var that = this;
+    if (that.isInited) return;
+    that.isInited = true;
+    // 请修改这一行代码，保存class为js-input的输入框的dom元素引用
+    that.input = null;
+    that.bindEvent();
+}
+
+function bindEvent() {
+    var that = this;
+    var input = that.input;
+    if (!input) return;
+    input.addEventListener('keydown', function (event) {
+        // 请修改这一行代码，判断用户是否按了回车键
+        var isEnter = false;
+        // 请修改这一行代码，判断用户是否按了删除键
+        var isDelete = false;
+
+        (isEnter || isDelete) && event.preventDefault();
+        isEnter && that.addTag();
+        isDelete && that.removeTag();
+    });
+    input.parentNode.addEventListener('click', function () {
+        input.focus();
+    });
+}
+
+function addTag() {
+dddd
+}
+
+function removeTag() {
+ddd
+}
+```
+
+## 选择组件
+描述
+CheckGroup是一个选择组件类，支持单选和多选
+选项参数格式、调用方式以及效果如下
+
+选项参数格式：
+var options = [{text: '选项a', value: 'a'}, {text: '选项b', value: 'b'}, {text: '选项c', value: 'c'}, {text: '选项d', value: 'd'}];
+
+实例化单选组件：
+var item = new CheckGroup(document.getElementById('jsCheckGroup'), options);
+item.val(['a']);
+<img src="https://uploadfiles.nowcoder.com/images/20190828/56_1566996717542_7701F92D7667E956D833EC53A6918814" />
+
+实例化多选组件：
+var item = new CheckGroup(document.getElementById('jsCheckGroup'), options, true);
+item.val(['a']);
+<img src="https://uploadfiles.nowcoder.com/images/20190828/56_1566996707156_593617FF7047544EFE57118A9E85D99E" />
+
+具体功能和需求如下：
+1、单选组件请在 div.checkgroup 元素加上class radius
+2、选中时，请在对应选项dom元素加上class selected
+3、点击单选选项，如果未选中当前选项则选中当前选项并取消其他选项，否则取消当前选项
+4、点击多选选项，如果未选中当前选项则选中当前选项，否则取消当前选项
+5、给定的options中, text和value属性的值均为非空字符串
+6、val方法的参数和返回值均为数组(单选时数组长度不超过)
+7、请阅读代码，并根据注释完成对应代码(方法initHtml、toggleEl、isSelected、val)
+8、请不要手动修改html和css
+9、不要使用第三方插件
+
+html
+```html
+<div id="jsCheckGroup">
+    <div class="checkgroup radius">
+        <div data-val="a" class="item selected">选项a</div>
+        <div data-val="b" class="item">选项b</div>
+        <div data-val="c" class="item">选项c</div>
+        <div data-val="d" class="item">选项d</div>
+    </div>
+</div>
+```
+css
+```css
+.checkgroup .item{
+    height: 42px;
+    line-height: 42px;
+    padding: 0 10px;
+    margin: 10px 0;
+    border: 1px solid #c7c7c7;
+    border-radius: 6px;
+}
+.checkgroup.radius .item{
+    border-radius: 21px;
+}
+.checkgroup .item.selected{
+    border: 1px solid #08b292;
+    background: #08b292;
+    color: #ffffff;
+}
+```
+js
+```js
+function CheckGroup(renderTo, options, isMultiple) {
+    var that = this;
+    that.renderTo = renderTo;
+    that.options = options;
+    that.isMultiple = !!isMultiple;
+    that.initHtml();
+    that.initEvent();
+}
+CheckGroup.prototype.initHtml = fInitHtml;
+CheckGroup.prototype.initEvent = fInitEvent;
+CheckGroup.prototype.toggleEl = fToggleEl;
+CheckGroup.prototype.isSelected = fIsSelected;
+CheckGroup.prototype.val = fVal;
+
+function fInitHtml() {
+    var that = this;
+    // 请补全代码，拼接html字符串
+    var sHtml = '';
+    that.renderTo.innerHTML = sHtml;
+    // 请补全代码，获取checkgroup的dom元素引用
+    that.el = null;
+}
+
+function fInitEvent() {
+    var that = this;
+    that.el && that.el.addEventListener('click', function (event) {
+        var item = event.target;
+        item.classList.contains('item') && that.toggleEl(item);
+    });
+}
+
+function fToggleEl(item) {
+    // 根据当前是单选还是多选，以及当前元素是否选中，高亮/取消���亮指定的选项dom元素
+    var that = this;
+    if (that.isSelected(item)) {
+        // 请补全代码
+    } else if (that.isMultiple) {
+        // 请补全代码
+    } else {
+        // 请补全代码
+        dddd
+    }
+}
+
+function fIsSelected(item) {
+    // 请补全代码，判断item是否选中
+    return item;
+}
+
+function fVal(values) {
+    var that = this;
+    if (arguments.length === 0) {
+        // 请补全代码，获取高亮的选项元素
+        var items = null;
+        // 请补全代码，获取高亮的选项元素的data-val
+        var result = [];
+        return result;
+    }
+    !that.isMultiple && values.length > 1 && (values.length = 1);
+    // 请补全代码，获取所有的选项元素
+    var items = null;
+    // 请补全代码，在指定元素上加上高亮的class
+}
+```
+
+## 简易计算器
+<img src="https://uploadfiles.nowcoder.com/images/20190829/56_1567050015887_82A1280122DABD89B1063F2A0AD723E5" />
+
+本题展示了一个简化版的计算器，需求如下：
+1、除法操作时，如果被除数为0，则结果为0
+2、结果如果为小数，最多保留小数点后两位，如 2 / 3 = 0.67(显示0.67), 1 / 2 = 0.5(显示0.5)
+3、请阅读并根据提示补充完成函数initEvent、result和calculate
+4、请不要手动修改html和css
+5、不要使用第三方插件
+
+html
+```html
+<div class="calculator">
+    <header class="cal-header">简易计算器</header>
+    <main class="cal-main">
+        <div class="origin-value">0</div>
+        <div class="cal-keyboard">
+            <ul class="cal-items">
+                <li data-action="num">7</li>
+                <li data-action="num">8</li>
+                <li data-action="num">9</li>
+                <li data-action="operator">÷</li>
+                <li data-action="num">4</li>
+                <li data-action="num">5</li>
+                <li data-action="num">6</li>
+                <li data-action="operator">x</li>
+                <li data-action="num">1</li>
+                <li data-action="num">2</li>
+                <li data-action="num">3</li>
+                <li data-action="operator">-</li>
+                <li data-action="num">0</li>
+                <li data-action="operator">清空</li>
+                <li data-action="operator">=</li>
+                <li data-action="operator">+</li>
+            </ul>
+        </div>
+    </main>
+</div>
+```
+css
+```css
+body, ul, li,select {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul,li {list-style: none;}
+.calculator {
+    max-width: 300px;
+    margin: 20px auto;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}
+.cal-header {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    height: 48px;
+    line-height: 48px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+.cal-main {
+    font-size: 14px;
+}
+.cal-main .origin-value {
+    padding: 15px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    text-align: right;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.cal-main .origin-type,
+.cal-main .target-type {
+    padding-left: 5px;
+    width: 70px;
+    font-size: 14px;
+    height: 30px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    vertical-align: middle;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+.cal-keyboard {
+    overflow: hidden;
+}
+.cal-items {
+    overflow: hidden;
+}
+.cal-items li {
+    user-select: none;
+    float: left;
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    line-height: 75px;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+    box-sizing: border-box;
+}
+li:nth-of-type(4n+1) {
+    border-left: none;
+}
+li[data-action=operator] {
+    background: #f5923e;
+    color: #fff;
+}
+.buttons {
+    float: left;
+    width: 75px;
+}
+.buttons .btn {
+    width: 75px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+}
+.btn-esc {
+    color: #ff5a34;
+}
+.btn-backspace {
+    position: relative;
+}
+```
+js
+```js
+var Calculator = {
+    init: function () {
+        var that = this;
+        if (!that.isInited) {
+            that.isInited = true;
+            // 保存操作信息
+            // total: Number, 总的结果
+            // next: String, 下一个和 total 进行运算的数据
+            // action: String, 操作符号
+            that.data = {total: 0, next: '', action: ''};
+            that.bindEvent();
+        }
+    },
+    bindEvent: function () {
+        var that = this;
+        // 请补充代码：获取 .cal-keyboard 元素
+        var keyboardEl = null;
+        keyboardEl && keyboardEl.addEventListener('click', function (event) {
+            // 请补充代码：获取当前点击的dom元素
+            var target = null;
+            // 请补充代码：获取target的 data-action 值
+            var action = '';
+            // 请补充代码：获取target的内容
+            var value = '';
+            if (action === 'num' || action === 'operator') {
+                that.result(value, action === 'num');
+            }
+        });
+    },
+    result: function (action, isNum) {
+        var that = this;
+        var data = that.data;
+        if (isNum) {
+            data.next = data.next === '0' ? action : (data.next + action);
+            !data.action && (data.total = 0);
+        } else if (action === '清空') {
+            // 请补充代码：设置清空时的对应状态
+            data.total = undefined;
+            data.next = undefined;
+            data.action = undefined;
+        } else if (action === '=') {
+            if (data.next || data.action) {
+                data.total = that.calculate(data.total, data.next, data.action);
+                data.next = '';
+                data.action = '';
+            }
+        } else if (!data.next) {
+            data.action = action;
+        } else if (data.action) {
+            data.total = that.calculate(data.total, data.next, data.action);
+            data.next = '';
+            data.action = action;
+        } else {
+            data.total = +data.next || 0;
+            data.next = '';
+            data.action = action;
+        }
+    
+        // ���补充代码：获取 .origin-value 元素
+        var valEl = null;
+        valEl && (valEl.innerHTML = data.next || data.total || '0');
+    },
+    calculate: function (n1, n2, operator) {
+        n1 = +n1 || 0;
+        n2 = +n2 || 0;
+        if (operator === '÷') {
+            // 请补充代码：获取除法的结果
+            return 0;
+        } else if (operator === 'x') {
+            // 请补充代码：获取乘法的结果
+            return 0;
+        } else if (operator === '+') {
+            // 请补充代码：获取加法的结果
+            return 0;
+        } else if (operator === '-') {
+            // 请补充代码：获取减法的结果
+            return 0;
+        }
+    }
+};
+Calculator.init();
+```
