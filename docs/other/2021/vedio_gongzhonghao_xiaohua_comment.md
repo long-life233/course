@@ -1730,7 +1730,7 @@ appearing legitimate but actually being spurious.
 
 翻译：名词，出现时是符合认知的，但实际虚假的
 
-![image-20210315100403598](TyporaImg/image-20210315100403598.png)
+
 
 **这些单词里，你最喜欢哪个？**
 
