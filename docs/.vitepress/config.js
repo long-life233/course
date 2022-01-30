@@ -75,9 +75,19 @@ module.exports = {
                 }
             ],
             '/other/':[
+                
                 {
                     text:"介绍",
                     link:'/other/'
+                },
+                {
+                    text:"2021",
+                    children:[
+                        {
+                            text:"dd",
+                            link:"/other/2021/vedio_gongzhonghao_xiaohua_comment"
+                        }
+                    ]
                 },
                 {
                     text:"自闭",
@@ -143,6 +153,10 @@ module.exports = {
                 {
                     text:'uniapp仿糗事百科项目总结',
                     link:'/uniapp/article/2022.1.11-community-project-summary'
+                },
+                {
+                    text:"uni-app结合云函数开发小程序博客",
+                    link:'/uniapp/article/2022.1.29-UNI-App combined with cloud function development applet blog'
                 }
             ],
             '/sundry/':[
@@ -157,6 +171,10 @@ module.exports = {
                 {
                     text:"读计算机书籍的意义",
                     link:"/sundry/article/2022.1.24-read-book-meaning"
+                },
+                {
+                    text:"手写常见代码",
+                    link:"/sundry/article/2022.1.29-hand-common-code"
                 }
             ]
         }
