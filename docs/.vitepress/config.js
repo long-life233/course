@@ -181,12 +181,21 @@ module.exports = {
             ],
             '/vue/': [
                 {
-                    text: '介绍',
-                    link: '/vue/'
-                },
-                {
-                    text: 'vue3',
-                    link: '/vue/article/vue3'
+                    text:"vue",
+                    children:[
+                        {
+                            text: '介绍',
+                            link: '/vue/'
+                        },
+                        {
+                            text: 'vue3',
+                            link: '/vue/article/vue3'
+                        },
+                        {
+                            text:'vue2/3随笔',
+                            link:'/vue/article/2022.1.31-vue2-3-essay'
+                        }
+                    ]
                 }
             ],
             '/uniapp/': [
