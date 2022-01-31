@@ -184,7 +184,7 @@ module.exports = {
                     text:"vue",
                     children:[
                         {
-                            text: '介绍',
+                            text: '资源',
                             link: '/vue/'
                         },
                         {
