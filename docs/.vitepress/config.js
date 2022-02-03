@@ -51,12 +51,12 @@ module.exports = {
                             text:"样式相关",
                             link:'/html-css-js/article/2022.1.30-about-ui',
                             collapsable:true
+                        },
+                        {
+                            text:"我的html，css，和js",
+                            link:'/html-css-js/article/2022.2.3-my-html-css-js',
+                            collapsable:true
                         }
-                        // {
-                        //     text:"JS进阶",
-                        //     link:'/html-css-js/article/2022.1.17-js-advanced',
-                        //     collapsable: true
-                        // },
                     ]
                 },
                 
