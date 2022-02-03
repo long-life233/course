@@ -235,6 +235,10 @@ module.exports = {
                         {
                             text: "手写常见代码",
                             link: "/sundry/article/2022.1.29-hand-common-code"
+                        },
+                        {
+                            text:"webSocket实现简单的聊天室",
+                            link:"/sundry/article/2022.2.4-easy-chat-room"
                         }
                     ]
                 },
