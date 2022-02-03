@@ -174,6 +174,10 @@ module.exports = {
                         {
                             text:"如何不自卑",
                             link:'/other/article/2022.1.30-how-not-self-pity'
+                        },
+                        {
+                            text:"把简单的事做复杂",
+                            link:'/other/article/2022.2.3-make-easy-to-complex'
                         }
                     ]
                 },
