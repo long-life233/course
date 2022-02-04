@@ -71,23 +71,27 @@ module.exports = {
                         },
                         {
                             text: "第一天",
-                            link: "/java/article/1-day"
+                            link: "/java/article/2022.2.4-one-day"
                         },
                         {
                             text: "第二天",
-                            link: "/java/article/2-day"
+                            link: "/java/article/2022.2.4-two-day"
                         },
                         {
                             text: "面向对象编程（上）",
-                            link: "/java/article/3-day"
+                            link: "/java/article/2022.2.4-face-object-pro-1"
                         },
                         {
                             text: "面向对象编程（中）",
-                            link: "/java/article/4-day"
+                            link: "/java/article/2022.2.4-face-object-pro-2"
                         },
                         {
                             text: "面向对象编程（下）",
-                            link: "/java/article/5-day"
+                            link: "/java/article/2022.2.4-face-object-pro-3"
+                        },
+                        {
+                            text:"异常处理",
+                            link:"/java/article/2022.2.4-resolve-exception"
                         }
                     ]
                 }
