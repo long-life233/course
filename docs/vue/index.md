@@ -9,6 +9,10 @@
 - 从 vue 源码看问题 —— vue 初始化都做了什么事？[https://juejin.cn/post/7038058903799595022]
 - 还不会Vue3？一篇笔记带你快速入门[https://juejin.cn/post/7006518993385160711]
 - 【初学者笔记】整理的一些Vue3知识点[https://juejin.cn/post/6977004323742220319]
+- https://juejin.cn/post/6926123042540421127
+- https://www.cnblogs.com/kdcg/p/13844808.html
+- https://www.jianshu.com/p/88ffc615f6f5
+- https://blog.csdn.net/weixin_42029374/article/details/107832015
 ## 视频
 - 尚硅谷ts+vue3[https://www.bilibili.com/video/BV1ra4y1H7ih]
 - 尚硅谷vue2+vue3[https://www.bilibili.com/video/BV1Zy4y1K7SH]
