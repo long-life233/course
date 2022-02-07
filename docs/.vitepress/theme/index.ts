@@ -1,11 +1,5 @@
-import './styles/index.css'
-import { h, App } from 'vue'
+import { h } from 'vue'
 import { VPTheme } from '@vue/theme'
-import {
-  preferComposition,
-  preferSFC,
-  filterHeadersByPreference
-} from './components/preferences'
 
 
 export default Object.assign({}, VPTheme, {
@@ -14,10 +8,5 @@ export default Object.assign({}, VPTheme, {
     return h(VPTheme.Layout, null, {
 
     })
-  },
-  enhanceApp({ app }: { app: App }) {
-    app.provide('prefer-composition', preferComposition)
-    app.provide('prefer-sfc', preferSFC)
-    app.provide('filter-headers', filterHeadersByPreference)
   }
 })
