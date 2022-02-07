@@ -16,7 +16,6 @@ export default defineConfigWithTheme<Config>({
         ['link', { rel: 'icon', href: '/logo.png' }],
     ],
     themeConfig: {
-        logo: '/logo.png',
         nav: [
             { text: 'html-css-js', link: '/html-css-js/' },
             { text: 'java', link: '/java/' },
@@ -30,43 +29,34 @@ export default defineConfigWithTheme<Config>({
             indexName: 'cli_vuejs',
             apiKey: 'f6df220f7d246aff64a56300b7f19f21'
           },
-        sidebarDepth: 3,
-        lastUpdated: '最后更新于', // string | boolean
         sidebar: {
             '/html-css-js/': [
                 {
                     text: "html-css-js",
-                    collapsable: false,
-                    children: [
+                    items: [
                         {
                             text: "介绍",
                             link: '/html-css-js/',
-                            collapsable: true
                         },
                         {
                             text: "被低估的html",
                             link: '/html-css-js/article/2022.1.13-good-html',
-                            collapsable: true
                         },
                         {
                             text: "零基础入门前端",
                             link: '/html-css-js/article/2022.1.16-0-base-front-end',
-                            collapsable: true
                         },
                         {
                             text: "CSS布局",
                             link: '/html-css-js/article/2022.1.17-css-layout',
-                            collapsable: true
                         },
                         {
                             text: "样式相关",
                             link: '/html-css-js/article/2022.1.30-about-ui',
-                            collapsable: true
                         },
                         {
                             text: "我的html，css，和js",
                             link: '/html-css-js/article/2022.2.3-my-html-css-js',
-                            collapsable: true
                         }
                     ]
                 },
@@ -75,7 +65,7 @@ export default defineConfigWithTheme<Config>({
             '/java/': [
                 {
                     text: "复习",
-                    children: [
+                    items: [
                         {
                             text: "介绍",
                             link: "/java/"
@@ -109,7 +99,7 @@ export default defineConfigWithTheme<Config>({
             ],
             '/interview/': [
                 {
-                    text: "前端", collapsable: true, children: [
+                    text: "前端", items: [
                         { text: "介绍", link: '/interview/' },
                         { text: "前端面试常见问题", link: '/interview/faq' }
                     ]
@@ -119,8 +109,7 @@ export default defineConfigWithTheme<Config>({
             '/other/': [
                 {
                     text: "2021",
-                    collapsable: true,
-                    children: [
+                    items: [
                         {
                             text: "dd",
                             link: "/other/2021/vedio_gongzhonghao_xiaohua_comment"
@@ -129,8 +118,7 @@ export default defineConfigWithTheme<Config>({
                 },
                 {
                     text: "2022",
-                    collapsable: true,
-                    children: [
+                    items: [
                         {
                             text: "介绍",
                             link: '/other/'
@@ -203,7 +191,7 @@ export default defineConfigWithTheme<Config>({
             '/vue/': [
                 {
                     text: "vue",
-                    children: [
+                    items: [
                         {
                             text: '资源',
                             link: '/vue/'
@@ -221,7 +209,7 @@ export default defineConfigWithTheme<Config>({
             ],
             '/uniapp/': [
                 {
-                    text: 'uniapp', children: [
+                    text: 'uniapp', items: [
                         { text: '介绍', link: '/uniapp/' },
                         {
                             text: 'uniapp仿糗事百科项目总结',
@@ -238,7 +226,7 @@ export default defineConfigWithTheme<Config>({
             '/sundry/': [
                 {
                     text: "杂项",
-                    children: [
+                    items: [
                         {
                             text: '介绍',
                             link: '/sundry/'
