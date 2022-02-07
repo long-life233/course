@@ -1,4 +1,11 @@
-module.exports = {
+import { defineConfigWithTheme } from 'vitepress'
+import baseConfig from '@vue/theme/config'
+import type { Config } from '@vue/theme'
+import { UserConfig } from 'vitepress'
+
+
+export default defineConfigWithTheme<Config>({
+    extends: baseConfig as () => UserConfig<Config>,
     title: '记录',
     lang: 'zh-CN',
     description: 'blog',
@@ -17,7 +24,7 @@ module.exports = {
             { text: 'uniapp', link: '/uniapp/' },
             { text: 'interview', link: '/interview/' },
             { text: 'sundry', link: '/sundry/' },
-            { text: 'other', link: '/other/' }
+            // { text: 'other', link: '/other/' }
         ],
         algolia: {
             indexName: 'cli_vuejs',
@@ -262,4 +269,5 @@ module.exports = {
             ]
         }
     }
-}
+})
+
