@@ -17,12 +17,12 @@ export default defineConfigWithTheme<Config>({
     ],
     themeConfig: {
         nav: [
-            { text: 'html-css-js', link: '/html-css-js/' },
-            { text: 'java', link: '/java/' },
-            { text: 'vue', link: '/vue/' },
-            { text: 'uniapp', link: '/uniapp/' },
-            { text: 'interview', link: '/interview/' },
-            { text: 'sundry', link: '/sundry/' },
+            { text: 'html-css-js',activeMatch:`^/(html-css-js)/`, link: '/html-css-js/' },
+            { text: 'java',activeMatch:`^/(java)/`, link: '/java/' },
+            { text: 'vue', activeMatch:`^/(vue)/`,link: '/vue/' },
+            { text: 'uniapp',activeMatch:`^/(uniapp)/`, link: '/uniapp/' },
+            { text: 'interview',activeMatch:`^/(interview)/`, link: '/interview/' },
+            { text: 'sundry',activeMatch:`^/(sundry)/`, link: '/sundry/' },
             // { text: 'other', link: '/other/' }
         ],
         algolia: {
