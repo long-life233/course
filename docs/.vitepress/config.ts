@@ -17,9 +17,9 @@ export default defineConfigWithTheme<Config>({
     ],
     themeConfig: {
         nav: [
+            { text: 'vue', activeMatch:`^/(vue)/`,link: '/vue/' },
             { text: 'html-css-js',activeMatch:`^/(html-css-js)/`, link: '/html-css-js/' },
             { text: 'java',activeMatch:`^/(java)/`, link: '/java/' },
-            { text: 'vue', activeMatch:`^/(vue)/`,link: '/vue/' },
             { text: 'uniapp',activeMatch:`^/(uniapp)/`, link: '/uniapp/' },
             { text: 'interview',activeMatch:`^/(interview)/`, link: '/interview/' },
             { text: 'sundry',activeMatch:`^/(sundry)/`, link: '/sundry/' },
@@ -30,6 +30,25 @@ export default defineConfigWithTheme<Config>({
             apiKey: 'f6df220f7d246aff64a56300b7f19f21'
           },
         sidebar: {
+            '/vue/': [
+                {
+                    text: "vue",
+                    items: [
+                        {
+                            text: '资源',
+                            link: '/vue/'
+                        },
+                        {
+                            text: 'vue3',
+                            link: '/vue/article/vue3'
+                        },
+                        {
+                            text: 'vue2/3随笔',
+                            link: '/vue/article/2022.1.31-vue2-3-essay'
+                        }
+                    ]
+                }
+            ],
             '/html-css-js/': [
                 {
                     text: "html-css-js",
@@ -188,25 +207,7 @@ export default defineConfigWithTheme<Config>({
                 },
 
             ],
-            '/vue/': [
-                {
-                    text: "vue",
-                    items: [
-                        {
-                            text: '资源',
-                            link: '/vue/'
-                        },
-                        {
-                            text: 'vue3',
-                            link: '/vue/article/vue3'
-                        },
-                        {
-                            text: 'vue2/3随笔',
-                            link: '/vue/article/2022.1.31-vue2-3-essay'
-                        }
-                    ]
-                }
-            ],
+           
             '/uniapp/': [
                 {
                     text: 'uniapp', items: [
