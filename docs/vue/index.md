@@ -17,4 +17,5 @@
 ## 视频
 - 尚硅谷ts+vue3[https://www.bilibili.com/video/BV1ra4y1H7ih]
 - 尚硅谷vue2+vue3[https://www.bilibili.com/video/BV1Zy4y1K7SH]
+- https://www.bilibili.com/video/BV1bS4y1T7ng?share_medium=android&share_plat=android&share_session_id=cc9da994-d84b-4c9f-b630-b04c223f0800&share_source=COPY&share_tag=s_i&timestamp=1642032560&unique_k=X9vfFB3
 
