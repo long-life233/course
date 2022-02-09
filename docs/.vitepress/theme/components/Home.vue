@@ -2,12 +2,11 @@
   <section id="hero">
     <h1 class="tagline">
       The
-      <span class="accent">Progressive</span>
-      <br />JavaScript Framework
+      <span class="accent">Lusong's</span>
+      <br />Blog
     </h1>
     <p class="description">
-      An approachable, performant and versatile framework for building web
-      user interfaces.
+      If there is any regret medicine in the world
     </p>
     <p class="actions">
       <a class="get-started" href="/vue/">
