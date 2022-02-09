@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import NewsLetter from './NewsLetter.vue'
-</script>
-
 <template>
   <section id="hero">
     <h1 class="tagline">

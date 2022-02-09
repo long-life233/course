@@ -16,6 +16,7 @@ export default defineConfigWithTheme<Config>({
         ['link', { rel: 'icon', href: '/logo.png' }],
     ],
     themeConfig: {
+        // sidebarDepth:2,
         nav: [
             { text: 'vue', activeMatch:`^/(vue)/`,link: '/vue/' },
             { text: 'html-css-js',activeMatch:`^/(html-css-js)/`, link: '/html-css-js/' },
