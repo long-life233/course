@@ -4,3 +4,4 @@
 
 - doc/guide/Essentials 
     - Reactivity Fundamentals
+    - Components Basics（OK）

@@ -45,11 +45,11 @@ export default defineConfigWithTheme<Config>({
                         },
                         {
                             text: 'vue2/3随笔',
-                            link: '/vue/article/2022.1.31-vue2-3-essay'
+                            link: '/vue/article/vue2-3-essay'
                         },
                         {
                             text:"手写mini-vue",
-                            link:"/vue/article/2022.2.8-hand-write-mini-vue"
+                            link:"/vue/article/hand-write-mini-vue"
                         }
                     ]
                 }
