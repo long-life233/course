@@ -1,3 +1,10 @@
+<script setup>
+// 引入useParticle钩子
+import useParticle from "../hooks/useParticle.js"
+
+const { screenWidth,screenHeight } = useParticle()
+
+</script>
 <template>
   <section id="hero">
     <h1 class="tagline">
@@ -5,9 +12,7 @@
       <span class="accent">Lusong's</span>
       <br />Blog
     </h1>
-    <p class="description">
-      If there is any regret medicine in the world
-    </p>
+    <p class="description">If there is any regret medicine in the world</p>
     <p class="actions">
       <a class="get-started" href="/vue/">
         Get Started
@@ -25,7 +30,8 @@
       </a>
     </p>
   </section>
-
+  <div id="box"></div>
+  
 </template>
 
 <style scoped>
