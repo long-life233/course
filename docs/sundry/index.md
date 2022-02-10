@@ -10,3 +10,5 @@ vue3文档
 vitepress文档
 - Guide/Intorduction
     - Asset Handling(OK)
+
+canvas没有层级，设置宽高有坑，等一些列bug。

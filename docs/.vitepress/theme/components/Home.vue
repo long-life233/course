@@ -6,6 +6,8 @@ const { screenWidth,screenHeight } = useParticle()
 
 </script>
 <template>
+  <div id="box"></div>
+
   <section id="hero" style="position:absolute">
     <h1 class="tagline">
       The
@@ -30,7 +32,6 @@ const { screenWidth,screenHeight } = useParticle()
       </a>
     </p>
   </section>
-  <div id="box"></div>
   
 </template>
 
