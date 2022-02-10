@@ -6,7 +6,7 @@ const { screenWidth,screenHeight } = useParticle()
 
 </script>
 <template>
-  <section id="hero">
+  <section id="hero" style="position:absolute">
     <h1 class="tagline">
       The
       <span class="accent">Lusong's</span>
@@ -37,6 +37,8 @@ const { screenWidth,screenHeight } = useParticle()
 <style scoped>
 section {
   padding: 42px 32px;
+  position: absolute;
+  width:100vw;
 }
 
 #hero {
@@ -69,7 +71,11 @@ html:not(.dark) .accent,
   font-size: 22px;
   margin: 24px auto 40px;
 }
-
+.actions{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 .actions a {
   font-size: 16px;
   display: inline-block;
@@ -81,6 +87,8 @@ html:not(.dark) .accent,
 }
 
 .actions .get-started {
+  position:absolute;
+  z-index:999999;
   font-weight: 600;
   background-color: var(--vt-c-green);
   color: #fff;

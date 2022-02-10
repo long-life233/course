@@ -4,32 +4,35 @@ export default function () {
     // 获取浏览器宽高
     let screenWidth = ref(window.screen.width)
     let screenHeight = ref(window.screen.height)
+    // canvas上下文
+    let ctx;
     onMounted(() => {
-        // 创建canvas标签
-        let canvasNode = document.createElement('canvas');
-        canvasNode.width = screenWidth.value;
-        canvasNode.height = screenHeight.value;
-        canvasNode.style.border = `1px solid #fff`
-        canvasNode.style.position = `fixed`
-        canvasNode.style.zIndex = `99`
-        canvasNode.id = "canvas"
-        document.querySelector("#box").appendChild(canvasNode)
         // 动态获取浏览器
-        // window.onresize = (e) => {
-        //     screenWidth.value = e.target.innerWidth;
-        //     screenHeight.value = e.target.innerHeight;
-        //     console.log(12);
-        // }
-        const ctx = canvasNode.getContext("2d")
+        window.onresize = (e) => {
+            screenWidth.value = e.target.innerWidth;
+            screenHeight.value = e.target.innerHeight;
+        }
         var points = []
+        // 绘制canvas
+        function drawCanvas() {
+            // 清空点
+            points = []
+            document.querySelector("#box").innerHTML = `<canvas id="canvas" width=${screenWidth.value} height=${screenHeight.value} style="position:fixed;z-index:2"></canvas>`
+            ctx = document.querySelector("#canvas").getContext("2d")
+            
+            for (var i = 0; i < 200; i++) {
+                points.push(new Point(Math.random() * screenWidth.value, Math.random() * screenHeight.value))
+            }
+            gameloop(); //进行
+        }
 
         /**速度*/
         var Point = function (x, y) {
             this.x = x
             this.y = y
             this.r = Math.random() * 2
-            this.sx = Math.random() *0.5 -0.25
-            this.sy = Math.random() * 0.5 -0.25
+            this.sx = Math.random() * 0.5 - 0.25
+            this.sy = Math.random() * 0.5 - 0.25
         }
         // 画点方法
         Point.prototype.draw = function (ctx) {
@@ -63,19 +66,12 @@ export default function () {
                 ctx.stroke()
             }
         }
-
-        for (var i = 0; i < 200; i++) {
-            points.push(new Point(Math.random() * screenWidth.value, Math.random() * screenHeight.value))
-        }
-
         /**粒子进行*/
         const gameloop = () => {
             window.requestAnimationFrame(gameloop)
             // setTimeout(gameloop, 100);
             paint();
         }
-
-
         /**清空画布*/
         const paint = () => {
             ctx.clearRect(0, 0, screenWidth.value, screenHeight.value)
@@ -88,8 +84,8 @@ export default function () {
             }
         }
 
-        gameloop(); //进行
-        // // ctx.draw();
+        // 绘制canvas
+        drawCanvas()
     })
     return {
         screenWidth,
