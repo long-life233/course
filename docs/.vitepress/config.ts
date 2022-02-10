@@ -256,6 +256,10 @@ export default defineConfigWithTheme<Config>({
                         {
                             text:"项目记录",
                             link:"/sundry/article/2022.2.5-my-project-record"
+                        },
+                        {
+                            text:"canvas实现粒子效果",
+                            link:"/sundry/article/home-page-particle-effect"
                         }
                     ]
                 },

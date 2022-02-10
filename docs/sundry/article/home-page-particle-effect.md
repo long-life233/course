@@ -1,3 +1,33 @@
+# canvas实现粒子效果
+
+## 注意
+canvas的宽高必须在渲染为dom之前指定，不然为默认宽高。
+
+并且不能通过css，style方式设置宽高，而是要将宽高设置为dom元素的属性。
+
+例如
+```js
+document.querySelector("#box").innerHTML = `<canvas id="canvas" width=${screenWidth.value} height=${screenHeight.value} style="position:fixed;z-index:2"></canvas>`
+```
+
+canvas在H5可以设置绝对定位被覆盖。但在小程序上却不能通过定位被覆盖。
+
+使用window.requestAnimationFrame方法更流畅的执行动画
+
+## 最后，贴下我的代码
+
+组件中引入使用即可
+```js
+// 引入useParticle钩子
+import useParticle from "../hooks/useParticle.js"
+
+useParticle()
+
+<div id="box"></div>
+```
+
+useParticle.js
+```js
 import { ref, onMounted } from 'vue'
 
 export default function () {
@@ -10,21 +40,18 @@ export default function () {
     let animationID;
     // 保存每个粒子的数组
     var points = []
-
     // 动态获取浏览器
     window.onresize = (e) => {
         screenWidth.value = e.target.innerWidth;
         screenHeight.value = e.target.innerHeight;
         drawCanvas()
     }
-    
     // 绘制canvas
     function drawCanvas() {
         // 清空点
         points = []
         document.querySelector("#box").innerHTML = `<canvas id="canvas" width=${screenWidth.value} height=${screenHeight.value} style="position:fixed;z-index:2"></canvas>`
         ctx = document.querySelector("#canvas").getContext("2d")
-        
         for (var i = 0; i < 100; i++) {
             points.push(new Point(Math.random() * screenWidth.value, Math.random() * screenHeight.value))
         }
@@ -97,3 +124,5 @@ export default function () {
         drawCanvas()
     })
 }
+
+```

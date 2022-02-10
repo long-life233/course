@@ -2,13 +2,12 @@
 // 引入useParticle钩子
 import useParticle from "../hooks/useParticle.js"
 
-const { screenWidth,screenHeight } = useParticle()
+useParticle()
 
 </script>
 <template>
   <div id="box"></div>
-
-  <section id="hero" style="position:absolute">
+  <section id="hero">
     <h1 class="tagline">
       The
       <span class="accent">Lusong's</span>
@@ -38,7 +37,7 @@ const { screenWidth,screenHeight } = useParticle()
 <style scoped>
 section {
   padding: 42px 32px;
-  position: absolute;
+  position: fixed;
   width:100vw;
 }
 
