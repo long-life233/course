@@ -242,10 +242,6 @@ export default defineConfigWithTheme<Config>({
                             link: "/sundry/article/2022.1.12-big-error-in-sourceTree"
                         },
                         {
-                            text: "读计算机书籍的意义",
-                            link: "/sundry/article/2022.1.24-read-book-meaning"
-                        },
-                        {
                             text: "手写常见代码",
                             link: "/sundry/article/2022.1.29-hand-common-code"
                         },
