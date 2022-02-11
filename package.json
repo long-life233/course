@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@vue/theme": "^1.0.0",
+    "mitt": "^3.0.0",
     "vitepress": "^0.21.6",
     "vue": "^3.2.28"
   },

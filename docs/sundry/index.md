@@ -36,3 +36,71 @@ html.dark body{
 
 还可以用js来操作获取css变量哟！
 
+## 使用mitt
+@vue/theme文件中，当改变主题时，使用mitt消息订阅传递数据
+
+在这里，为什么要使用高阶函数呢？（调用一个函数返回另一个函数，确保获取到window对象，否则打包时一直报错，window对象不存在！！！）
+```vue
+<script lang="ts" setup>
+import VTSwitch from './VTSwitch.vue'
+import VTIconSun from './icons/VTIconSun.vue'
+import VTIconMoon from './icons/VTIconMoon.vue'
+// 自定义触发changeTheme事件
+import mitt from 'mitt'
+// window.emitter = mitt() // 打包时会报错，window对象不存在
+ 
+const storageKey = 'vue-theme-appearance'
+const toggle = typeof localStorage !== 'undefined' ? useAppearance() : () => {}
+
+function useAppearance() {
+  //
+  window.emitter = mitt()
+  //
+  let userPreference = localStorage.getItem(storageKey) || 'auto'
+  const query = window.matchMedia(`(prefers-color-scheme: dark)`)
+  const classList = document.documentElement.classList
+  let isDark =
+    userPreference === 'auto' ? query.matches : userPreference === 'dark'
+  const setClass = (dark: boolean) => classList[dark ? 'add' : 'remove']('dark')
+
+  query.onchange = (e) => {
+    if (userPreference === 'auto') {
+      setClass((isDark = e.matches))
+    }
+  }
+
+  const toggle = () => {
+    setClass((isDark = !isDark))
+    // 触发一个事件
+    window.emitter.emit('changeTheme',isDark)
+    localStorage.setItem(
+      storageKey,
+      (userPreference = isDark
+        ? query.matches
+          ? 'auto'
+          : 'dark'
+        : query.matches
+        ? 'light'
+        : 'auto')
+    )
+  }
+
+  return toggle
+}
+</script>
+
+<template>
+  <VTSwitch
+    class="vt-switch-appearance"
+    aria-label="toggle dark mode"
+    @click="toggle"
+  >
+    <VTIconSun class="vt-switch-appearance-sun" />
+    <VTIconMoon class="vt-switch-appearance-moon" />
+  </VTSwitch>
+</template>
+```
+
+## algoria搜索框
+
+- vitepress不支持内置搜索框。只有algoria搜索框。可是我不会配置。。

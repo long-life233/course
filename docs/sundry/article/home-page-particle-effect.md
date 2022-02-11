@@ -28,30 +28,40 @@ useParticle()
 
 useParticle.js
 ```js
-import { ref, onMounted } from 'vue'
+import { ref, onMounted,watch,reactive } from 'vue'
 
 export default function () {
     // 获取浏览器宽高
     let screenWidth = ref(window.screen.width)
     let screenHeight = ref(window.screen.height)
+    // 是否是黑色主题
+    let isDark
     // 定义canvas上下文，方便函数里拿到
     let ctx;
     // window.requestAnimationFrame返回id
     let animationID;
     // 保存每个粒子的数组
     var points = []
-    // 动态获取浏览器
+    
+
+
+    // 浏览器缩放重绘canvas
     window.onresize = (e) => {
         screenWidth.value = e.target.innerWidth;
         screenHeight.value = e.target.innerHeight;
         drawCanvas()
     }
+
+    window.emitter.on('changeTheme',drawCanvas)
+    
     // 绘制canvas
     function drawCanvas() {
+        
         // 清空点
         points = []
         document.querySelector("#box").innerHTML = `<canvas id="canvas" width=${screenWidth.value} height=${screenHeight.value} style="position:fixed;z-index:2"></canvas>`
         ctx = document.querySelector("#canvas").getContext("2d")
+        // 绘制点
         for (var i = 0; i < 100; i++) {
             points.push(new Point(Math.random() * screenWidth.value, Math.random() * screenHeight.value))
         }
@@ -59,6 +69,8 @@ export default function () {
         if(animationID){
             window.cancelAnimationFrame(animationID)
         }
+        // 判断主题色
+        isDark = document.documentElement.classList.contains('dark')
         gameloop(); //进行
     }
 
@@ -75,7 +87,7 @@ export default function () {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI)
         ctx.closePath()
-        ctx.fillStyle = '#fff'
+        ctx.fillStyle = isDark?'#fff':'#000'
         ctx.fill()
         ctx.stroke();
     }
@@ -97,7 +109,7 @@ export default function () {
             ctx.moveTo(this.x, this.y)
             ctx.lineTo(p.x, p.y)
             ctx.closePath()
-            ctx.strokeStyle = 'rgba(255, 255, 255, ' + alpha + ')'
+            ctx.strokeStyle = isDark?'rgba(255, 255, 255, ' + alpha + ')':'rgba(0, 0, 0, ' + alpha + ')'
             ctx.strokeWidth = 1
             ctx.stroke()
         }
@@ -124,5 +136,4 @@ export default function () {
         drawCanvas()
     })
 }
-
 ```
