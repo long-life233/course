@@ -1,5 +1,22 @@
 # canvas实现粒子效果
 
+## 在vitepree中使用的坑
+获取不到元素。。
+```shell
+本地调试运行没有问题，
+
+可是打包上传到服务器就会有各种问题。比如获取不到canvas的宿主元素<box id="box"></box>
+
+此时打印document,发现只有<div id="app"></app>渲染出来呢，其他元素还没有渲染出来。。。
+
+所以我想既然canvas只是作为背景那为什么不直接插进body标签里呢。
+```
+::: danger 最后的结果
+还是有问题。。。Hydration completed but contains mismatches.
+
+对canvas图形化还是不了解，只能搁置了。
+:::
+
 ## 注意
 canvas的宽高必须在渲染为dom之前指定，不然为默认宽高。
 

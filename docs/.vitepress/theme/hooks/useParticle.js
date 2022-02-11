@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 
 export default function () {
     // 获取浏览器宽高
@@ -12,20 +12,26 @@ export default function () {
     let animationID;
     // 保存每个粒子的数组
     var points = []
-
-
-
-
-
     // 绘制canvas
     function drawCanvas() {
         screenWidth = window.screen.width
         screenHeight = window.screen.height
         // 清空点
         points = []
-        console.log(document.querySelector("#box"));
-        document.querySelector("#box").innerHTML = `<canvas id="canvas" width=${screenWidth} height=${screenHeight} style="position:fixed;z-index:2"></canvas>`
-        ctx = document.querySelector("#canvas").getContext("2d")
+        // 删除之前的canvas
+        if(document.querySelector("canvas")){
+            document.querySelector("canvas").remove()
+        }
+        // 创建canvas
+        let canvasNode = document.createElement('canvas')
+        canvasNode.width = screenWidth
+        canvasNode.height = screenHeight
+        canvasNode.style.position = 'fixed'
+        canvasNode.style.zIndex = -999
+        canvasNode.id = "canvas"
+        ctx = canvasNode.getContext("2d")
+        document.body.appendChild(canvasNode)
+        document.querySelector("#app").style.position = 'fixed'
         // 绘制点
         for (var i = 0; i < 100; i++) {
             points.push(new Point(Math.random() * screenWidth, Math.random() * screenHeight))
@@ -36,6 +42,7 @@ export default function () {
         }
         // 判断主题色
         isDark = document.documentElement.classList.contains('dark')
+
         gameloop(); //进行
     }
 

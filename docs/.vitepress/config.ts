@@ -255,7 +255,7 @@ export default defineConfigWithTheme<Config>({
                         },
                         {
                             text:"canvas实现粒子效果",
-                            link:"/sundry/article/home-page-particle-effect"
+                            link:"/sundry/article/canvas-particle-effect"
                         }
                     ]
                 },

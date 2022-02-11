@@ -1,14 +1,14 @@
 <script setup>
-import {nextTick} from 'vue'
+import { nextTick } from 'vue'
 // 引入useParticle钩子
 import useParticle from "../hooks/useParticle.js"
 
 // await nextTick()
-useParticle()
+// useParticle()
 
 </script>
 <template>
-  <div id="box" @click="ensureRender('a')"></div>
+  <div id="box"></div>
   <section id="hero">
     <h1 class="tagline">
       The
@@ -33,14 +33,13 @@ useParticle()
       </a>
     </p>
   </section>
-  
 </template>
 
 <style scoped>
 section {
   padding: 42px 32px;
   position: fixed;
-  width:100vw;
+  width: 100vw;
 }
 
 #hero {
@@ -73,10 +72,10 @@ html:not(.dark) .accent,
   font-size: 22px;
   margin: 24px auto 40px;
 }
-.actions{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .actions a {
   font-size: 16px;
@@ -89,8 +88,8 @@ html:not(.dark) .accent,
 }
 
 .actions .get-started {
-  position:absolute;
-  z-index:999999;
+  position: absolute;
+  z-index: 999999;
   font-weight: 600;
   background-color: var(--vt-c-green);
   color: #fff;

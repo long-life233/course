@@ -11,17 +11,18 @@ vitepress文档
 - Guide/Intorduction
     - Asset Handling(OK)
 
-## 切换深色和浅色主题
+## JS媒体查询
 主要使用API：
 ```js
 // 媒体查询，系统是否使用深色主题？（return boolean）
+// 类似还有当前浏览器窗口是否小于780px？ 还是小于560px？
 const query = window.matchMedia(`(prefers-color-scheme: dark)`)
 
 query.onchange = (e) => {
     log(e.matches)
 }
 
-
+// 获取类列表
 const classList = document.documentElement.classList
 classList[dark ? 'add' : 'remove']('dark')
 ```
@@ -104,3 +105,5 @@ function useAppearance() {
 ## algoria搜索框
 
 - vitepress不支持内置搜索框。只有algoria搜索框。可是我不会配置。。
+
+## 
