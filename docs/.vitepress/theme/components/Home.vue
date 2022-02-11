@@ -16,7 +16,7 @@ import useParticle from "../hooks/useParticle.js"
       <br />Blog
     </h1>
     <p class="description">If there is any regret medicine in the world</p>
-    <p class="actions">
+    <div class="actions">
       <a class="get-started" href="/vue/">
         Get Started
         <svg
@@ -31,7 +31,7 @@ import useParticle from "../hooks/useParticle.js"
           />
         </svg>
       </a>
-    </p>
+    </div>
   </section>
 </template>
 

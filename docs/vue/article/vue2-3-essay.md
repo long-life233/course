@@ -1,13 +1,6 @@
 # vue2/3随笔
-- RFC是什么
-    request for comment(征求意见，vue向社区征求意见)
 
-    https://github.com/vuejs/rfcs
 
-- vue3中文文档
-    非官方，但有很多学习、面试、实战资料
-
-    https://vue3js.cn/
 
 ## tip
 - style标签中的scoped改为mudule，然后可以在模板中通过驼峰式写法引用。这样做的好处是会自动给类名添加hash，不怕会起冲突了。

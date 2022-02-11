@@ -238,24 +238,20 @@ export default defineConfigWithTheme<Config>({
                             link: '/sundry/'
                         },
                         {
-                            text: '丢弃，sourceTree的重大失误',
-                            link: "/sundry/article/2022.1.12-big-error-in-sourceTree"
-                        },
-                        {
                             text: "手写常见代码",
-                            link: "/sundry/article/2022.1.29-hand-common-code"
+                            link: "/sundry/article/hand-common-code"
                         },
                         {
                             text: "webSocket实现简单的聊天室",
-                            link: "/sundry/article/2022.2.4-easy-chat-room"
-                        },
-                        {
-                            text:"项目记录",
-                            link:"/sundry/article/2022.2.5-my-project-record"
+                            link: "/sundry/article/easy-chat-room"
                         },
                         {
                             text:"canvas实现粒子效果",
                             link:"/sundry/article/canvas-particle-effect"
+                        },
+                        {
+                            text:"项目记录",
+                            link:"/sundry/article/project-record"
                         }
                     ]
                 },

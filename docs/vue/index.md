@@ -14,6 +14,7 @@
 - https://www.jianshu.com/p/88ffc615f6f5
 - https://blog.csdn.net/weixin_42029374/article/details/107832015
 - https://blog.csdn.net/qq_42778001/article/details/95959531
+- vue3中文文档，非官方，但有很多学习、面试、实战资料 https://vue3js.cn/
 ## 视频
 - 尚硅谷ts+vue3[https://www.bilibili.com/video/BV1ra4y1H7ih]
 - 尚硅谷vue2+vue3[https://www.bilibili.com/video/BV1Zy4y1K7SH]

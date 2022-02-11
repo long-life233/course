@@ -105,5 +105,3 @@ function useAppearance() {
 ## algoria搜索框
 
 - vitepress不支持内置搜索框。只有algoria搜索框。可是我不会配置。。
-
-## 
