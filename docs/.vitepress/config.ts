@@ -251,8 +251,8 @@ export default defineConfigWithTheme<Config>({
                         },
                         {
                             text:"项目记录",
-                            link:"/sundry/article/project-record"
-                        }
+                            link:"/sundry/article/your-project-record"
+                        },
                     ]
                 },
 

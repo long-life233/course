@@ -24,6 +24,7 @@ HTML 5Plus是什么？
 HTML调用APP api的能力
 https://www.cnblogs.com/gzhjj/p/11903773.html
 
+
 安卓模拟器，有手机的模样
 
 打包为原生app
@@ -55,9 +56,11 @@ static 目录下的 js 文件不会被编译
 
 自HBuilderX 2.6.6起template内支持@开头路径引入静态资源，旧版本不支持此方式
 
+
 js文件引入
 // 绝对路径，@指向项目根目录，在cli项目中@指向src目录
 import add from '@/common/add.js'
+
 
 js文件不支持使用/开头的方式引入
 
@@ -73,12 +76,16 @@ uLink组件是navigator组件的增强版，样式上自带下划线，功能上
 
 如何引入字体图标？看文档
 
+pprocess.env.NODE_ENV
+
+
+
 uni-app 有两种页面路由跳转方式：使用navigator组件跳转、调用API跳转。
 
-uni-app 可通过 process.env.NODE_ENV 判断当前环境是开发环境还是生产环境。一般用于连接测试服务器或生产服务器的动态切换。
+uni-app 可通过 pprocess.env.NODE_ENV 判断当前环境是开发环境还是生产环境。一般用于连接测试服务器或生产服务器的动态切换。
 
 开发环境和生产环境判断
-uni-app 可通过 process.env.NODE_ENV 判断当前环境是开发环境还是生产环境。一般用于连接测试服务器或生产服务器的动态切换。
+uni-app 可通过 pprocess.env.NODE_ENV 判断当前环境是开发环境还是生产环境。一般用于连接测试服务器或生产服务器的动态切换。
 
 判断平台
 平台判断有2种场景，一种是在编译期判断，一种是在运行期判断。
@@ -129,7 +136,7 @@ domModule.addRule('fontFace', {
         font-family: iconfont;
         margin-left: 20rpx;
     }
-</style>
+</style  >
 
 <block/> 在不同的平台表现存在一定差异，推荐统一使用 <template/>。
 
@@ -171,4 +178,6 @@ cli创建的项目可以在package.json中添加参数--minimize
 
 一切为了好维护，升级，迭代
 ```
+
+
 
