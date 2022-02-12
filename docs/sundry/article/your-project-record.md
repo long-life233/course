@@ -12,18 +12,32 @@
 - 技术栈
     - uniapp
     
+```shell
+1. 使用使用Vue3/Vite版创建uniapp项目
+    创建以 typescript 开发的工程
+    npx degit dcloudio/uni-preset-vue#vite-ts my-thowderPower-project
+
+2. 可发布到iOS、Android、Web（响应式）、以及各种小程序、快应用等多个平台
+    暂时只发布到微信小程序中
+    "dev": "uni -p mp-weixin",
+    npm run dev即可
+3. cli创建的项目可以在package.json中添加参数--minimize
+    在vite/ts项目下会报错。
+4. 模仿未来小程序
+        
+
+```
 
 ## question
 
 ## sundry
 
 ```shell
-可发布到iOS、Android、Web（响应式）、以及各种小程序、快应用等多个平台
+
 
 HTML 5Plus是什么？
 HTML调用APP api的能力
 https://www.cnblogs.com/gzhjj/p/11903773.html
-
 
 安卓模拟器，有手机的模样
 
@@ -33,7 +47,7 @@ hash路由和history路由区别
 
 为什么history route用户在浏览器中直接访问 https://example.com/user/id，就会得到一个 404 错误？因为单页应用，只有一个页面，你想跳到哪个页面呢？
 
-使用使用Vue3/Vite版创建uniapp项目
+
 
 三方培训机构视频
 
@@ -56,11 +70,9 @@ static 目录下的 js 文件不会被编译
 
 自HBuilderX 2.6.6起template内支持@开头路径引入静态资源，旧版本不支持此方式
 
-
 js文件引入
 // 绝对路径，@指向项目根目录，在cli项目中@指向src目录
 import add from '@/common/add.js'
-
 
 js文件不支持使用/开头的方式引入
 
@@ -75,10 +87,6 @@ css文件或style标签内引入css文件时（scss、less文件同理），可�
 uLink组件是navigator组件的增强版，样式上自带下划线，功能上支持打开在线网页、其他App的schema、mailto发邮件、tel打电话。
 
 如何引入字体图标？看文档
-
-pprocess.env.NODE_ENV
-
-
 
 uni-app 有两种页面路由跳转方式：使用navigator组件跳转、调用API跳转。
 
@@ -136,7 +144,7 @@ domModule.addRule('fontFace', {
         font-family: iconfont;
         margin-left: 20rpx;
     }
-</style  >
+</style>
 
 <block/> 在不同的平台表现存在一定差异，推荐统一使用 <template/>。
 
@@ -168,7 +176,7 @@ nvue的组件和API写法与vue页面一致，其内置组件还比vue页面内�
 
 static 目录的条件编译
 
-cli创建的项目可以在package.json中添加参数--minimize
+
 
 分包优化
 
@@ -178,6 +186,8 @@ cli创建的项目可以在package.json中添加参数--minimize
 
 一切为了好维护，升级，迭代
 ```
+
+
 
 
 

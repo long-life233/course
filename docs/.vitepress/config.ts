@@ -15,6 +15,8 @@ export default defineConfigWithTheme<Config>({
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }],
     ],
+    // lastUpdated:true,
+    
     themeConfig: {
         // sidebarDepth:2,
         nav: [
@@ -252,7 +254,7 @@ export default defineConfigWithTheme<Config>({
                         {
                             text:"项目记录",
                             link:"/sundry/article/your-project-record"
-                        },
+                        }
                     ]
                 },
 
