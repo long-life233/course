@@ -1,10 +1,4 @@
 <script setup>
-import { nextTick } from 'vue'
-// 引入useParticle钩子
-import useParticle from "../hooks/useParticle.js"
-
-// await nextTick()
-useParticle()
 
 </script>
 <template>
