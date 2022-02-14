@@ -27,7 +27,7 @@ export default function () {
         canvasNode.width = screenWidth
         canvasNode.height = screenHeight
         canvasNode.style.position = 'fixed'
-        canvasNode.style.zIndex = -999
+        canvasNode.style.zIndex = -2
         canvasNode.id = "canvas"
         ctx = canvasNode.getContext("2d")
         document.body.appendChild(canvasNode)
@@ -110,8 +110,6 @@ export default function () {
             screenHeight = e.target.innerHeight;
             drawCanvas()
         }
-
-        window.emitter.on('changeTheme', drawCanvas)
         // 绘制canvas
         drawCanvas()
     })
