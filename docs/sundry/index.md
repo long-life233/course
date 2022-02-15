@@ -6,6 +6,7 @@ vue3文档
 - doc/guide/Essentials 
     - Reactivity Fundamentals
     - Components Basics（OK）
+    - Components In-Depth / Async Components (OK)
 
 vitepress文档
 - Guide/Intorduction
