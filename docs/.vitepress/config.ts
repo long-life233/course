@@ -82,7 +82,7 @@ export default defineConfigWithTheme<Config>({
                         },
                         {
                             text: "我的html，css，和js",
-                            link: '/html-css-js/article/2022.2.3-my-html-css-js',
+                            link: '/html-css-js/article/my-html-css-js',
                         }
                     ]
                 },

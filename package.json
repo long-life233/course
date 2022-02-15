@@ -12,10 +12,10 @@
     "serve": "vitepress serve docs"
   },
   "dependencies": {
-    "@vue/theme": "^1.0.0",
+    "@vue/theme": "^1.0.1",
     "mitt": "^3.0.0",
-    "vitepress": "^0.22.0",
-    "vue": "^3.2.28"
+    "vitepress": "^0.22.2",
+    "vue": "^3.2.31"
   },
   "pnpm": {
     "peerDependencyRules": {

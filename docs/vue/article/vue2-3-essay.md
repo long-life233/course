@@ -1099,4 +1099,34 @@ emitter.on('foo',msg=>log(msg))
 
 ## vue-router变化
 
+## v-on事件继承
+描述，父组件上的绑定事件会传递给子组件的根节点，当触发事件时，执行父组件里的方法。
 
+v-button组件
+```vue
+<script setup >
+    const emit = defineEmits('click')
+
+    const onClick = ()=>{
+        console.log(123);
+    }
+</script>
+<template>
+    <button>按钮</button>
+</template>
+```
+
+父组件
+```vue
+<script setup>
+    import vButton from './components/V-Button.vue'
+    const onClick = ()=>{
+    console.log("我是爹");
+    }
+
+</script>
+<template>
+  <router-view></router-view>
+  <vButton @click="onClick" class="abcd"></vButton>
+</template>
+```

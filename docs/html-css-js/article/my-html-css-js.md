@@ -1,8 +1,8 @@
 # 我的html，css，和js
 
-## css
+## css部分 ↓
  
-### pointer-events
+## pointer-events
 结构
 ```html
     <div id="box1">
@@ -64,7 +64,7 @@ js事件
     </script> 
 ```
 
-### object-fit
+## object-fit
 
 样式
 ```css
@@ -100,7 +100,7 @@ html
     </div>
 ```
 
-### 骨架屏
+## 骨架屏
 <script setup>
 import Skelttion from '/@theme/components/vue/Skelttion.vue'
 </script>
@@ -140,3 +140,36 @@ import Skelttion from '/@theme/components/vue/Skelttion.vue'
     <div></div>
 </body>
 ```
+
+## iframe实现全屏，高度自适应浏览器实现
+
+https://blog.csdn.net/qq_40542534/article/details/111238522
+
+iframe编写
+```html
+<iframe id="iframe"
+        name="iframe"
+        height="100%"
+        width="100%"
+        src="https://www.baidu.com"
+        scrolling="auto"
+        frameborder="0"
+        onload="changeFrameHeight()">
+</iframe>
+```
+
+JS读取height赋值
+```js
+<script>
+    function changeFrameHeight() {
+        var iframe = document.getElementById("iframe");
+        iframe.height = document.documentElement.clientHeight;
+    }
+    //onresize属性可以用来获取或设置当前窗口的resize事件的事件处理函数
+    //onresize事件会在窗口或框架被调整大小时发生
+    window.onresize = function() {
+        changeFrameHeight();
+    }
+</script>
+```
+
