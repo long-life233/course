@@ -7,10 +7,15 @@ vue3文档
     - Reactivity Fundamentals
     - Components Basics（OK）
     - Components In-Depth / Async Components (OK)
+    - Reusability / Plugins(OK)
 
 vitepress文档
 - Guide/Intorduction
     - Asset Handling(OK)
+
+- tip
+  - vscode，搜索文件名，ctr+p
+  - 搜索字符，ctr+f，ctr+shift+f搜索
 
 ## JS媒体查询
 主要使用API：

@@ -254,6 +254,10 @@ export default defineConfigWithTheme<Config>({
                         {
                             text:"项目记录",
                             link:"/sundry/article/your-project-record"
+                        },
+                        {
+                            text:"正则表达式",
+                            link:"/sundry/article/regular-expression"
                         }
                     ]
                 },
