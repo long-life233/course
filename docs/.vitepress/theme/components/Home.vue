@@ -25,6 +25,7 @@
         </svg>
       </a>
     </div>
+    
   </section>
 </template>
 
@@ -128,69 +129,6 @@ html:not(.dark) .accent,
   background-color: var(--vt-c-gray-dark-3);
 }
 
-#special-sponsor {
-  border-top: 1px solid var(--vt-c-divider-light);
-  border-bottom: 1px solid var(--vt-c-divider-light);
-  padding: 12px 24px;
-  text-align: center;
-}
-
-#special-sponsor span {
-  color: var(--vt-c-text-2);
-  font-weight: 500;
-  font-size: 13px;
-  vertical-align: middle;
-  margin: 0 24px;
-}
-
-#special-sponsor img {
-  display: inline-block;
-  vertical-align: middle;
-  height: 36px;
-}
-
-.dark #special-sponsor img {
-  filter: grayscale(1) invert(1);
-}
-
-#highlights {
-  max-width: 960px;
-  margin: 0px auto;
-  color: var(--vt-c-text-2);
-}
-
-#highlights h2 {
-  font-weight: 600;
-  font-size: 20px;
-  letter-spacing: -0.4px;
-  color: var(--vt-c-text-1);
-  transition: color 0.5s;
-  margin-bottom: 0.75em;
-}
-
-#highlights p {
-  font-weight: 400;
-  font-size: 15px;
-}
-
-#highlights .vt-box {
-  background-color: transparent;
-}
-
-#sponsors {
-  max-width: 900px;
-  margin: 0px auto;
-}
-
-#sponsors h2 {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 1em;
-}
-
-#sponsors .sponsor-container {
-  margin-bottom: 3em;
-}
 
 @media (max-width: 960px) {
   .tagline {
@@ -217,16 +155,6 @@ html:not(.dark) .accent,
   .description {
     font-size: 16px;
     margin: 18px 0 30px;
-  }
-  #special-sponsor img {
-    display: block;
-    margin: 2px auto 1px;
-  }
-  #highlights h3 {
-    margin-bottom: 0.6em;
-  }
-  #highlights .vt-box {
-    padding: 20px 36px;
   }
 }
 
