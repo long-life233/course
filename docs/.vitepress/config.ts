@@ -47,7 +47,7 @@ export default defineConfigWithTheme<Config>({
                         },
                         {
                             text: 'vue随笔',
-                            link: '/vue/article/vue2-3-essay'
+                            link: '/vue/article/vue-essay'
                         },
                         {
                             text:"vue3大概初始化流程",
