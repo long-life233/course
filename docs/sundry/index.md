@@ -8,6 +8,7 @@ vue3文档
     - Components Basics（OK）
     - Components In-Depth / Async Components (OK)
     - Reusability / Plugins(OK)
+    - Built-in Components / Teleport
 
 vitepress文档
 - Guide/Intorduction
