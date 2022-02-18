@@ -9,7 +9,8 @@ vue3文档
     - Components In-Depth / Async Components (OK)
     - Reusability / Plugins(OK)
     - Built-in Components / Suspense
-    - Scaling Up / Tooling (OK)
+    - Scaling Up / Routing (OK)
+    -             
 
 vitepress文档
 - Guide/Intorduction
