@@ -3,12 +3,13 @@
 编程记录中的杂项
 
 vue3文档
-- doc/guide/Essentials 
+- doc/guide/
     - Reactivity Fundamentals
     - Components Basics（OK）
     - Components In-Depth / Async Components (OK)
     - Reusability / Plugins(OK)
     - Built-in Components / Suspense
+    - Scaling Up / Tooling (OK)
 
 vitepress文档
 - Guide/Intorduction
