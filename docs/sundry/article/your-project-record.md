@@ -148,6 +148,8 @@ domModule.addRule('fontFace', {
 
 <block/> 在不同的平台表现存在一定差异，推荐统一使用 <template/>。
 
+看了看小程序分包，只有子页面才能分包，tabbar页不支持。先在还配置不了。
+
 直接从 npm 下载库很容易只兼容H5端。
 
 关于ui库的获取，详见多端UI库https://ask.dcloud.net.cn/article/35489
