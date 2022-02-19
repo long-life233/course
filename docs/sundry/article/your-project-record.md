@@ -35,6 +35,15 @@
 ```shell
 
 
+/* 取消scroll-view滚动条样式 */
+::-webkit-scrollbar {  
+    display: none;  
+    width: 0 !important;  
+    height: 0 !important;  
+    -webkit-appearance: none;  
+    background: transparent;  
+}
+
 HTML 5Plus是什么？
 HTML调用APP api的能力
 https://www.cnblogs.com/gzhjj/p/11903773.html

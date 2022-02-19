@@ -258,6 +258,10 @@ export default defineConfigWithTheme<Config>({
                         {
                             text:"正则表达式",
                             link:"/sundry/article/regular-expression"
+                        },
+                        {
+                            text:"贪吃蛇",
+                            link:"/sundry/article/greedy-snake"
                         }
                     ]
                 },
