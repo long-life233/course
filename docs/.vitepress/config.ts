@@ -262,6 +262,10 @@ export default defineConfigWithTheme<Config>({
                         {
                             text:"贪吃蛇",
                             link:"/sundry/article/greedy-snake"
+                        },
+                        {
+                            text:"vue2+mongodb项目",
+                            link:"/sundry/article/vue2-mongodb-project"
                         }
                     ]
                 },

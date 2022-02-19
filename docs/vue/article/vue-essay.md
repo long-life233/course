@@ -78,6 +78,57 @@ module.exports = {
 - vite.config.js中配置目录别名，代理，mock数据
 
 - 项目打包，部署，CI/CD
+## vue优雅实现use插件
+main.ts
+```ts{7}
+import { createApp } from 'vue'
+import App from './App.vue'
+import usePlugins from "@/plugins"
+
+const app = createApp(App)
+
+usePlugins(app)
+
+app.mount("#app")
+```
+usePlugins.ts
+```ts{12}
+import { App, Plugin } from 'vue'
+import router from '@/router'
+import store from '@/store'
+import componentsPlugin from "./components"
+
+const plugins: Plugin[] = [
+    componentsPlugin,
+    store,
+    router
+]
+// [].forEach((item,index)=>{})
+// app.use((app)=>{}),插件是一个函数，接受app参数
+const usePlugins = (app: App) => plugins.forEach(app.use, app)
+
+export default usePlugins
+```
+componentsPlugin.ts
+```ts{10}
+import cButton from "./c-button.vue"
+import cIcon from "./c-icon.vue"
+import { Component, Plugin } from "vue"
+
+const components: Map<string, Component> = new Map([
+    ["c-button", cButton],
+    ["c-icon", cIcon],
+])
+
+const componentsPlugin: Plugin = app => {
+    components.forEach(
+        // item,index
+        (component, name) => app.component(name, component)
+    )
+}
+
+export default componentsPlugin
+```
 ## 父组件获取子组件实例
 关键点：需要使用defineExpose
 
