@@ -31,7 +31,6 @@ react，生态更好，web，移动端都可做（native）
 
 我的是`vue/cli.4.x`
 
-![image-20211121144252735](TyporaImg/image-20211121144252735.png)
 
 但是项目用的是`vue-cli`老版本，可以在官网找到入口
 
