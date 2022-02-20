@@ -20,6 +20,8 @@ vitepress文档
   - 搜索字符，ctr+f，ctr+shift+f搜索
 
 
+## Gitee 图床搭建
+https://product.mdnice.com/article/developer/gitee-image-hosting/
 ## JS生成二维码
 https://github.com/davidshimjs/qrcodejs
 ## 解析marked格式
