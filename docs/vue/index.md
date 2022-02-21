@@ -15,8 +15,12 @@
 - The rendering process of Vue3.x components[https://www.jianshu.com/p/88ffc615f6f5]
 - Vue3.0 Custom Renderer API[https://blog.csdn.net/weixin_42029374/article/details/107832015]
 - H function in VUE[https://blog.csdn.net/qq_42778001/article/details/95959531]
+- W3C Nuxt course [https://www.w3cschool.cn/nuxtjs/nuxtjs-b2i736fu.html]
+- Chinese Nuxt documentation[https://www.nuxtjs.cn/ ]
 
 ## Video
 - Source code analysis[https://www.bilibili.com/video/BV1bS4y1T7ng?share_medium=android&share_plat=android&share_session_id=cc9da994-d84b-4c9f-b630-b04c223f0800&share_source=COPY&share_tag=s_i&timestamp=1642032560&unique_k=X9vfFB3]
 - Sgg ts vue3[https://www.bilibili.com/video/BV1ra4y1H7ih]
 - Sgg vue2 vue3[https://www.bilibili.com/video/BV1Zy4y1K7SH]
+- QianFeng Nuxt tutorial [https://www.bilibili.com/video/BV13Z4y1T74J?p=9&spm_id_from=pageDriver]
+- QianFeng Nuxt tutorial2 [https://www.bilibili.com/video/BV1EE411e7qJ?p=11&spm_id_from=pageDriver]
