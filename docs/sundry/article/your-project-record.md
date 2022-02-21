@@ -2,7 +2,8 @@
 
 ## 介绍
 2022.2.11开始，大概最多做半个到一个月吧！！
-
+    
+```shell
 
 - 服务对象
     - 公司
@@ -11,8 +12,7 @@
     - 打包为app
 - 技术栈
     - uniapp
-    
-```shell
+
 1. 使用使用Vue3/Vite版创建uniapp项目
     创建以 typescript 开发的工程
     npx degit dcloudio/uni-preset-vue#vite-ts my-thowderPower-project
@@ -24,7 +24,7 @@
 3. cli创建的项目可以在package.json中添加参数--minimize
     在vite/ts项目下会报错。
 4. 模仿未来小程序
-        
+5. 图片使用通过图壳网上传图片返回的链接
 
 ```
 

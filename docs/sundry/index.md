@@ -10,6 +10,7 @@ vue3文档
     - Reusability / Plugins(OK)
     - Built-in Components / Suspense
     - Scaling Up / SSR （OK only）
+	- Best Practise / Security
 
 vitepress文档
 - Guide/Intorduction
