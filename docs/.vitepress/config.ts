@@ -20,12 +20,12 @@ export default defineConfigWithTheme<Config>({
     themeConfig: {
         // sidebarDepth:2,
         nav: [
-            { text: 'vue', activeMatch:`^/(vue)/`,link: '/vue/' },
-            { text: 'html-css-js',activeMatch:`^/(html-css-js)/`, link: '/html-css-js/' },
-            { text: 'java',activeMatch:`^/(java)/`, link: '/java/' },
-            { text: 'uniapp',activeMatch:`^/(uniapp)/`, link: '/uniapp/' },
-            { text: 'interview',activeMatch:`^/(interview)/`, link: '/interview/' },
-            { text: 'sundry',activeMatch:`^/(sundry)/`, link: '/sundry/' },
+            { text: 'Vue', activeMatch:`^/(vue)/`,link: '/vue/' },
+            { text: 'H5-C3-JS',activeMatch:`^/(html-css-js)/`, link: '/html-css-js/' },
+            { text: 'Java',activeMatch:`^/(java)/`, link: '/java/' },
+            { text: 'Uniapp',activeMatch:`^/(uniapp)/`, link: '/uniapp/' },
+            { text: 'Interview',activeMatch:`^/(interview)/`, link: '/interview/' },
+            { text: 'Sundry',activeMatch:`^/(sundry)/`, link: '/sundry/' },
             // { text: 'other', link: '/other/' }
         ],
         algolia: {
@@ -35,22 +35,22 @@ export default defineConfigWithTheme<Config>({
         sidebar: {
             '/vue/': [
                 {
-                    text: "vue",
+                    text: "Vue",
                     items: [
                         {
-                            text: '资源',
+                            text: 'Resource',
                             link: '/vue/'
                         },
                         {
-                            text: 'base',
-                            link: '/vue/article/vue3'
+                            text: 'Essentials',
+                            link: '/vue/article/essentials'
                         },
                         {
-                            text: 'vue随笔',
-                            link: '/vue/article/vue-essay'
+                            text: 'Essay',
+                            link: '/vue/article/essay'
                         },
                         {
-                            text:"vue3大概初始化流程",
+                            text:"Vue3 Init Process",
                             link:"/vue/article/vue3-init-process"
                         }
                     ]
@@ -58,7 +58,7 @@ export default defineConfigWithTheme<Config>({
             ],
             '/html-css-js/': [
                 {
-                    text: "html-css-js",
+                    text: "H5-C3-JS",
                     items: [
                         {
                             text: "介绍",
@@ -90,7 +90,7 @@ export default defineConfigWithTheme<Config>({
             ],
             '/java/': [
                 {
-                    text: "复习",
+                    text: "Java",
                     items: [
                         {
                             text: "介绍",
@@ -125,7 +125,7 @@ export default defineConfigWithTheme<Config>({
             ],
             '/interview/': [
                 {
-                    text: "前端", items: [
+                    text: "Interview", items: [
                         { text: "介绍", link: '/interview/' },
                         { text: "前端面试常见问题", link: '/interview/faq' }
                     ]
@@ -217,15 +217,15 @@ export default defineConfigWithTheme<Config>({
            
             '/uniapp/': [
                 {
-                    text: 'uniapp', items: [
-                        { text: '介绍', link: '/uniapp/' },
+                    text: 'Uniapp', items: [
+                        { text: 'Resource', link: '/uniapp/' },
                         {
-                            text: 'uniapp仿糗事百科项目总结',
-                            link: '/uniapp/article/2022.1.11-community-project-summary'
+                            text: 'Project Summary',
+                            link: '/uniapp/article/project-summary'
                         },
                         {
-                            text: "uni-app结合云函数开发小程序博客",
-                            link: '/uniapp/article/2022.1.29-UNI-App combined with cloud function development applet blog'
+                            text: "UniCloud",
+                            link: '/uniapp/article/uni-cloud'
                         }
                     ]
                 },
@@ -233,7 +233,7 @@ export default defineConfigWithTheme<Config>({
             ],
             '/sundry/': [
                 {
-                    text: "杂项",
+                    text: "Sundry",
                     items: [
                         {
                             text: '介绍',

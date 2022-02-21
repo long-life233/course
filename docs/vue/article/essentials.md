@@ -1,4 +1,4 @@
-# vue3
+# Essentials
 
 ## vue3的todoList总结
 
@@ -615,7 +615,6 @@ export default {
 
 ## todoList练习
 
-### todoList练习1
 ```shell
 1.拆分组件
 
