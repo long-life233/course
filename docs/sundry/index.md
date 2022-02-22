@@ -1,8 +1,8 @@
-# 介绍
+# Index
 
-编程记录中的杂项
+the sundry in programming
 
-vue3文档
+vue3 documentation
 - doc/guide/
     - Reactivity Fundamentals
     - Components Basics（OK）
@@ -12,14 +12,13 @@ vue3文档
     - Scaling Up / SSR （OK only）
 	- Best Practise / Security
 
-vitepress文档
+vitepress documentation
 - Guide/Intorduction
     - Asset Handling(OK)
 
 - tip
   - vscode，搜索文件名，ctr+p
   - 搜索字符，ctr+f，ctr+shift+f搜索
-
 
 ## Gitee 图床搭建
 https://product.mdnice.com/article/developer/gitee-image-hosting/

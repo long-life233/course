@@ -16,8 +16,13 @@
 - Vue3.0 Custom Renderer API[https://blog.csdn.net/weixin_42029374/article/details/107832015]
 - H function in VUE[https://blog.csdn.net/qq_42778001/article/details/95959531]
 - W3C Nuxt course [https://www.w3cschool.cn/nuxtjs/nuxtjs-b2i736fu.html]
-- Chinese Nuxt documentation[https://www.nuxtjs.cn/ ]
-
+- Chinese Nuxt documentation[https://www.nuxtjs.cn/]
+- Brief Description Nuxtjs[https://zhuanlan.zhihu.com/p/89484871]
+- Nuxt.js brief description[https://www.jianshu.com/p/b0626ba924c9]
+- Nuxt.js Ten thousand words[https://www.cnblogs.com/chanwahfung/p/12899714.html]
+- The defference between MPA and SPA[https://www.jianshu.com/p/4c9c29967dd6]
+- Nuxt.js actual combat tutorail [https://zhuanlan.zhihu.com/p/28408650]
+- Develop a VUE program based on NUXT.js to implement login and registration[https://blog.csdn.net/e5bb96/article/details/121766379]
 ## Video
 - Source code analysis[https://www.bilibili.com/video/BV1bS4y1T7ng?share_medium=android&share_plat=android&share_session_id=cc9da994-d84b-4c9f-b630-b04c223f0800&share_source=COPY&share_tag=s_i&timestamp=1642032560&unique_k=X9vfFB3]
 - Sgg ts vue3[https://www.bilibili.com/video/BV1ra4y1H7ih]

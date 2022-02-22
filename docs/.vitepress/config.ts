@@ -236,7 +236,7 @@ export default defineConfigWithTheme<Config>({
                     text: "Sundry",
                     items: [
                         {
-                            text: '介绍',
+                            text: 'Index',
                             link: '/sundry/'
                         },
                         {
@@ -266,6 +266,10 @@ export default defineConfigWithTheme<Config>({
                         {
                             text:"vue2+mongodb项目",
                             link:"/sundry/article/vue2-mongodb-project"
+                        },
+                        {
+                            text:"Nuxt MiniProgram",
+                            link:"/sundry/article/nuxt-mini-program"
                         }
                     ]
                 },

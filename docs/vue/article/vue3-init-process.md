@@ -1,4 +1,4 @@
-# Vue3 init process
+# Vue3  Init Process
 - 初始工作？
 ```shell
 - 首先删除popteer依赖，太大了
