@@ -1,7 +1,12 @@
 # Index
 
+## Article
+- UNI-App combined with cloud function development applet blog[https://juejin.cn/post/6844904142809333773]
+## Video
+- UniCloud Quick Start Actual Combat[https://study.163.com/course/introduction.htm?courseId=1210197477#/courseDetail?tab=1]
 the sundry in programming
 
+## Sundry Record
 vue3 documentation
 - doc/guide/
     - Reactivity Fundamentals
@@ -20,7 +25,7 @@ vitepress documentation
   - vscode，搜索文件名，ctr+p
   - 搜索字符，ctr+f，ctr+shift+f搜索
 
-## Gitee 图床搭建
+## Gitee Image Hosting
 https://product.mdnice.com/article/developer/gitee-image-hosting/
 ## JS生成二维码
 https://github.com/davidshimjs/qrcodejs

@@ -1,4 +1,4 @@
-# 贪吃蛇
+# Greedy Snake
 
 ## index.html结构
 index.html

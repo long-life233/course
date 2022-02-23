@@ -1,4 +1,4 @@
-# webSocket实现简单的聊天室
+# Easy Chat Room
 app.js,作为服务端
 ```js
 var ws = require("nodejs-websocket")

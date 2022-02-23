@@ -1,4 +1,4 @@
-# canvas实现粒子效果
+# Canvas Particle Effect
 
 ## 在vitepree中使用的坑
 获取不到元素。。

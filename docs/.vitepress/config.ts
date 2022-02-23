@@ -22,8 +22,7 @@ export default defineConfigWithTheme<Config>({
         nav: [
             { text: 'Vue', activeMatch:`^/(vue)/`,link: '/vue/' },
             { text: 'H5-C3-JS',activeMatch:`^/(html-css-js)/`, link: '/html-css-js/' },
-            { text: 'Java',activeMatch:`^/(java)/`, link: '/java/' },
-            { text: 'Uniapp',activeMatch:`^/(uniapp)/`, link: '/uniapp/' },
+            // { text: 'Java',activeMatch:`^/(java)/`, link: '/java/' },
             { text: 'Interview',activeMatch:`^/(interview)/`, link: '/interview/' },
             { text: 'Sundry',activeMatch:`^/(sundry)/`, link: '/sundry/' },
             // { text: 'other', link: '/other/' }
@@ -214,23 +213,6 @@ export default defineConfigWithTheme<Config>({
                 },
 
             ],
-           
-            '/uniapp/': [
-                {
-                    text: 'Uniapp', items: [
-                        { text: 'Resource', link: '/uniapp/' },
-                        {
-                            text: 'Project Summary',
-                            link: '/uniapp/article/project-summary'
-                        },
-                        {
-                            text: "UniCloud",
-                            link: '/uniapp/article/uni-cloud'
-                        }
-                    ]
-                },
-
-            ],
             '/sundry/': [
                 {
                     text: "Sundry",
@@ -240,31 +222,31 @@ export default defineConfigWithTheme<Config>({
                             link: '/sundry/'
                         },
                         {
-                            text: "手写常见代码",
+                            text: "Hand Common Code",
                             link: "/sundry/article/hand-common-code"
                         },
                         {
-                            text: "webSocket实现简单的聊天室",
+                            text: "WebSocket Easy Chat Room",
                             link: "/sundry/article/easy-chat-room"
                         },
                         {
-                            text:"canvas实现粒子效果",
+                            text:"Canvas Particle Effect",
                             link:"/sundry/article/canvas-particle-effect"
                         },
                         {
-                            text:"项目记录",
-                            link:"/sundry/article/your-project-record"
+                            text:"Uniapp Project Record",
+                            link:"/sundry/article/uniapp-project-record"
                         },
                         {
-                            text:"正则表达式",
+                            text:"Regular Expression",
                             link:"/sundry/article/regular-expression"
                         },
                         {
-                            text:"贪吃蛇",
+                            text:"Greedy Snake",
                             link:"/sundry/article/greedy-snake"
                         },
                         {
-                            text:"vue2+mongodb项目",
+                            text:"Vue2 MongoDB Project",
                             link:"/sundry/article/vue2-mongodb-project"
                         },
                         {

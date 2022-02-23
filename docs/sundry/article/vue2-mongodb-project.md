@@ -1,4 +1,4 @@
-# vue2+mongodb项目
+# Vue2 MongoDB Project
 
 ## 涵盖功能模块
 商品列表
