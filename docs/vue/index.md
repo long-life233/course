@@ -29,3 +29,4 @@
 - Sgg vue2 vue3[https://www.bilibili.com/video/BV1Zy4y1K7SH]
 - QianFeng Nuxt tutorial [https://www.bilibili.com/video/BV13Z4y1T74J?p=9&spm_id_from=pageDriver]
 - QianFeng Nuxt tutorial2 [https://www.bilibili.com/video/BV1EE411e7qJ?p=11&spm_id_from=pageDriver]
+- LAO SANG Nuxt.js[https://www.bilibili.com/video/BV1654y1r7rM/?spm_id_from=333.788.recommend_more_video.1]
