@@ -23,6 +23,7 @@
 - The defference between MPA and SPA[https://www.jianshu.com/p/4c9c29967dd6]
 - Nuxt.js actual combat tutorail [https://zhuanlan.zhihu.com/p/28408650]
 - Develop a VUE program based on NUXT.js to implement login and registration[https://blog.csdn.net/e5bb96/article/details/121766379]
+- vue3.0 挂载全局api 和 全局自定义方法[https://blog.csdn.net/agua001/article/details/122835808]
 ## Video
 - Source code analysis[https://www.bilibili.com/video/BV1bS4y1T7ng?share_medium=android&share_plat=android&share_session_id=cc9da994-d84b-4c9f-b630-b04c223f0800&share_source=COPY&share_tag=s_i&timestamp=1642032560&unique_k=X9vfFB3]
 - Sgg ts vue3[https://www.bilibili.com/video/BV1ra4y1H7ih]

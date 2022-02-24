@@ -41,10 +41,6 @@ export default defineConfigWithTheme<Config>({
                             link: '/vue/'
                         },
                         {
-                            text: 'Essentials',
-                            link: '/vue/article/essentials'
-                        },
-                        {
                             text: 'Essay',
                             link: '/vue/article/essay'
                         },
@@ -125,8 +121,7 @@ export default defineConfigWithTheme<Config>({
             '/interview/': [
                 {
                     text: "Interview", items: [
-                        { text: "介绍", link: '/interview/' },
-                        { text: "前端面试常见问题", link: '/interview/faq' }
+                        { text: "前端面试常见问题", link: '/interview/' }
                     ]
                 },
 

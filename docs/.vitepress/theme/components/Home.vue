@@ -4,11 +4,10 @@
 <template>
   <section id="hero">
     <h1 class="tagline">
-      The
-      <span class="accent">Lusong's</span>
-      <br />Blog
+      <span class="accent">Important</span>
+      <br />Emergent
     </h1>
-    <p class="description">If there is any regret medicine in the world</p>
+    <p class="description">Important and Emergent</p>
     <div class="actions">
       <a class="get-started" href="/vue/">
         Get Started
