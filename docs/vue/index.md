@@ -1,12 +1,12 @@
-# Resource
+# 资源
 should determination，study well vue，at least half year，do well company‘s project。
-## Documentation
+## 文档
 - Vue3官方文档[https://vuejs.org/]
 - vue中文文档[https://vue3js.cn/]
 - uniapp文档[https://uniapp.dcloud.io/]
 - Nuxt中文文档[https://www.nuxtjs.cn/]
 - W3C Nuxt教程[https://www.w3cschool.cn/nuxtjs/nuxtjs-b2i736fu.html]
-## Article
+## 文章
 
 - Contains a lot of extended articles[https://juejin.cn/post/7055224376437784589]
 - Sgg documentation[https://24kcs.github.io/vue3_study/]
@@ -27,7 +27,7 @@ should determination，study well vue，at least half year，do well company‘s
 - Nuxt.js actual combat tutorail [https://zhuanlan.zhihu.com/p/28408650]
 - Develop a VUE program based on NUXT.js to implement login and registration[https://blog.csdn.net/e5bb96/article/details/121766379]
 - vue3.0 挂载全局api 和 全局自定义方法[https://blog.csdn.net/agua001/article/details/122835808]
-## Video
+## 视频
 - Source code analysis[https://www.bilibili.com/video/BV1bS4y1T7ng?share_medium=android&share_plat=android&share_session_id=cc9da994-d84b-4c9f-b630-b04c223f0800&share_source=COPY&share_tag=s_i&timestamp=1642032560&unique_k=X9vfFB3]
 - Sgg ts vue3[https://www.bilibili.com/video/BV1ra4y1H7ih]
 - Sgg vue2 vue3[https://www.bilibili.com/video/BV1Zy4y1K7SH]

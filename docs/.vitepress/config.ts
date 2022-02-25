@@ -20,12 +20,13 @@ export default defineConfigWithTheme<Config>({
     themeConfig: {
         // sidebarDepth:2,
         nav: [
-            { text: 'Vue', activeMatch:`^/(vue)/`,link: '/vue/' },
-            { text: 'H5-C3-JS',activeMatch:`^/(html-css-js)/`, link: '/html-css-js/' },
+            // { text: 'Vue', activeMatch:`^/(vue)/`,link: '/vue/' },
+            // { text: 'H5-C3-JS',activeMatch:`^/(html-css-js)/`, link: '/html-css-js/' },
             // { text: 'Java',activeMatch:`^/(java)/`, link: '/java/' },
-            { text: 'Interview',activeMatch:`^/(interview)/`, link: '/interview/' },
-            { text: 'Sundry',activeMatch:`^/(sundry)/`, link: '/sundry/' },
+            // { text: 'Interview',activeMatch:`^/(interview)/`, link: '/interview/' },
+            // { text: 'Sundry',activeMatch:`^/(sundry)/`, link: '/sundry/' },
             // { text: 'other', link: '/other/' }
+            {text:'前端',activeMatch:`^/(font-end)/`,link:'/font-end/'}
         ],
         algolia: {
             indexName: 'cli_vuejs',

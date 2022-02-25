@@ -7,9 +7,9 @@
       <span class="accent">Important</span>
       <br />Emergent
     </h1>
-    <p class="description">Important and Emergent</p>
+    <p class="description">Don't pursue the fine branches</p>
     <div class="actions">
-      <a class="get-started" href="/vue/">
+      <a class="get-started" href="/font-end/">
         Get Started
         <svg
           class="icon"
