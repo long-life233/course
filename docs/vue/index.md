@@ -1,9 +1,14 @@
 # Resource
-
+should determination，study well vue，at least half year，do well company‘s project。
+## Documentation
+- Vue3官方文档[https://vuejs.org/]
+- vue中文文档[https://vue3js.cn/]
+- uniapp文档[https://uniapp.dcloud.io/]
+- Nuxt中文文档[https://www.nuxtjs.cn/]
+- W3C Nuxt教程[https://www.w3cschool.cn/nuxtjs/nuxtjs-b2i736fu.html]
 ## Article
-- Vue official website[https://vuejs.org/]
+
 - Contains a lot of extended articles[https://juejin.cn/post/7055224376437784589]
-- Vue Chinese documentation,unofficial,but there are many learning,interviews,actual combat information[https://vue3js.cn/]
 - Sgg documentation[https://24kcs.github.io/vue3_study/]
 - Vue2 upgrade vue3[https://juejin.cn/post/7023275396388880414]
 - Five knowledge points, let Vue3 develop more silky[https://juejin.cn/post/7054317318343491615]
@@ -15,8 +20,6 @@
 - The rendering process of Vue3.x components[https://www.jianshu.com/p/88ffc615f6f5]
 - Vue3.0 Custom Renderer API[https://blog.csdn.net/weixin_42029374/article/details/107832015]
 - H function in VUE[https://blog.csdn.net/qq_42778001/article/details/95959531]
-- W3C Nuxt course [https://www.w3cschool.cn/nuxtjs/nuxtjs-b2i736fu.html]
-- Chinese Nuxt documentation[https://www.nuxtjs.cn/]
 - Brief Description Nuxtjs[https://zhuanlan.zhihu.com/p/89484871]
 - Nuxt.js brief description[https://www.jianshu.com/p/b0626ba924c9]
 - Nuxt.js Ten thousand words[https://www.cnblogs.com/chanwahfung/p/12899714.html]
