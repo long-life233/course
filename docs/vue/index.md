@@ -34,3 +34,4 @@ should determination，study well vue，at least half year，do well company‘s
 - QianFeng Nuxt tutorial [https://www.bilibili.com/video/BV13Z4y1T74J?p=9&spm_id_from=pageDriver]
 - QianFeng Nuxt tutorial2 [https://www.bilibili.com/video/BV1EE411e7qJ?p=11&spm_id_from=pageDriver]
 - LAO SANG Nuxt.js[https://www.bilibili.com/video/BV1654y1r7rM/?spm_id_from=333.788.recommend_more_video.1]
+- 完整版-领券联盟前端nuxt.js[https://www.bilibili.com/video/BV1QC4y1b7gL?p=19]

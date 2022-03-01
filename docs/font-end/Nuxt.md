@@ -1,4 +1,4 @@
-# Nuxt
+# Nuxt1
 
 ## 什么是服务端渲染
 服务器获取数据填充到页面上然后返回给浏览器。
@@ -52,3 +52,30 @@ static
 
 ## nuxt命令和部署
 静态部署和动态部署。哪个好呢。
+
+# Nuxt2
+
+## 框架安装
+npx create-nuxt-app xx。改版了。
+
+## 生命周期
+
+
+## nuxtServerInit_middleware_validate
+新版没搜到nuxtServerInit。
+
+# 领券联盟web版
+
+## 创建项目，导入ElementUI
+
+## 编写头部，底部公共部分
+.nuxt/layouts/default.vue
+
+没难点
+
+## 添加axios依赖
+查文档
+
+## 对请求进行封装
+## 渲染分类菜单
+使用asyncData。应该会在很多地方用到。
