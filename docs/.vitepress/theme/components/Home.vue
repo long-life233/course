@@ -1,7 +1,10 @@
 <script setup>
+import useParticle from "../hooks/useParticle.js"
 
+useParticle()
 </script>
 <template>
+  <div id="box"></div>
   <section id="hero">
     <h1 class="tagline">
       <span class="accent">Important</span>
@@ -24,7 +27,6 @@
         </svg>
       </a>
     </div>
-    
   </section>
 </template>
 
@@ -127,7 +129,6 @@ html:not(.dark) .accent,
 .dark .actions .setup:hover {
   background-color: var(--vt-c-gray-dark-3);
 }
-
 
 @media (max-width: 960px) {
   .tagline {

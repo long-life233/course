@@ -69,8 +69,6 @@ export default function () {
         drawCanvas()
     }
 
-    window.emitter.on('changeTheme',drawCanvas)
-    
     // 绘制canvas
     function drawCanvas() {
         
