@@ -7,9 +7,9 @@ title: BLOG
 import Home from '/@theme/components/Home.vue'
 </script>
 
-<ClientOnly>
-  <Home/>
-</ClientOnly>
+
+<Home/>
+
 
 
 
