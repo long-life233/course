@@ -1,6 +1,49 @@
 
 # vue技巧
 
+
+## 编辑器
+  - vscode，搜索文件名，ctr+p
+  - 搜索字符，ctr+f，ctr+shift+f搜索
+
+## JS生成二维码
+https://github.com/davidshimjs/qrcodejs
+
+## JS媒体查询
+主要使用API：
+```js
+// 媒体查询，系统是否使用深色主题？（return boolean）
+// 类似还有当前浏览器窗口是否小于780px？ 还是小于560px？
+const query = window.matchMedia(`(prefers-color-scheme: dark)`)
+
+query.onchange = (e) => {
+    log(e.matches)
+}
+
+// 获取类列表
+const classList = document.documentElement.classList
+classList[dark ? 'add' : 'remove']('dark')
+```
+对HTML根元素添加或删除dark类来切换主题。然后对很多元素(body,头部导航等等)来说，使用交集选择器（当html拥有dark类时）,设置背景为
+```css
+html.dark body{
+    /* 定义css变量 */
+    --vt-c-bg: var(--vt-c-black);
+}
+```
+[-->了解css变量](https://www.ruanyifeng.com/blog/2017/05/css-variables.html)
+
+还可以用js来操作获取css变量哟！
+
+## 解析marked格式
+使用"marked"库
+
+## IntersectionObserver
+api `IntersectionObserver`,离开视口区域会触发函数
+
+## Gitee Image Hosting
+https://product.mdnice.com/article/developer/gitee-image-hosting/
+
 ##   CSS Modules
 通过$style访问css
 ```vue

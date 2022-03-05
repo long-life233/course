@@ -28,6 +28,8 @@
 - vue3.0 挂载全局api 和 全局自定义方法[https://blog.csdn.net/agua001/article/details/122835808]
 - 手摸手，带你用vue撸后台 系列一（基础篇）[https://juejin.cn/post/6844903476661583880]
 - 潘家成vue-element-admin文档[https://panjiachen.github.io/vue-element-admin-site/zh/]
+- uni-app结合云函数开发小程序博客（一）：组件库使用、引入 Vuex 状态管理[https://juejin.cn/post/6844904142809333773]
+- Koa阮一峰入门教程[https://www.ruanyifeng.com/blog/2017/08/koa.html]
 
 ## 视频
 
@@ -38,3 +40,4 @@
 - VUE服务器端渲染-NUXT实战教程 [https://www.bilibili.com/video/BV1EE411e7qJ?p=11&spm_id_from=pageDriver]
 - SSR（服务器端渲染）的Nuxt.js框架[https://www.bilibili.com/video/BV1654y1r7rM/?spm_id_from=333.788.recommend_more_video.1]
 - 完整版-领券联盟前端nuxt.js[https://www.bilibili.com/video/BV1QC4y1b7gL?p=19]
+- uniClound快速入门实战[https://study.163.com/course/introduction.htm?courseId=1210197477#/courseDetail?tab=1]
