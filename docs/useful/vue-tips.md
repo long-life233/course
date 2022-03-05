@@ -1,11 +1,7 @@
-# 有用的东西
 
-## 调适
+# vue技巧
 
-- 打断点的时候，可以查看调用栈，理清思路。
-
-## vue相关
-###  CSS Modules
+##   CSS Modules
 通过$style访问css
 ```vue
 <template>
@@ -20,7 +16,7 @@
     }
 </style>
 ```
-###  vue脚手架可以直接使用css预处理器
+##   vue脚手架可以直接使用css预处理器
 直接使用即可，但记得要`npm i scss`下载
 ```css
 <style lang="scss">
@@ -30,7 +26,7 @@
 import "\./common.scss"
 ```
 
-### PostCss
+##  PostCss
 
 为css添加前缀，获取兼容性处理。
 
@@ -43,7 +39,7 @@ module.exports = {
 }
 ```
 
-### vue优雅使用use插件
+##  vue优雅使用use插件
 main.ts
 ```ts{7}
 import { createApp } from 'vue'
@@ -93,7 +89,7 @@ const componentsPlugin: Plugin = app => {
 export default componentsPlugin
 ```
 
-### 父组件获取子组件实例
+##  父组件获取子组件实例
 关键点：需要使用defineExpose
 
 父组件
@@ -142,7 +138,7 @@ onMounted(()=>{
 </style>
 ```
 
-### usePromise函数（封装状态）
+##  usePromise函数（封装状态）
 问题：什么是promise？promise可以理解为一个会变化的结果。
 
 编写一个公共函数usePromise函数需求如下：
@@ -221,185 +217,7 @@ function usePromise(fn: Function) {
 ```
 
 
-### 响应式数据实现的大致原理
-> 一个响应式数据对应一个Dep类实例。
-获取、设置这个响应式数据会分别触发get、set钩子。
-get钩子的作用是收集依赖（可以理解为一个函数，里面会执行一些逻辑，比如更新视图）
-set钩子的作用是触发依赖（更新视图）
-
-ref就是一个响应式数据。reactive就是一个对象里面有很多ref。
-一开始，简单点
-```ts
-// v1
-
-// let a = 10;
-// let b = a + 10;
-// console.log(b);
-
-// a = 20;
-// b = a + 10;
-// console.log(b);
-
-
-// v2
-
-// let a = 10;
-// let b
-// update()
-// function update() {
-//     b = a + 10;
-//     console.log(b);
-// }
-
-// a = 20;
-// update()
-
-```
-使用官方api
-```ts
-import  {effect, reactive} from "@vue/reactivity"
-
-let a = reactive({
-    value:19
-})
-
-let b;
-// effect函数，当回调里面的响应式数据发生变化时，再次执行回调
-effect(()=>{
-    b = a.value + 10
-    console.log(b);
-})
-
-a.value = 29
-```
-
-名为reactivity.ts，导出effectWatch函数，reactivity函数
-```ts
-// 当前dep实例是否有依赖函数
-let currentEffect:Function|null;
-// dep类
-class Dep {
-    // 依赖函数集合
-    effects: Set<Function>;
-    // 当前dep的值（dep也就是一个响应式数据）
-    _val:any;
-    // 获取当前dep的值
-    get value(){
-        this.depend()
-        return this._val
-    }
-    // 设置当前dep的值
-    set value(newVal){
-        this._val = newVal;
-        this.notice()
-    }
-    // 实例dep时做两个操作，创建一个空的依赖集合，初始化值
-    constructor(val:any){
-        this.effects = new Set()
-        this._val = val
-    }
-    // 1. 收集依赖
-    depend(){
-        if(currentEffect){
-            this.effects.add(currentEffect)
-        }
-    }
-
-    // 2. 触发依赖
-    notice(){
-        // 触发一下我们之前收集到的依赖
-        this.effects.forEach(effect=>effect())
-    }
-}
-export function effectWatch(effect:Function) {
-    // 收集依赖
-    currentEffect = effect
-    effect()
-    currentEffect = null
-}
-```
-测试一下
-```ts
-// 测试
-ref --> 很像了。
-const dep = new Dep(10)
-
-let b;
-
-effectWatch(()=>{
-    b = dep.value + 10
-    // console.log(b);
-})
-
-// 值发生变更
-dep.value = 20
-```
-最后，继续在这个文件中实现reactivity
-```ts
-// reactive
-// dep -> number string
-// object -> key -> dep
-
-// 1.这个对象在什么时候改变的
-// object.a -> get
-// object.a = 2 -> set
-
-// vue2 defineProperty
-// vue3 proxy
-const depsMap = new Map();
-
-function getDep(target:any, key:any) {
-    // let depsMap = targetMap.get(target)
-    // if(!depsMap){
-    //     depsMap = new Map()
-    //     targetMap.set(target,depsMap)
-    // }
-    let dep = depsMap.get(key)
-    if(!dep){
-        dep = new Dep(target[key]);
-        depsMap.set(key,dep);
-    }
-    return dep;
-}
-export function reactive(raw:Object){
-    return new Proxy(raw,{
-        get(target,key){
-            // key - dep
-            // dep 我们存储在哪里
-            const dep = getDep(target,key);
-
-            // 依赖收集
-            dep.depend();
-
-            // return target[key]
-            return Reflect.get(target,key)
-            // return dep.value // 这里返回的是dep的值，那么改变代理的值时也要改变对应dep的值。
-        },
-        set(target,key,value){
-            // 触发依赖
-            // 要获取到dep
-            const dep = getDep(target,key);
-            const result = Reflect.set(target,key,value)
-            dep.notice(result);            
-            return result
-        }
-    })
-}
-```
-测试
-```ts
-let user  = reactive({
-    age:19
-})
-
-effectWatch(()=>{
-    console.log(user.age);
-})
-```
-
-### 不懂diff算法/自定义渲染器/函数式组件
-
-### 异步组件要求使用defineAsyncComponent方法创建
+##  异步组件要求使用defineAsyncComponent方法创建
 
 - 必须明确使用defineAsyncComponent包裹
 - component选项重命名为loader
@@ -425,12 +243,12 @@ const asyncPageWithOptions = defineAsyncComponent({
 ```
 
 
-### is属性与v-is
+##  is属性与v-is
 is属性只能用在component标签上了。
 
 dom内模板解析使用v-is代替
 
-### $on,$off,$once移除
+##  $on,$off,$once移除
 上述三个方法被认为不应该由vue提供，因此被移除了，可以使用其他三方库实现。
 ```js
 <script src="https://unpkg.com/mitt/dist/mitt.umd.js"></script>
