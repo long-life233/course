@@ -26,7 +26,7 @@ export default defineConfigWithTheme<Config>({
             // { text: 'Interview',activeMatch:`^/(interview)/`, link: '/interview/' },
             // { text: 'Sundry',activeMatch:`^/(sundry)/`, link: '/sundry/' },
             // { text: 'other', link: '/other/' }
-            {text:'前端',activeMatch:`^/(font-end)/`,link:'/font-end/'}
+            // {text:'前端',activeMatch:`^/(font-end)/`,link:'/font-end/'}
         ],
         algolia: {
             indexName: 'cli_vuejs',
