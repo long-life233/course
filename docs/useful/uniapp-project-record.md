@@ -52,7 +52,6 @@ https://www.cnblogs.com/gzhjj/p/11903773.html
 
 打包为原生app
 
-hash路由和history路由区别
 
 为什么history route用户在浏览器中直接访问 https://example.com/user/id，就会得到一个 404 错误？因为单页应用，只有一个页面，你想跳到哪个页面呢？
 
@@ -187,18 +186,5 @@ nvue的组件和API写法与vue页面一致，其内置组件还比vue页面内�
 
 static 目录的条件编译
 
-
-
 分包优化
-
-为提升开发效率，HBuilderX将 uni-app 常用代码封装成了以 u 开头的代码块，如在 template 标签内输入 ulist 回车，会自动生成如下代码：
-
-注意需保障uni-list组件在项目的components目录下。比较简单的方式，是新建项目时，选 uni ui项目模板，在里面即可随便敲所有u开头的代码块。如果不是 uni ui项目模板，那么需要去插件市场手动把uni ui组件下载到工程里。
-
-一切为了好维护，升级，迭代
 ```
-
-
-
-
-

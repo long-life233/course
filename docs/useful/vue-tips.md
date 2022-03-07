@@ -82,6 +82,9 @@ module.exports = {
 }
 ```
 
+## uniapp实现拖拽/索引列表/日历/侧滑
+uniapp的wxpui插件
+
 ##  vue优雅使用use插件
 main.ts
 ```ts{7}
