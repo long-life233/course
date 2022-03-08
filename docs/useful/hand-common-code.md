@@ -1,14 +1,24 @@
 # Hand Common Code
+## reduce链式获取对象属性值
+```js
+let obj = {
+    a:{
+        b:{
+            c:"helloKitty"
+        }
+    }
+}
+let a = ['a','b','c'].reduce((accu,item)=>{
+    return accu[item]
+},obj)
 
-## 浅深拷贝
+console.log(a);
 
-- 浅拷贝: 拷贝对象中的第一层属性，如果是引用数据类型，只拷贝地址
+```
+## 浅拷贝
+拷贝对象中的第一层属性，如果是引用数据类型，只拷贝地址
 
-- 深拷贝：拷贝数组中的元素，如果是引用数据类型，只拷贝地址
-
-
-### 浅拷贝1
-- 利用es6的扩展运算符
+利用es6的扩展运算符
 ```js
     // 浅拷贝
     // 1,es6,扩展运算符
@@ -25,62 +35,11 @@
         }
     }
 ```
+## 深拷贝
 
-### 浅拷贝2
-- 利用es5的for(let key in target)遍历
+- 运用递归遍历方式，缓存以克隆的对象或数组
 
-```js
-    // 2,es5,for(let key in target)
-    function clone2(target) {
-        // 如果是引用数据类型（对象，数组）
-        if (target !== null && typeof target === "object") {
-            let cloneTarget = Array.isArray(target) ? [] : {}
-            for (let key in target) {
-                // 自身对象上的属性，不能是对象原型中的属性
-                if (target.hasOwnProperty(key)) {
-                    cloneTarget[key] = target[key]
-                }
-            }
-            return cloneTarget
-        } else {// 如果是基本数据类型或者函数
-            return target
-        }
-    }
-```
-
-### 深拷贝1
-- 乞丐版，会出现函数属性会丢失，循环引用会报错两个问题
-```js
-    // 大众乞丐版：（）
-    function deepClone1(target) {
-        return JSON.parse(JSON.stringify(target))
-    }
-```
-
-### 深拷贝2
-- 加强版，运用递归遍历方式，解决函数属性丢失
-```js
-    // 强化一
-    function deepClone2(target) {
-        // 如果是引用数据类型（对象，数组）
-        if (target !== null && typeof target === "object") {
-            let cloneTarget = Array.isArray(target) ? [] : {}
-            for (let key in target) {
-                // 自身对象上的属性，不能是对象原型中的属性
-                if (target.hasOwnProperty(key)) {
-                    cloneTarget[key] = deepClone2(target[key])
-                }
-            }
-            return cloneTarget
-        } else {// 如果是基本数据类型或者函数
-            return target
-        }
-    }
-```
-### 深拷贝3
-- 加强升级版
-- 运用递归遍历方式，缓存以克隆的对象或数组，解决函数属性丢失和循环引用会报错两个问题
-        
+解决函数属性丢失和循环引用会报错两个问题
 ```js
     // 强化二
     // 解决函数属性丢失(运用递归遍历)
@@ -114,21 +73,19 @@
 
 ## 数组扁平化
 
-### 使用数组原型中的falt方法
-
 ```js
 let arr = [1, 2, 3, [4, 5, 6, [7, 8, [9, 10, 11]]]];
 arr.flat(Infinity);
 ```
+toSting，split
 
-### toSting，split
 如果都是数字，可再进行遍历讲字符串转为数字
 ```js
 let arr = [1, 2, 3, [4, 5, 6, [7, 8, [9, 10, 11]]]];
 arr.toString().split(',')
 ```
+三点运算符
 
-### 三点运算符
 ```js
 function flatten(arr) {
     while (arr.some(item => Array.isArray(item))) {

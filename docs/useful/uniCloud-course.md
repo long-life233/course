@@ -96,3 +96,10 @@ unicloud为我们删除做了许多事：
 ## uni-admin
 快速的创建一个管理后台管理
 
+## unicloud记录
+
+云函数要使用common目录下的公共模块，需要在云函数目录右键管理公共模块依赖，更新依赖。
+
+## hello uniCloud分析
+
+
