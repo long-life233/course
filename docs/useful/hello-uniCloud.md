@@ -373,7 +373,7 @@ HX版本低于3.4
 			},
 ```
 
-## clientDB
+## api操作数据库
 
 ### 普通查询，客户端联表查询
 
@@ -804,3 +804,79 @@ orderBy方法内可以传入一个字符串来指定排序规则。如:订单表
         }
     },
 ```
+
+## clientDB组件
+
+增
+```js
+	async add(){
+		return await udb.add({
+			book_id:"add-test",
+			quantity:Date.now()
+		},{
+			success: (res) => { // 新增成功后的回调
+				console.log("res.result: ",res.result);
+				this.getFn()
+				return res
+			}
+		})
+	},
+```
+删
+```js
+	async remove(){
+		const _id = udb.dataList[0]._id
+		return await udb.remove(_id)
+	},
+```
+改
+```js
+	async update(){
+		const _id = udb.dataList[0]._id
+		return await udb.update(_id,{book_id:"这条数据被改"},
+		{
+			success: (res) => { // 新增成功后的回调
+				this.getFn()
+			}
+		})
+	},
+```
+查
+```js
+	getFn(){
+		udb.loadData()
+	},
+```
+指定查询结果是否仅返回数组第一条数据（getone）
+
+默认 false。在false情况下返回的是数组，即便只有一条结果，也需要[0]的方式获取。在值为 true 时，直接返回结果数据，少一层数组，一般用于非列表页，比如详情页
+```html
+		<switch class="switch-getone" :checked="getone" @change="getone = $event.detail.value" />
+
+
+		<unicloud-db ref="udb" v-slot:default="{data, loading, error, options,pagination,hasMore}"
+			:options="options"
+			:page-data="pageData"
+			:collection="collection"
+			:field="field.join(',')"
+			:page-size="pageSize"
+			:orderby="orderby"
+			:getone="getone"
+			:page-current="pageCurrent"
+			:getcount="getcount"
+			>
+```
+分页策略选择（page-data）
+```html
+<uni-data-checkbox v-model="pageData" :localdata='pageDataList' />
+
+pageData:"replace",
+
+pageDataList:[{"text":"add",value:"add"},{"text":"replace",value:"replace"}],
+```
+
+### 控制前端操作数据库的权限
+
+### 字段值域校验
+
+### 完整示例
