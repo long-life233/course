@@ -1196,3 +1196,28 @@ Lensflare镜头光晕并不是一种光源
 
 </html>
 ```
+
+## 内置平面几何体
+```js
+        var planeGeometry = new THREE.PlaneGeometry(10, 10);
+        var planeMaterial = new THREE.MeshLambertMaterial({ color:0xff0000 });
+        var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        planeMaterial.side = THREE.DoubleSide
+        scene.add(plane)
+```
+
+## 内置常见普通几何体
+略
+## 凸面几何体和车削几何体
+略
+## 管道几何体
+略
+## 拉伸几何体
+略
+## Parametric Geometry参数化缓冲几何体
+略
+## TextGeometry文本缓冲几何体
+略
+## 材质常用基础属性
+
+

@@ -18,9 +18,9 @@
     <script type="module">
         import { dat } from './dat.gui.js'
         import { Stats } from './Stats.js'
-        import {GLTFLoader} from './GLTFLoader.js'
-        import {OrbitControls} from './OrbitControls.js'
-        import {Lensflare,LensflareElement} from './Lensflare.js'
+        import { GLTFLoader } from './GLTFLoader.js'
+        import { OrbitControls } from './OrbitControls.js'
+        import { Lensflare, LensflareElement } from './Lensflare.js'
         // console.log(window.__THREE__); // 135
         var scene = new THREE.Scene();
 
@@ -30,73 +30,24 @@
         camera.position.z = 45;
         camera.lookAt(scene.position)
 
-        var planeGeometry = new THREE.PlaneGeometry(100, 100)
-        var planeMaterial = new THREE.MeshLambertMaterial({ color: 0xcccccc });
+        var planeGeometry = new THREE.PlaneGeometry(10, 10);
+        var planeMaterial = new THREE.MeshLambertMaterial({ color:0xff0000 });
         var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        plane.receiveShadow = true;
-        plane.rotation.x = -0.5 * Math.PI
-        plane.position.set(0, 0, 0)
+        planeMaterial.side = THREE.DoubleSide
         scene.add(plane)
 
-        // 半球体光源
-        // 1,天空中发出光线的颜色，默认值白色
-        // 2，地面发出光线的颜色，默认值白色
-        // 3,光照强度
-        const hemisphereLight = new THREE.HemisphereLight(0xffffff)
-        hemisphereLight.position.set(20,20,20)
-        scene.add(hemisphereLight)
-
-        // 加载贴图
-        const textureLoader = new THREE.TextureLoader();
-        const textureFlare0 = textureLoader.load("textures/lensflare0.png")
-        const textureFlare1 = textureLoader.load("textures/lensflare1.png")
-
-        // 创建一个镜头光晕对象
-        const lensflare = new Lensflare();
-        lensflare.addElement(new LensflareElement(textureFlare0,500,0))
-        lensflare.addElement(new LensflareElement(textureFlare1,60,0.1))
-        var lensflareEl
-        lensflare.addElement(lensflareEl = new LensflareElement(textureFlare1,30,0.2))
-        hemisphereLight.add(lensflare)
+        // 环境光
+        var ambientLight = new THREE.AmbientLight(0xaaaaaa);
+        scene.add(ambientLight)
 
         // 坐标系
         var axes = new THREE.AxesHelper(50)
         scene.add(axes)
 
         var ctrlObj = {
-            hemisphereLightVisible:true,
-            skyColor:0xffffff, // 改变此颜色，模型和阴影的颜色都发生了改变
-            groundColor:0x00ff00,
-            hemisphereIntensity:1,
-            // 光晕尺寸
-            lensflareSize:30,
-            lensflareDistance:0,
-            lensflareColor:0xffffff
+
         };
         var ctrl = new dat.GUI();
-        var hemisphereLightFolder = ctrl.addFolder("hemisphereLight")
-        hemisphereLightFolder.add(ctrlObj,"hemisphereLightVisible").onChange(e=>{
-            hemisphereLight.visible = e
-        })
-        hemisphereLightFolder.addColor(ctrlObj,"skyColor").onChange(e=>{
-            hemisphereLight.color = new THREE.Color(e)
-        })
-        hemisphereLightFolder.addColor(ctrlObj,"groundColor").onChange(e=>{
-            hemisphereLight.groundColor = new THREE.Color(e)
-        })
-        hemisphereLightFolder.add(ctrlObj,"hemisphereIntensity",0,10).onChange(e=>{
-            hemisphereLight.intensity = e
-        })
-        var lensflareFolder = ctrl.addFolder("lensflare")
-        lensflareFolder.add(ctrlObj,"lensflareSize",0,100).onChange(e=>{
-            lensflareEl.size = e
-        })
-        lensflareFolder.add(ctrlObj,"lensflareDistance",0,1).onChange(e=>{
-            lensflareEl.distance = e
-        })
-        lensflareFolder.addColor(ctrlObj,"lensflareColor").onChange(e=>{
-            lensflareEl.color = new THREE.Color(e)
-        })
 
         var render = new THREE.WebGLRenderer();
         render.shadowMap.enabled = true
@@ -104,22 +55,9 @@
         document.querySelector("body").appendChild(render.domElement);
 
         // 轨道控制器对象
-        var controls = new OrbitControls(camera,render.domElement)
+        var controls = new OrbitControls(camera, render.domElement)
         controls.update();
 
-        loadModel()
-        function loadModel(){
-            new GLTFLoader().setPath("model/").
-            load("untitled.glb",function(gltf){
-                gltf.scene.scale.set(0.02,0.02,0.02);
-                gltf.scene.traverse(obj=>{
-                    if(obj.isMesh){
-                        obj.castShadow = true;
-                    }
-                })
-                scene.add(gltf.scene)
-            })
-        }
 
         renderScene();
         function renderScene() {
