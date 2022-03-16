@@ -1,28 +1,36 @@
 
-# 直播云
+# 七牛直播云
 
-## 七牛直播云
-直播拉流:实时音视频播放
+## 小程序直播demo
+具体文档[https://developer.qiniu.com/pili/4211/small-program-live-access-to-documents]
 
-直播推流:实时音视频录制
+1. 注册认证账号
 
-实际业务中通过SDK的方式进行推流和播放，可参考SDK文档：[推流SDK](https://developer.qiniu.com/pili/5028/push-the-sdk-download-experience)和[播放SDK](https://developer.qiniu.com/pili/4262/player-sdk-introduction-and-demo-download)。
+2. 下载直播小程序demo[https://github.com/pili-engineering/wxapp-live-demo]
 
-### 入门
-- 注册认证账号
-
-- 在[七牛开发者平台首页](https://portal.qiniu.com/home)定位到 资源管理 > 直播空间 资源卡片；
+3. 在[七牛开发者平台首页](https://portal.qiniu.com/home)定位到 资源管理 > 直播空间 资源卡片，点击创建直播流
 <img src="https://dn-odum9helk.qbox.me/FkjcHcu-caXemFVGVeJYs8MuC2Tz" />
 
-- (直播域名填不了)填写直播空间信息
+4. (直播域名可以随便填)填写直播空间信息，然后按照步骤创建直播空间。
 <img src="https://static01.imgkr.com/temp/5f74f44f78d3482680cdb562a490ea45.png"/>
 
+5. 更改后端参数
+<img src="https://sdk-release.qnsdk.com/1545722811576.jpg" />
 
-## 阿里视频直播
 
-### [入门](https://help.aliyun.com/document_detail/198676.html)
 
-前提条件
+注意点：
 
-1. 您已经注册了阿里云账号并完成账号实名认证。注册地址请点击阿里云官网。注册指引请参见注册阿里云账号。实名认证指引请参见个人实名认证或企业实名认证。
-2. （未满足）准备2个已完成备案的域名，备案流程请参见备案。
+1. server目录下的index.js修改，否则可能连接不成功。然后先`mongod`，开启数据库。再`node index.js`
+
+````js
+//                mongodb://mongo:27017
+mongoose.connect('mongodb://127.0.0.1:27017/piliwechat').catch((err)=>{console.log("xxxxxx",err,"xxxxx");});
+````
+## 小程序实时音视频云sdk
+
+微信小程序接入实时音视频RTC产品参考这个文档：https://doc.qnsdk.com/rtn/wxapp/docs/overview.html
+
+-  完成了七牛实时音视频云接入流程(https://doc.qnsdk.com/rtn/docs/rtn_startup)
+- 请在微信小程序后台 -> 开发 -> 开发设置 -> 服务器域名配置中，将 wss://rtmpgate.cloudvdn.com 加到 socket 合法域名中，将 https://pili-rtc-qos.qiniuapi.com 添加到 request 合法域名中。
+- 在小程序的开发后台打开实时播放音视频流、实时录制音视频流的开关（小程序后台 -> 开发 -> 接口设置）(==两个都显示未符合开通条件，需要在小程序后台添加相应服务类目)[例如 https://developers.weixin.qq.com/miniprogram/dev/component/live-player.html]
