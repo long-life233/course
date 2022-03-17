@@ -34,3 +34,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/piliwechat').catch((err)=>{console.l
 -  完成了七牛实时音视频云接入流程(https://doc.qnsdk.com/rtn/docs/rtn_startup)
 - 请在微信小程序后台 -> 开发 -> 开发设置 -> 服务器域名配置中，将 wss://rtmpgate.cloudvdn.com 加到 socket 合法域名中，将 https://pili-rtc-qos.qiniuapi.com 添加到 request 合法域名中。
 - 在小程序的开发后台打开实时播放音视频流、实时录制音视频流的开关（小程序后台 -> 开发 -> 接口设置）(==两个都显示未符合开通条件，需要在小程序后台添加相应服务类目)[例如 https://developers.weixin.qq.com/miniprogram/dev/component/live-player.html]
+
+## uniapp直播demo
+==注意==
+
+1. 测试账号不支持使用直播功能，只有符合条件的appid才可以，具体要求请参考：https://developers.weixin.qq.com/miniprogram/dev/component/live-player.html
+2. live-pusher只支持nvue页面
