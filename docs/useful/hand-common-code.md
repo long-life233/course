@@ -180,3 +180,50 @@ setInterval(()=>{
     tFn()
 },10)
 ```
+
+## 数据响应式
+ref实现。根据自己的理解。
+
+所谓响应式数据，就是指当这个数据发生改变时，会触发一个回调函数（这个回调里面一定使用到了这个响应式数据）
+```js
+let currentDepend = null
+class Dep {
+    dependSet = []
+    _value = undefined
+    constructor(value){
+        this.value = value
+    }
+    get value(){
+        // get收集依赖
+        if(currentDepend){
+            this.gatherDepned()
+        }
+        return this._value
+    }
+    set value(newVal){
+        // set触发依赖
+        this.triggerDepend()
+        this._value = newVal
+    }
+    triggerDepend(){
+        this.dependSet.forEach(depend=>depend())
+    }
+    gatherDepned(){
+        this.dependSet.push(currentDepend)
+    }
+}
+function gatherDepned(callback){
+    currentDepend = callback
+    callback()
+    currentDepend = null
+}
+
+
+const a = new Dep(10)
+gatherDepned(()=>{
+    console.log(a.value);
+})
+setInterval(()=>{
+    a.value += 1
+},1000)
+```
