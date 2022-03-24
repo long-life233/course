@@ -135,9 +135,48 @@ function compile(template) {
         return "${" + key + "}"
     })
     let returnStr = ''
-    // 最为精妙之处: 利用new Function（）将普通字符串转为木板字符串。
+    // 最为精妙之处: 利用new Function（）将普通字符串转为模板字符串。
     const fnBody = "with(obj){ returnStr = `" + template + "` }; console.log(returnStr); return returnStr"
     return new Function("obj", fnBody)
 }
 compile('<div>{{a}}</div>')({ a: "aValue" })
+```
+
+## 防抖与节流
+节流是多次只执行一次，节省流量。
+
+防抖更厉害了，只执行最后一次。
+```js
+// 防抖
+function debounce(fn, delay) {
+    let timer = null
+    return (...args) => {
+        if (timer) {
+            clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+            fn.apply(this, args)
+        }, delay)
+    }
+}
+// 节流
+function throttle(fn, delay) {
+    let past = 0;
+    return (...args) => {
+        const now = + new Date()
+        if (now - past > delay) {
+            past = now
+            fn.apply(this, args)
+        }
+    }
+}
+
+function testLog(){
+    console.log('123');
+}
+const dFn = debounce(testLog,500)
+const tFn = throttle(testLog,1000)
+setInterval(()=>{
+    tFn()
+},10)
 ```
