@@ -1,4 +1,4 @@
-# Hand Common Code
+# 手写常见代码
 ## reduce链式获取对象属性值
 ```js
 let obj = {
@@ -125,4 +125,19 @@ function flatten(arr) {
             return array;
         } 
         console.log(bubbleSort([6,7,2,8,6]));
+```
+
+## 模板编译函数
+最为精妙之处: 利用new Function（）将普通字符串转为木板字符串。
+```js
+function compile(template) {
+    template = template.replace(/\{\{(.+)\}\}/g, (x, key) => {
+        return "${" + key + "}"
+    })
+    let returnStr = ''
+    // 最为精妙之处: 利用new Function（）将普通字符串转为木板字符串。
+    const fnBody = "with(obj){ returnStr = `" + template + "` }; console.log(returnStr); return returnStr"
+    return new Function("obj", fnBody)
+}
+compile('<div>{{a}}</div>')({ a: "aValue" })
 ```
