@@ -185,45 +185,107 @@ setInterval(()=>{
 ref实现。根据自己的理解。
 
 所谓响应式数据，就是指当这个数据发生改变时，会触发一个回调函数（这个回调里面一定使用到了这个响应式数据）
-```js
-let currentDepend = null
-class Dep {
-    dependSet = []
-    _value = undefined
-    constructor(value){
-        this.value = value
-    }
-    get value(){
-        // get收集依赖
-        if(currentDepend){
-            this.gatherDepned()
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let currentFn = null
+        class Dep {
+            fnSet = []
+            _value = undefined
+            constructor(value) {
+                this.value = value
+            }
+            get value() {
+                // get收集依赖
+                if (currentFn) {
+                    this.gatherFn()
+                }
+                return this._value
+            }
+            set value(newVal) {
+                // set触发依赖
+                this.triggerFn()
+                this._value = newVal
+            }
+            // 这个函数不仅可以通过set触发，手动触发也是可以的。
+            triggerFn() {
+                this.fnSet.forEach(fn => fn())
+            }
+            gatherFn() {
+                if (currentFn) {
+                    this.fnSet.push(currentFn)
+                }
+            }
         }
-        return this._value
-    }
-    set value(newVal){
-        // set触发依赖
-        this.triggerDepend()
-        this._value = newVal
-    }
-    triggerDepend(){
-        this.dependSet.forEach(depend=>depend())
-    }
-    gatherDepned(){
-        this.dependSet.push(currentDepend)
-    }
-}
-function gatherDepned(callback){
-    currentDepend = callback
-    callback()
-    currentDepend = null
-}
+
+        function gatherFn(callback) {
+            currentFn = callback
+            callback()
+            currentFn = null
+        }
 
 
-const a = new Dep(10)
-gatherDepned(()=>{
-    console.log(a.value);
-})
-setInterval(()=>{
-    a.value += 1
-},1000)
+        // const a = new Dep(10)
+        // gatherFn(()=>{
+        //     console.log(a.value);
+        // })
+        // setInterval(()=>{
+        //     a.value += 1
+        // },1000)
+
+        const depsMap = new Map()
+        function reactive(raw) {
+            return new Proxy(raw, {
+                get(target, key) {
+                    // key打印的永远是第一层属性，但实际上获取到的值是正确的。
+                    let dep = depsMap.get(key)
+                    if (!dep) {
+                        dep = new Dep()
+                        depsMap.set(key, dep)
+                    }
+                    dep.gatherFn()
+
+                    let value = Reflect.get(target, key)
+                    if(typeof value !== 'object' && typeof value !== null){
+                        return value
+                    }else {
+                        return reactive(value)
+                    }
+                },
+                set(target, key, value) {
+                    let dep = depsMap.get(key)
+                    Reflect.set(target, key, value)
+                    dep.triggerFn()
+                }
+            })
+        }
+        const data = reactive({
+            a: {
+                b: {
+                    c: 99
+                }
+            }
+        })
+
+        gatherFn(() => {
+            console.log(data.a);
+        })
+
+        setInterval(() => {
+            data.a = 10
+        }, 1000)
+    </script>
+</body>
+
+</html>
 ```

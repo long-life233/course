@@ -1,37 +1,5 @@
 # 响应式数据实现的大致原理
-> 一个响应式数据对应一个Dep类实例。
-获取、设置这个响应式数据会分别触发get、set钩子。
-get钩子的作用是收集依赖（可以理解为一个函数，里面会执行一些逻辑，比如更新视图）
-set钩子的作用是触发依赖（更新视图）
 
-ref就是一个响应式数据。reactive就是一个对象里面有很多ref。
-一开始，简单点
-```ts
-// v1
-
-// let a = 10;
-// let b = a + 10;
-// console.log(b);
-
-// a = 20;
-// b = a + 10;
-// console.log(b);
-
-
-// v2
-
-// let a = 10;
-// let b
-// update()
-// function update() {
-//     b = a + 10;
-//     console.log(b);
-// }
-
-// a = 20;
-// update()
-
-```
 使用官方api
 ```ts
 import  {effect, reactive} from "@vue/reactivity"
@@ -117,12 +85,6 @@ dep.value = 20
 // dep -> number string
 // object -> key -> dep
 
-// 1.这个对象在什么时候改变的
-// object.a -> get
-// object.a = 2 -> set
-
-// vue2 defineProperty
-// vue3 proxy
 const depsMap = new Map();
 
 function getDep(target:any, key:any) {
@@ -156,9 +118,8 @@ export function reactive(raw:Object){
             // 触发依赖
             // 要获取到dep
             const dep = getDep(target,key);
-            const result = Reflect.set(target,key,value)
-            dep.notice(result);            
-            return result
+            Reflect.set(target,key,value)
+            dep.notice();            
         }
     })
 }
