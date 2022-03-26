@@ -289,3 +289,26 @@ ref实现。根据自己的理解。
 
 </html>
 ```
+
+## 统一状态管理
+```js
+        function createStore(opts) {
+            // 定义一个store类
+            function Store(opts) {
+                this.state = opts.state
+                this.mutations = opts.mutations
+            }
+            Store.prototype.commit = function(type){
+                this.mutations[type](this.state)
+                this.effect()
+            }
+            Store.prototype.effect = function(fn){
+                this.effect = fn
+            }
+
+            return new Store(opts)
+        }
+```
+
+## 时间旅行
+这有啥应用场景吗？
