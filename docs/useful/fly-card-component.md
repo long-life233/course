@@ -5,7 +5,7 @@
   const card1Left = ref(0)
   // 松手后，并且卡片飞出去的判断变量
   const hasDrop = ref(false)
-
+  const dropBack = ref(false)
   let innerX = 0
   const touchStart = (e) => {
     innerX = e.touches[0].clientX - e.target.offsetLeft
@@ -16,6 +16,8 @@
   const touchCancel = (e) => {
     if (-50 < card1Left.value && card1Left.value < 50) {
       card1Left.value = 0
+      dropBack.value = true
+      setTimeout(()=>{dropBack.value = false},400)
     } else if (card1Left.value < -50) {
       card1Left.value = -500
       _dropCard()
@@ -49,7 +51,7 @@
     <div class="container">
       <div class="card" @touchstart="touchStart" @touchmove="touchMove" @touchcancel="touchCancel"
         @touchend="touchCancel" :style="`left:${card1Left}px;z-index:4`"
-        :class="hasDrop?'card1 transition':'card1'">
+        :class="[hasDrop?'card1 transition':'card1',dropBack?'transition':'']">
         {{list[0]}}
       </div>
       <div style="z-index:3" class="card" :class="hasDrop?'card1 transition':'card2'">{{list[1]}}</div>
