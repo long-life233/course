@@ -1,4 +1,5 @@
 # threejs2
+动力 IT老师
 
 ## 查看版本
 
@@ -146,10 +147,30 @@ camera.lookAt(scene.position)
 路径
 
 ```shell
-C:\Users\LuKecheng\Desktop\three.js-r135\examples\js\libs\stats.min.js
+three.js-r135\examples\js\libs\stats.min.js
+
+ import {Stats} from "../../libs/Stats/Stats.js"
+```
+```js
+            var stats = addStats();
+            stats.update();
+
+            function addStats(){
+                var stats = new Stats();
+                stats.domElement.style.position = 'absolute';
+                stats.domElement.style.left = '0px';
+                stats.domElement.style.top = '0px';
+                stats.setMode(0);
+
+                document.getElementById("myStats").appendChild(stats.domElement);
+                return stats;
+            }
 ```
 
-## dat.gui库，方便测试动画
+## dat.gui库，方便测试动画。窗口缩放重新渲染
+dat.gui库介绍地址。
+
+https://www.hangge.com/blog/cache/detail_1785.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -338,7 +359,9 @@ scene.add(line)
 ```
 
 visible属性设置是否可见
+
 ## 透视摄像机与正交投影摄像机
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1199,21 +1222,27 @@ Lensflare镜头光晕并不是一种光源
 
 ## 内置平面几何体
 ```js
-        var planeGeometry = new THREE.PlaneGeometry(10, 10);
-        var planeMaterial = new THREE.MeshLambertMaterial({ color:0xff0000 });
-        var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        planeMaterial.side = THREE.DoubleSide
-        scene.add(plane)
+            var planeGeo = new THREE.PlaneGeometry(4,8,4,8);
+            var planeMat = new THREE.MeshBasicMaterial({color:0xff0000});
+            planeMat.side = THREE.DoubleSide;
+            planeMat.wireframe = true;
+            var plane = new THREE.Mesh(planeGeo,planeMat);
+            scene.add(plane);
 ```
 
 ## 内置常见普通几何体
-略
+查看代码
 ## 凸面几何体和车削几何体
-略
+高级几何体，threejs不包含，需要额外导入。
+
+凸面几何体，是有很多凸起的几何体。
+
+车削几何体，是后二维图形“平移”得到的几何体。
 ## 管道几何体
-略
+先绘制一条曲线，再根据这条曲线生成管道
 ## 拉伸几何体
-略
+将二维几何体拉伸成三维几何体
+
 ## Parametric Geometry参数化缓冲几何体
 略
 ## TextGeometry文本缓冲几何体
