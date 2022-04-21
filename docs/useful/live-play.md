@@ -139,3 +139,8 @@ https://developer.aliyun.com/article/706488
 
 
 
+
+## 直播开发学习链接
+
+- obs+node-media-server+flv.js实现录播和直播[https://www.jianshu.com/p/d6cd56d31bf2]
+- 前端实现直播功能[https://blog.csdn.net/CSDNzhaojiale/article/details/118571451]
