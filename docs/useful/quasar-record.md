@@ -53,6 +53,8 @@ eslint: {
   errors: false
 }
 ```
+## 图标使用
+https://quasar.dev/options/quasar-icon-sets#introduction
 
 ## 字体大小类
 https://quasar.dev/style/typography#headings

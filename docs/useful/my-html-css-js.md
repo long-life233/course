@@ -146,3 +146,8 @@ import Skelttion from '/@theme/components/vue/Skelttion.vue'
 font-family:sans-serif;
 ```
 
+## 获取图片主色调
+
+https://blog.csdn.net/qq_28918357/article/details/116493371
+
+
