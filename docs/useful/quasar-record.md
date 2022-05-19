@@ -53,8 +53,53 @@ eslint: {
   errors: false
 }
 ```
+## 插件使用
+https://quasar.dev/start/how-to-use-vue#using-quasar-plugins
+
+以使用notify通知插件为例。
+
+先在quasar.conf.js里注册
+```js
+framework: {
+  plugins: [ 'Notify', 'BottomSheet' ]
+}
+```
+然后使用就行了
+```vue
+<q-btn
+      @click="$q.notify('My message')"
+      color="primary"
+      label="Show a notification"
+    />
+```
+
+## 使用$q对象
+https://quasar.dev/options/the-q-object#introduction
+
+```shell
+version
+platform
+screen
+lang
+iconSet
+等等
+```
+
 ## 图标使用
 https://quasar.dev/options/quasar-icon-sets#introduction
+
+只需要在quasar.conf.js里配置一下就行了。
+
+Quasar icon set就是quasar的内置组件使用的图标集合。只能选择某一项。
+
+## js媒体查询
+https://quasar.dev/options/screen-plugin#introduction
+就是页面响应式的js插件
+
+## 动画的使用
+https://quasar.dev/options/animations#introduction
+
+借助于animate.css。
 
 ## 字体大小类
 https://quasar.dev/style/typography#headings
@@ -128,6 +173,10 @@ div {
 }
 </style>
 ```
+## 暗黑模式
+https://quasar.dev/style/dark-mode#introduction
+
+就是给body添加一个类
 
 ## padding/margin相关类
 https://quasar.dev/style/spacing#introduction
@@ -171,6 +220,48 @@ shadow-N
 ## 媒体查询相关类
 https://quasar.dev/style/breakpoints#introduction
 
+## 可视化相关类
+https://quasar.dev/style/visibility#introduction
+
+```js
+disabled 鼠标悬浮时变成禁用的样子
+hidden  隐藏
+invisible	  看不见，但占位置
+transparent 透明
+dimmed 蒙上一层黑色
+light-dimmed	
+
+xs  Display only on extra small windows
+sm  	Display only on small windows
+md  Display only on medium-sized windows
+lg  Display only on large windows
+xl  Display only on large windows
+``` 
+```shell
+First of all, let’s define what the breakpoints are:
+
+Extra Small	xs	Up to 599px
+Small	sm	600px to 1023px
+Medium	md	1024px to 1439px
+Large	lg	1440px to 1919px
+Extra Large	xl	1920px and up
+
+You can also show some DOM element or component if it’s lower than one of the sizes. Same for greater than one of the sizes. Just attach lt- or gt- prefixes, which come from “lower than” and “greater than”. Example: lt-md (display on xs and sm only), lt-xl (display on xs, sm, md and lg windows only), gt-md (display on greater than medium windows: lg and xl).
+```
+平台可视化相关类、
+```shell
+desktop-only
+mobile-only
+native-mobile-only
+等等
+```
+手机垂直、水平可视化相关类
+```shell
+orientation-portrait
+orientation-landscape
+```
+
+
 ## 文字省略号
 https://quasar.dev/style/visibility#introduction
 ```css
@@ -204,6 +295,9 @@ on-right     margin-left: 12px;
 
 vertical-top   vertical-align:top
 vertical-middle	  vertical-align:middle
+
+z-top
+z-max
 ```
 
 ## 所有css变量
@@ -268,6 +362,7 @@ border-radius-inherit
 
 ## flex定位相关类
 https://quasar.dev/layout/grid/introduction-to-flexbox#setting-direction
+
 ```css
 row      display: flex;flex-wrap: wrap;
 row inline   行内块
@@ -304,6 +399,7 @@ self-end,
 self-stretch
 
 /* 区别；items-* 将主轴视为一行 */
+/* align-items只有一条主轴。align-content不止一条主轴 */
 content-start
 content-end
 content-center
@@ -341,6 +437,9 @@ order-first and order-last CSS helper classes.
   <div class="order-first">First column</div>
 </div>
 ```
+## flex断点插件
+https://quasar.dev/layout/grid/introduction-to-flexbox#flex-addons
+
 ## flex的响应式设计
 https://quasar.dev/layout/grid/introduction-to-flexbox#responsive-design
 
@@ -379,17 +478,50 @@ q-gutter-{size}
 
 q-col-gutter-{size}
 ```
-后面没看
+## flex断痕
+相当于有个元素占一整行。
 
-。。。
+https://quasar.dev/layout/grid/flexbox-patterns#flex-row-column-break
+```css
+.flex-break
+  flex: 1 0 100% !important
+.row
+  .flex-break
+    height: 0 !important
+.column
+  .flex-break
+    width: 0 !important
+```
+
+## 砌砖样式布局
+https://quasar.dev/layout/grid/flexbox-patterns#masonry-like-layout
+
+## 布局配置
+https://quasar.dev/layout/layout#introduction
+
 
 ## 指令
+### 关闭弹窗指令
+https://quasar.dev/vue-directives/close-popup#introduction
+
+### Intersection交叉指令
+https://quasar.dev/vue-directives/intersection#introduction
+
+### 波纹指令
+https://quasar.dev/vue-directives/material-ripple#introduction
+
 使用内置指令，在所有 HTML 元素上都可以使用！例如
 
 ```html
 <!-- 波纹效果 -->
 <div v-ripple>Click Me</div>
 ```
+
+###  Mutation Observer API
+https://quasar.dev/vue-directives/mutation#introduction
+
+### 插件
+
 
 所有 bool 属性的默认值都为 false！
 
