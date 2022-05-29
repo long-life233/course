@@ -212,7 +212,7 @@ https://quasar.dev/style/shadows#introduction
 no-shadow
 inset-shadow
 inset-shadow-down
-shadow-1
+x
 shadow-2
 shadow-N
 ```
