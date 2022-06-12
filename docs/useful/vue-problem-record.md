@@ -268,3 +268,237 @@ onMounted(() => {
 
 ## 获取真实的dom元素数组
 https://vuejs.org/guide/essentials/template-refs.html#refs-inside-v-for
+
+## 组件内触发方法
+```html
+<script setup>
+const emit = defineEmits(['enlarge-text'])
+
+emit('enlarge-text')
+</script>
+
+export default {
+  emits: ['enlarge-text'],
+  setup(props, ctx) {
+    ctx.emit('enlarge-text')
+  }
+}
+```
+
+## 动态组件
+
+```html
+<!-- Component changes when currentTab changes -->
+<component :is="tabs[currentTab]"></component>
+```
+
+## 大小写不敏感
+html的标签和属性命名是不敏感的。这意味着浏览器会断定任何大写字符为小写字符。
+
+这意味着你在模板内使用大小驼峰命名、v-on事件名，需要将他们转为烧烤串命名法。
+```html
+// camelCase in JavaScript
+const BlogPost = {
+  props: ['postTitle'],
+  emits: ['updatePost'],
+  template: `
+    <h3>{{ postTitle }}</h3>
+  `
+}
+
+<!-- kebab-case in HTML -->
+<blog-post post-title="hello!" @update-post="onUpdatePost"></blog-post>
+```
+## 注册全局组件
+
+```js
+import MyComponent from './App.vue'
+
+app.component('MyComponent', MyComponent)
+```
+
+## 组件绑定多个属性
+```html
+const post = {
+  id: 1,
+  title: 'My Journey with Vue'
+}
+
+<BlogPost v-bind="post" />
+
+<BlogPost :id="post.id" :title="post.title" />
+```
+
+## 组件属性接收
+```html
+<script setup>
+const props = defineProps(['foo'])
+
+console.log(props.foo)
+</script>
+
+export default {
+  props: ['foo'],
+  setup(props) {
+    // setup() receives props as the first argument.
+    console.log(props.foo)
+  }
+}
+```
+
+## 单向数据流动
+https://vuejs.org/guide/components/props.html#one-way-data-flow
+```js
+const props = defineProps(['foo'])
+
+// ❌ warning, props are readonly!
+props.foo = 'bar'
+```
+
+方式一. 将传入数据作为初始值，作为组件内部数据，传入数据改变不会触发视图更新。
+```js
+const props = defineProps(['initialCounter'])
+
+// counter only uses props.initialCounter as the initial value;
+// it is disconnected from future prop updates.
+const counter = ref(props.initialCounter)
+```
+
+方式二。将传入的数据稍作转换
+```js
+const props = defineProps(['size'])
+
+// computed property that auto-updates when the prop changes
+const normalizedSize = computed(() => props.size.trim().toLowerCase())
+```
+
+注意：改变传入的对象、数组类型数据。
+
+虽然子组件不支持直接改变对象、数组的引用地址，但是可以改变对象、数组的属性。
+
+一般还是建议用emit改变。除非父子组件之间有强耦合关系。
+
+## 触发事件验证
+https://vuejs.org/guide/components/events.html#events-validation
+```html
+<script setup>
+const emit = defineEmits({
+  // No validation
+  click: null,
+
+  // Validate submit event
+  submit: ({ email, password }) => {
+    if (email && password) {
+      return true
+    } else {
+      console.warn('Invalid submit event payload!')
+      return false
+    }
+  }
+})
+
+function submitForm(email, password) {
+  emit('submit', { email, password })
+}
+</script>
+```
+## 处理v-model修饰符
+https://vuejs.org/guide/components/events.html#usage-with-v-model
+
+```html
+<MyComponent v-model.capitalize="myText" />
+
+const props = defineProps({
+  modelValue: String,
+  modelModifiers: { default: () => ({}) }
+})
+
+console.log(props.modelModifiers) // { capitalize: true }
+
+<MyComponent v-model:title.capitalize="myText">
+
+const props = defineProps(['title', 'titleModifiers'])
+defineEmits(['update:title'])
+
+console.log(props.titleModifiers) // { capitalize: true }
+```
+
+## v-on监听器继承
+https://vuejs.org/guide/components/attrs.html#v-on-listener-inheritance
+
+@click会绑定到组件的根元素上，若触发会触发父组件的onClick方法。若子组件也绑定有方法，那么都会触发。
+```html
+<MyButton @click="onClick" />
+```
+
+## 将属性精确到组件某个元素上
+https://vuejs.org/guide/components/attrs.html#disabling-attribute-inheritance 
+```html
+<script>
+// use normal <script> to declare options
+export default {
+  inheritAttrs: false
+}
+</script>
+
+<script setup>
+// ...setup logic
+</script>
+```
+
+## 在js中获取落空属性
+https://vuejs.org/guide/components/attrs.html#accessing-fallthrough-attributes-in-javascript
+
+```html
+<script setup>
+import { useAttrs } from 'vue'
+
+const attrs = useAttrs()
+</script>
+```
+
+## 插槽
+https://vuejs.org/guide/components/slots.html#slots
+
+## app级provide、inject
+https://vuejs.org/guide/components/provide-inject.html#app-level-provide
+```js
+import { createApp } from 'vue'
+
+const app = createApp({})
+
+app.provide(/* key */ 'message', /* value */ 'hello!')
+```
+
+响应式
+```html
+<!-- inside provider component -->
+<script setup>
+import { provide, ref } from 'vue'
+
+const location = ref('North Pole')
+
+function updateLocation() {
+  location.value = 'South Pole'
+}
+
+provide('location', {
+  location,
+  updateLocation
+})
+</script>
+
+<!-- in injector component -->
+<script setup>
+import { inject } from 'vue'
+
+const { location, updateLocation } = inject('location')
+</script>
+
+<template>
+  <button @click="updateLocation">{{ location }}</button>
+</template>
+```
+
+## 异步组件
+https://vuejs.org/guide/components/async.html#async-components
