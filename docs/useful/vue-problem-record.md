@@ -502,3 +502,60 @@ const { location, updateLocation } = inject('location')
 
 ## 异步组件
 https://vuejs.org/guide/components/async.html#async-components
+
+## 现代时间库date-fn
+## 自定义指令
+https://vuejs.org/guide/reusability/custom-directives.html#custom-directives
+## 插件
+https://vuejs.org/guide/reusability/plugins.html#plugins
+
+## 过渡组件
+transition仅仅支持单元素（组件只有一个根元素）作为它的插槽。
+## 自定义过渡类
+比如使用animate.css
+
+
+https://vuejs.org/guide/built-ins/transition.html#custom-transition-classes
+
+```html
+<!-- assuming Animate.css is included on the page -->
+<Transition
+  name="custom-classes"
+  enter-active-class="animate__animated animate__tada"
+  leave-active-class="animate__animated animate__bounceOutRight"
+>
+  <p v-if="show">hello</p>
+</Transition>
+```
+
+## 列表渲染
+https://vuejs.org/guide/built-ins/transition-group.html#transitiongroup
+
+```html
+<TransitionGroup name="list" tag="ul">
+  <li v-for="item in items" :key="item">
+    {{ item }}
+  </li>
+</TransitionGroup>
+
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+```
+
+## keepAlive
+https://vuejs.org/guide/built-ins/keep-alive.html#keepalive
