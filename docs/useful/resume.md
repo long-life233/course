@@ -1,16 +1,20 @@
 # 简历
-## 项目
-- 小程序1
+
+## 小程序
 ```shell
-时间6个月，2021.9 - 2022.3。
+时间: 6个月，2021.9 - 2022.3。
 
-介绍：该小程序的功能是为车主、消费者、运营人员提供服务。
+介绍: 该小程序的功能是为车主、消费者、运营人员提供服务。
 
-人员周期：前端1个，UI2个，后端1个。
+人员周期: 前端2个，UI2个，后端1个。
 
 技术体系：uniApp
 
-技术要点：瀑布流页面开发；分享指定页面开发；轮播图动态指示点组件的开发；请求的封装与拦截；用户授权及登录的Token认证。
+
+技术要点：
+    1.瀑布流页面开发;
+    2.分享指定页面开发;
+    3.轮播图动态指示点组件的开发;
 
 1，瀑布流页面开发思路：将获取到的列表数据分为两组，每一组数据都定义两个变量，一个记录的这组的总高度、一个记录这组的列表数据。
 然后将获取到的图片url赋值给display为none的image标签。这里之所以这么做是为了防止图片在加载过程中拉伸变形，用户体验不好。
@@ -25,7 +29,231 @@
 5，用户授权及登录的Token认证思路：
 先在前端通过uni.login获取js_code，请求接口带上js_code，拿到openId，然后在通过uni.getUserProfile获取用户信息，将用户信息和openId作为参数，发请求保存在服务器上，这样就登录成功了。
 ```
-- 官网
+
+### 瀑布流页面开发
+```Html
+<movable-area style="height:50vh">
+    <movable-view direction="vertical" @change="change">
+        <!-- 瀑布流 -->
+        <scroll-view style="height:50vh" scroll-y="true" @scrolltolower="onScrollToLower" refresher-enabled
+            :refresher-triggered="triggered" :refresher-threshold="100" @refresherpulling="onPulling"
+            @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherabort="onAbort">
+            <view class="rowStaBet">
+                <view>
+                    <site-list-item v-for="(item,index) in leftArr" :item="item" :key="index"></site-list-item>
+                </view>
+                <view>
+                    <site-list-item v-for="(item,index) in rightArr" :item="item" :key="index"></site-list-item>
+                </view>
+            </view>
+        </scroll-view>
+    </movable-view>
+</movable-area>
+
+<script>
+    const siteList = ref([])
+    let page = 0 // 第一次获取营地列表
+    // 下拉加载更多，加载中，没有更多了
+	const MORE = 'more'
+	const LOADING = 'loading'
+	const NOMORE = 'noMore'
+    let state = ref(LOADING)
+	const stateText = computed(() => {
+		let obj = {
+			[MORE]: '上拉加载更多',
+			[LOADING]: '加载中...',
+			[NOMORE]: '没有更多了亲'
+		}
+		return obj[state.value]
+	})
+    // 第一次获取列表数据
+	getSiteList({
+		page
+	}).then(({
+		code,
+		total,
+		data
+	}) => {
+		siteList.value = data
+		setTimeout(() => state.value = MORE, 1000)
+	})
+    // 左边瀑布流的高度
+	let leftH = 0
+	let leftArr = reactive([])
+	// 右边瀑布流的高度
+	let rightH = 0
+	let rightArr = reactive([])
+	const onImgLoad = (e, item) => {
+		const rate = e.detail.height / e.detail.width
+		const imgWidth = 350
+		const rateHeight = imgWidth * rate
+		if (leftH > rightH) { // 如果左边高，就往右边添加图片
+			rightArr.push(item)
+			rightH += rateHeight
+		} else { // 如果右边高或者一样高，就往左边添加图片
+			leftArr.push(item)
+			leftH += rateHeight
+		}
+	}
+</script>
+```
+
+
+### 分享指定页面开发
+```JavaScript
+// 全局混入,可以分享;点击分享的小程序会跳到制定页面
+Vue.mixin({
+  data(){
+	return {
+		sharePath:""
+	}  
+  },
+  onReady() {
+  	this.sharePath = '/'+this.__route__
+  },
+  onShareAppMessage() {
+  	return {
+  		title: '',
+  		path: this.sharePath
+  	}
+  },
+  onShareTimeline(){
+	  return {
+	  	title: '',
+	  	path: this.sharePath
+	  }
+  }
+})
+
+// 详情页重写方法
+onShareAppMessage() {
+    return {
+        title: '',
+        path: `${this.sharePath}?roomId=${this.roomId}&productId=${this.productId}`
+    }
+},
+onShareTimeline(){
+        return {
+        title: '',
+        path: `${this.sharePath}?roomId=${this.roomId}&productId=${this.productId}`
+        }
+},
+```
+
+### 轮播图动态指示点组件的开发
+
+```Vue
+<template>
+	<view class="dot-wrapper-box" 
+		  :style="'transform:translateX('+translateX+'px);width:'+dot_distance+'px;height:'+dot_distance+'px;bottom:'+dotBoxBottom+'rpx'">
+		<block v-for="(item,index) in resdata" :key="index">
+			<view class="dot-wrapper">
+				<view class="dot" 
+					  :class="index===currentIndex-2?'prew_2_dot':
+							  index===currentIndex-1?'prew_1_dot':
+							  index===currentIndex?'current-dot':
+							  index===currentIndex+1?'next_1_dot':
+							  index===currentIndex+2?'next_2_dot':''">
+				</view>
+			</view>
+		</block>
+	</view> 
+</template>
+
+<script>
+	export default {
+		name:"swiper-dynamic-bullets",
+		props:{
+			// 轮播图数据
+			resdata:{
+				type:Array
+			},
+			// 指示点的中心距离,相当于指示点之间的距离
+			dot_distance:{
+				type:[Number,String],
+				default:20
+			},
+			// 当前指示点索引
+			currentIndex:{
+				type:[Number,String],
+				default:0
+			},
+			// 指示点宽高
+			dotWidth:{
+				type:[Number,String],
+				default:10
+			},
+			// 指示点盒子bottom
+			dotBoxBottom:{
+				type:[Number,String],
+				default:1
+			}
+		},
+		data() {
+			return {
+				
+			};
+		},
+		computed:{
+			translateX(){
+				return -(+this.currentIndex)*(+this.dot_distance) - (+this.dot_distance)/2
+			}
+		},
+	}
+</script>
+ 
+<style>
+/* // 指示点外边框 */
+	.dot-wrapper-box{
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		
+		/* // bottom: 1rpx; */
+		left: 50%;
+/* 		// bottom: 20px;
+		// left: 50%;
+		// margin: 0 auto;
+		// width: 30px;
+		// height: 30px; */
+		transition: .3s;
+	}
+	.dot-wrapper{
+		flex-shrink: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.dot{
+		border-radius: 50%;
+		
+		transition: .3s;
+	}
+	.prew_2_dot,.next_2_dot{
+		width:3px;
+		height: 3px;
+		background-color: rgba(255,255,255,.8)
+	}
+	.prew_1_dot,.next_1_dot{
+		width:6px;
+		height: 6px;
+		background-color: rgba(255,255,255,.8)
+	}
+	.current-dot{
+		width:9px;
+		height: 9px;
+		background-color: #ffffff
+	}
+</style>
+
+```
+
+
+
+## 官网
 ```shell
 名称：官网
 
@@ -35,10 +263,10 @@
 
 技术体系：Nuxt、Axios、Html、Css、JavaScript。
 
-技术要点：移动端适配。（这功能怎么实现的？问问申申）
+技术要点：移动端适配。
 ```
 
-- 电商网站
+## 电商网站
 ```shell
 三级分类事件委派处理。
 
@@ -86,7 +314,7 @@ swiper轮播图的使用
 
 人员周期：前端2个，首期4个月，迭代周期为1-2周。
 
-技术体系：Vue全家桶、Axios、ElementUI、Restful Api、Webpack
+技术体系：Vue全家桶、Axios、ElementUI、Restful Api、Webpack、Echarts
 
-技术要点：Axios请求的封装；Mixins通常代码的抽离；状态管理数据持久化；vxeTable复杂表格系统应用；用户权限及登录的Token认证；
+技术要点：Mixins通常代码的抽离；状态管理数据持久化；用户权限及登录的Token认证；Echarts图表
 ```
