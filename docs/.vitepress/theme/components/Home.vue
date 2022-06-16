@@ -1,19 +1,17 @@
 <script setup>
-
+// import {useParticle} from '../hooks/useParticle.js'
+// useParticle()
 </script>
 <template>
   <section id="hero">
     <h1 class="tagline">
       <span class="accent">记录</span>
-      <br />有用的东西
+      <br />东西
     </h1>
-    <p class="description">不要在意细枝末节</p>
-    <p class="description">按照有用无用进行分类</p>
-    <p class="description">只要有用，就不要有心理负担</p>
-    <p class="description">要看到有用的一面</p>
+    <p class="description">博客</p>
     <div class="actions">
-      <a class="get-started" href="/useful/">
-        干
+      <a class="get-started" href="/vue/vue3-init-process  ">
+        Get Started
         <svg
           class="icon"
           xmlns="http://www.w3.org/2000/svg"

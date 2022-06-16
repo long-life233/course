@@ -494,7 +494,9 @@ order.schema.json
     },
 ```
 ### 查询一本图书数据
+
 使用clientDB时可以在get方法内传入getOne:true来返回一条数据
+
 ```js
     async getOneBook() {
         uni.showLoading({
@@ -514,7 +516,7 @@ order.schema.json
             }).finally(() => {
                 uni.hideLoading()
             })
-    },
+    }
 ```
 ### 查询结果返回总数
 使用clientDB时可以在get方法内传入getCount:true来同时返回总数

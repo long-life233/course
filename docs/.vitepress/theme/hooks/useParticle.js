@@ -1,6 +1,6 @@
-import { ref, onMounted,watch,reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 
-export default function () {
+export const useParticle = () => {
     // 获取浏览器宽高
     let screenWidth = ref(window.screen.width)
     let screenHeight = ref(window.screen.height)
@@ -12,7 +12,7 @@ export default function () {
     let animationID;
     // 保存每个粒子的数组
     var points = []
-    
+
 
 
     // 浏览器缩放重绘canvas
@@ -24,7 +24,7 @@ export default function () {
 
     // 绘制canvas
     function drawCanvas() {
-        
+
         // 清空点
         points = []
         document.querySelector("#box").innerHTML = `<canvas id="canvas" width=${screenWidth.value} height=${screenHeight.value} style="position:fixed;z-index:2"></canvas>`
@@ -34,7 +34,7 @@ export default function () {
             points.push(new Point(Math.random() * screenWidth.value, Math.random() * screenHeight.value))
         }
         // 需要判断清空上一次的动画window.requestAnimationFrame
-        if(animationID){
+        if (animationID) {
             window.cancelAnimationFrame(animationID)
         }
         // 判断主题色
@@ -55,7 +55,7 @@ export default function () {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI)
         ctx.closePath()
-        ctx.fillStyle = isDark?'#fff':'#000'
+        ctx.fillStyle = isDark ? '#fff' : '#000'
         ctx.fill()
         ctx.stroke();
     }
@@ -77,7 +77,7 @@ export default function () {
             ctx.moveTo(this.x, this.y)
             ctx.lineTo(p.x, p.y)
             ctx.closePath()
-            ctx.strokeStyle = isDark?'rgba(255, 255, 255, ' + alpha + ')':'rgba(0, 0, 0, ' + alpha + ')'
+            ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, ' + alpha + ')' : 'rgba(0, 0, 0, ' + alpha + ')'
             ctx.strokeWidth = 1
             ctx.stroke()
         }
