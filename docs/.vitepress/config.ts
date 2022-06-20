@@ -110,10 +110,10 @@ export default defineConfigWithTheme<Config>({
                 {
                     text: 'Sundry',
                     items: [
-                        // {
-                        //     text: 'hello-uniCloud',
-                        //     link: '/sundry/hello-uniCloud'
-                        // },
+                        {
+                            text: 'hello-uniCloud',
+                            link: '/sundry/hello-uniCloud'
+                        },
                         {
                             text: 'interview-problem',
                             link: '/sundry/interview-problem'
@@ -142,10 +142,10 @@ export default defineConfigWithTheme<Config>({
                             text: 'remember',
                             link: '/sundry/remember'
                         },
-                        // {
-                        //     text: 'resume',
-                        //     link: '/sundry/resume'
-                        // }
+                        {
+                            text: 'resume',
+                            link: '/sundry/resume'
+                        }
                     ]
                 }
             ]

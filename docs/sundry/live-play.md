@@ -56,11 +56,9 @@ https://developer.aliyun.com/article/706488
 ### MCN主播如何开直播间
 1.  使用谷歌浏览器，打开地址`https://live.youinsh.com/livestream/qiniulogin`。可能需要注册登陆。
 
-    ![image-20220329162608070](TyporaImg/image-20220329162608070.png)
   
 2.  点击新建直播
 
-    ![image-20220329163423397](TyporaImg/image-20220329163423397.png)
 
     下面对直播设置做出解释：
 
@@ -70,13 +68,6 @@ https://developer.aliyun.com/article/706488
     
     - 直播类型：有横屏直播和竖屏直播两种方式。感觉竖屏直播更类似淘宝抖音的带货直播。创建后就无法再修改直播类型了，只能另开一个直播间。
     
-        横屏
-    
-        ![image-20220329163950556](TyporaImg/image-20220329163950556.png)
-    
-        竖屏
-    
-        ![image-20220329164015444](TyporaImg/image-20220329164015444.png)
     
     -   直播方式
     

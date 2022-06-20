@@ -542,7 +542,7 @@ order.schema.json
 ```
 
 ### 仅查询图书数据的书名
-查询时可以使用field方法指定返回字段，在<uni-clientDB>组件中也支持field属性。不使用field方法时会返回所有字段
+查询时可以使用field方法指定返回字段，在`<uni-clientDB>`组件中也支持field属性。不使用field方法时会返回所有字段
 
 ```js
     async getBookTitle() {

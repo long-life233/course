@@ -1,8 +1,9 @@
 # 简历
-
+博客地址：https://long-life233.github.io/
+gitee仓库：https://gitee.com/Lukechenggg
 ## 小程序
-```shell
-时间: 6个月，2021.9 - 2022.3。
+```js
+时间: 6个月，2021.9 - 2022.5。
 
 介绍: 该小程序的功能是为车主、消费者、运营人员提供服务。
 
@@ -31,7 +32,7 @@
 ```
 
 ### 瀑布流页面开发
-```Html
+```html
 <movable-area style="height:50vh">
     <movable-view direction="vertical" @change="change">
         <!-- 瀑布流 -->
@@ -100,7 +101,7 @@
 
 
 ### 分享指定页面开发
-```JavaScript
+```js
 // 全局混入,可以分享;点击分享的小程序会跳到制定页面
 Vue.mixin({
   data(){
@@ -142,7 +143,7 @@ onShareTimeline(){
 
 ### 轮播图动态指示点组件的开发
 
-```Vue
+```vue
 <template>
 	<view class="dot-wrapper-box" 
 		  :style="'transform:translateX('+translateX+'px);width:'+dot_distance+'px;height:'+dot_distance+'px;bottom:'+dotBoxBottom+'rpx'">
@@ -203,20 +204,13 @@ onShareTimeline(){
 </script>
  
 <style>
-/* // 指示点外边框 */
 	.dot-wrapper-box{
 		position: absolute;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
 		
-		/* // bottom: 1rpx; */
 		left: 50%;
-/* 		// bottom: 20px;
-		// left: 50%;
-		// margin: 0 auto;
-		// width: 30px;
-		// height: 30px; */
 		transition: .3s;
 	}
 	.dot-wrapper{
@@ -254,8 +248,8 @@ onShareTimeline(){
 
 
 ## 官网
-```shell
-名称：官网
+```js
+时间:2021.9-2022.3
 
 介绍：在该官网上展示不同系列的房车、公司简介、职位招聘等信息
 
@@ -267,7 +261,11 @@ onShareTimeline(){
 ```
 
 ## 前台电商网站
-```shell
+```js
+时间：2021.02 - 2021。07
+
+技术体系：Vue
+
 三级分类事件委派处理。
 
 swiper轮播图的使用
@@ -307,7 +305,7 @@ swiper轮播图的使用
 ```
 
 - 后台管理
-```shell
+```js
 项目名称：后台管理系统
 
 项目介绍：该系统为小程序的配套后台管理系统，实现对小程序的数据管理，并提供相应的数据分析与统计报表。
@@ -322,8 +320,8 @@ swiper轮播图的使用
 
 ## 后台管理系统
 
-```shell
-时间: 6个月，2021.9 - 2022.3。
+```js
+时间: 6个月，2020.2 - 2022.2。
 
 介绍: 为运营人员提供后台管理服务。
 
