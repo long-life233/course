@@ -256,3 +256,470 @@ https://tailwindcss.com/docs/hover-focus-and-other-states#viewport-orientation
   </div>
 </div>
 ```
+
+## 响应式设计
+断点
+
+https://tailwindcss.com/docs/responsive-design
+
+## 暗黑模式
+https://tailwindcss.com/docs/dark-mode
+
+
+## 可复用样式
+https://tailwindcss.com/docs/reusing-styles
+
+## 自定义主题
+https://tailwindcss.com/docs/adding-custom-styles#customizing-your-theme
+
+## 使用精确值
+https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values
+
+```html
+<div class="top-[117px]">
+  <!-- ... -->
+</div>
+
+<div class="bg-[#bada55] text-[22px] before:content-['Festivus']">
+  <!-- ... -->
+</div>
+```
+
+## 使用任意属性
+```html
+<div class="[--scroll-offset:56px] lg:[--scroll-offset:44px]">
+  <!-- ... -->
+</div>
+```
+
+## 处理空白
+
+用`_`代替空白
+```html
+<div class="grid grid-cols-[1fr_500px_2fr]">
+  <!-- ... -->
+</div>
+
+<div class="bg-[url('/what_a_rush.png')]">
+  <!-- ... -->
+</div>
+
+<!-- 转义 -->
+<div class="before:content-['hello\_world']">
+  <!-- ... -->
+</div>
+```
+
+## 处理模棱两可的css
+https://tailwindcss.com/docs/adding-custom-styles#resolving-ambiguities 
+```html
+<!-- Will generate a font-size utility -->
+<div class="text-[length:var(--my-var)]">...</div>
+
+<!-- Will generate a color utility -->
+<div class="text-[color:var(--my-var)]">...</div>
+```
+## 使用css和@layer
+
+https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
+
+没看
+
+## 功能和指令
+https://tailwindcss.com/docs/functions-and-directives
+
+没看
+
+## 自定义颜色
+调色板
+
+https://tailwindcss.com/docs/customizing-colors
+
+## 布局
+
+### 长宽比
+https://tailwindcss.com/docs/aspect-ratio
+
+### 容器类
+https://tailwindcss.com/docs/container
+感觉文档有错误呀
+
+有最大宽度
+
+加上mx-auto元素会居中。
+```html
+<div class="container mx-auto bg-black">
+  <!-- ... -->ddd
+</div>
+```
+
+### 控制元素列数
+https://tailwindcss.com/docs/columns
+
+```html
+<div class="columns-3 ...">
+  <img class="w-full aspect-video ..." src="..." />
+  <img class="w-full aspect-square ..." src="..." />
+  <!-- ... -->
+</div>
+```
+### break after
+https://tailwindcss.com/docs/break-after
+
+### break before
+https://tailwindcss.com/docs/break-before
+
+### break inside
+https://tailwindcss.com/docs/break-inside
+
+### Box Decoration Break 
+https://tailwindcss.com/docs/box-decoration-break
+
+### 盒模型
+控制盒模型
+
+https://tailwindcss.com/docs/box-sizing
+
+```shell
+Class          Properties
+             
+box-border	box-sizing: border-box;
+box-content	box-sizing: content-box;
+```
+
+### display属性
+https://tailwindcss.com/docs/display
+
+```shell
+block	        display: block;
+inline-block	display: inline-block;
+inline	      display: inline;
+flex	        display: flex;
+inline-flex	  display: inline-flex;
+
+...等等
+```
+### 浮动
+https://tailwindcss.com/docs/float
+
+```shell
+float-right	  float: right;
+float-left	  float: left;
+float-none	  float: none;
+```
+
+### 清楚浮动
+https://tailwindcss.com/docs/clear
+
+```shell
+clear-left	    clear: left;
+clear-right	    clear: right;
+clear-both	    clear: both;
+clear-none	    clear: none;
+```
+
+### Isolation
+https://tailwindcss.com/docs/isolation
+
+```shell
+isolate	          isolation: isolate;
+isolation-auto	  isolation: auto;
+```
+
+### Object Fit
+https://tailwindcss.com/docs/object-fit
+
+### Object Position
+https://tailwindcss.com/docs/object-position
+
+### Overflow属性
+https://tailwindcss.com/docs/overflow
+
+控制内容溢出
+
+### Overscroll Behavior属性
+https://tailwindcss.com/docs/overscroll-behavior
+
+控制滚动条的行为
+
+### Position属性
+https://tailwindcss.com/docs/position
+
+定位相关类
+
+### Top / Right / Bottom / Left
+
+https://tailwindcss.com/docs/top-right-bottom-left
+
+### Visibility
+https://tailwindcss.com/docs/visibility
+
+### Z-Index 
+https://tailwindcss.com/docs/z-index
+
+## Flexobx & Grid
+
+### Flex Basis
+https://tailwindcss.com/docs/flex-basis
+
+控制flex项的初始大小
+
+```shell
+basis-0	flex-basis: 0px;
+basis-1	flex-basis: 0.25rem; /* 4px */
+basis-2	flex-basis: 0.5rem; /* 8px */
+basis-3	flex-basis: 0.75rem; /* 12px */
+
+。。。等等
+```
+
+```html
+<div class="flex flex-row">
+  <div class="basis-1/4">01</div>
+  <div class="basis-1/4">02</div>
+  <div class="basis-1/2">03</div>
+</div>
+```
+
+### Flex Direction
+https://tailwindcss.com/docs/flex-direction
+
+控制flex项的排列顺序
+
+```shell
+flex-row	flex-direction: row;
+flex-row-reverse	flex-direction: row-reverse;
+flex-col	flex-direction: column;
+flex-col-reverse	flex-direction: column-reverse;
+```
+
+### Flex Wrap
+https://tailwindcss.com/docs/flex-wrap
+
+怎么包裹flex项
+
+```shell
+flex-wrap	flex-wrap: wrap;
+flex-wrap-reverse	flex-wrap: wrap-reverse;
+flex-nowrap	flex-wrap: nowrap;
+```
+
+### Flex
+https://tailwindcss.com/docs/flex
+
+控制flex项的伸和缩
+```shell
+flex-1	flex: 1 1 0%;
+flex-auto	flex: 1 1 auto;
+flex-initial	flex: 0 1 auto;
+flex-none	flex: none;
+```
+
+### Flex Grow
+https://tailwindcss.com/docs/flex-grow
+
+Utilities for controlling how flex items grow.  
+
+### Flex Shrink
+https://tailwindcss.com/docs/flex-shrink
+
+Utilities for controlling how flex items shrink.
+
+### Order
+https://tailwindcss.com/docs/order
+
+Utilities for controlling the order of flex and grid items.
+
+### Grid Template Columns
+https://tailwindcss.com/docs/grid-template-columns
+
+在网格布局中指定列数
+```shell
+grid-cols-1	grid-template-columns: repeat(1, minmax(0, 1fr));
+grid-cols-2	grid-template-columns: repeat(2, minmax(0, 1fr));
+grid-cols-3	grid-template-columns: repeat(3, minmax(0, 1fr));
+grid-cols-4	grid-template-columns: repeat(4, minmax(0, 1fr));
+grid-cols-5	grid-template-columns: repeat(5, minmax(0, 1fr));
+```
+```html
+<div class="grid grid-cols-4 gap-4">
+  <div>01</div>
+  <!-- ... -->
+  <div>09</div>
+</div>
+```
+
+### Grid Column Start / End
+https://tailwindcss.com/docs/grid-column
+
+```shell
+col-span-1	grid-column: span 1 / span 1;
+col-span-2	grid-column: span 2 / span 2;
+col-span-3	grid-column: span 3 / span 3;
+col-span-4	grid-column: span 4 / span 4;
+```
+```html
+<div class="grid grid-cols-3 gap-4">
+  <div class="...">01</div>
+  <div class="...">02</div>
+  <div class="...">03</div>
+  <div class="col-span-2 ...">04</div>
+  <div class="...">05</div>
+  <div class="...">06</div>
+  <div class="col-span-2 ...">07</div>
+</div>
+```
+
+### Grid Template Rows
+https://tailwindcss.com/docs/grid-template-rows
+```shell
+grid-rows-2	grid-template-rows: repeat(2, minmax(0, 1fr));
+grid-rows-3	grid-template-rows: repeat(3, minmax(0, 1fr));
+grid-rows-4	grid-template-rows: repeat(4, minmax(0, 1fr));
+grid-rows-5	grid-template-rows: repeat(5, minmax(0, 1fr));
+grid-rows-6	grid-template-rows: repeat(6, minmax(0, 1fr));
+```
+
+### Grid Row Start / End
+https://tailwindcss.com/docs/grid-row
+```shell
+row-span-3	grid-row: span 3 / span 3;
+row-span-4	grid-row: span 4 / span 4;
+row-span-5	grid-row: span 5 / span 5;
+```
+
+### Grid Auto Flow
+https://tailwindcss.com/docs/grid-auto-flow
+```shell
+grid-flow-row	grid-auto-flow: row;
+grid-flow-col	grid-auto-flow: column;
+grid-flow-dense	grid-auto-flow: dense;
+grid-flow-row-dense	grid-auto-flow: row dense;
+grid-flow-col-dense	grid-auto-flow: column dense;
+```
+### Grid Auto Columns
+https://tailwindcss.com/docs/grid-auto-columns
+
+```shell
+auto-cols-auto	grid-auto-columns: auto;
+auto-cols-min	grid-auto-columns: min-content;
+auto-cols-max	grid-auto-columns: max-content;
+auto-cols-fr	grid-auto-columns: minmax(0, 1fr);
+```
+
+### Grid Auto Rows
+https://tailwindcss.com/docs/grid-auto-rows
+
+```shell
+auto-rows-auto	grid-auto-rows: auto;
+auto-rows-min	grid-auto-rows: min-content;
+auto-rows-max	grid-auto-rows: max-content;
+auto-rows-fr	grid-auto-rows: minmax(0, 1fr);
+```
+
+### Gap
+https://tailwindcss.com/docs/gap
+
+```shell
+gap-0	gap: 0px;
+gap-x-0	column-gap: 0px;
+gap-y-0	row-gap: 0px;
+gap-px	gap: 1px;
+gap-x-px	column-gap: 1px;
+gap-y-px	row-gap: 1px;
+gap-0.5	gap: 0.125rem; /* 2px */
+gap-x-0.5	column-gap: 0.125rem; /* 2px */
+```
+
+### Justify Content
+https://tailwindcss.com/docs/justify-content
+```css
+justify-start	justify-content: flex-start;
+justify-end	justify-content: flex-end;
+justify-center	justify-content: center;
+justify-between	justify-content: space-between;
+justify-around	justify-content: space-around;
+justify-evenly	justify-content: space-evenly;
+```
+
+### Justify Items
+https://tailwindcss.com/docs/justify-items
+```css
+justify-items-start	justify-items: start;
+justify-items-end	justify-items: end;
+justify-items-center	justify-items: center;
+justify-items-stretch	justify-items: stretch;
+```
+
+### Justify Self
+https://tailwindcss.com/docs/justify-self
+```css
+justify-self-auto	justify-self: auto;
+justify-self-start	justify-self: start;
+justify-self-end	justify-self: end;
+justify-self-center	justify-self: center;
+justify-self-stretch	justify-self: stretch;
+```
+
+### Align Content
+https://tailwindcss.com/docs/align-content
+```css
+content-center	align-content: center;
+content-start	align-content: flex-start;
+content-end	align-content: flex-end;
+content-between	align-content: space-between;
+content-around	align-content: space-around;
+content-evenly	align-content: space-evenly;
+```
+
+### Align Items
+https://tailwindcss.com/docs/align-items
+```css
+items-start	align-items: flex-start;
+items-end	align-items: flex-end;
+items-center	align-items: center;
+items-baseline	align-items: baseline;
+items-stretch	align-items: stretch;
+```
+
+### Align Self
+https://tailwindcss.com/docs/align-self
+```css
+self-auto	align-self: auto;
+self-start	align-self: flex-start;
+self-end	align-self: flex-end;
+self-center	align-self: center;
+self-stretch	align-self: stretch;
+self-baseline	align-self: baseline;
+```
+
+### Place Content
+https://tailwindcss.com/docs/place-content
+```css
+place-content-center	place-content: center;
+place-content-start	place-content: start;
+place-content-end	place-content: end;
+place-content-between	place-content: space-between;
+place-content-around	place-content: space-around;
+place-content-evenly	place-content: space-evenly;
+place-content-stretch	place-content: stretch;
+```
+
+### Place Items
+https://tailwindcss.com/docs/place-items
+```css
+place-items-start	place-items: start;
+place-items-end	place-items: end;
+place-items-center	place-items: center;
+place-items-stretch	place-items: stretch;
+```
+
+### Place Self
+https://tailwindcss.com/docs/place-self
+```css
+place-self-auto	place-self: auto;
+place-self-start	place-self: start;
+place-self-end	place-self: end;
+place-self-center	place-self: center;
+place-self-stretch	place-self: stretch;
+```
