@@ -1,4 +1,11 @@
 # 简历
+
+
+## 问题
+```shell
+
+```
+
 博客地址：https://long-life233.github.io/
 
 gitee仓库：https://gitee.com/Lukechenggg
@@ -335,7 +342,3 @@ swiper轮播图的使用
 	2.根据图片颜色动态生成渐变背景色
 ```
 
-## 问题
-```shell
-
-```
