@@ -1,5 +1,6 @@
 # 简历
 博客地址：https://long-life233.github.io/
+
 gitee仓库：https://gitee.com/Lukechenggg
 ## 小程序
 ```js
@@ -332,4 +333,9 @@ swiper轮播图的使用
 技术要点：
     1.自定义日历组件开发。
 	2.根据图片颜色动态生成渐变背景色
+```
+
+## 问题
+```shell
+
 ```
