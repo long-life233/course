@@ -1,15 +1,5 @@
 # 简历
 
-
-## 面试记录
-```shell
-
-
-
-
-
-```
-
 博客地址：https://long-life233.github.io/
 
 gitee仓库：https://gitee.com/Lukechenggg

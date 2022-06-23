@@ -6,6 +6,28 @@
 hash路由兼容性强。history路由需要做一定处理，因为单页应用实际上是没有路由的，会出现刷新404的情况。
 
 - 看了源码也还是不理解它的思想，只感觉像是在死记硬背。
+## render函数的使用
+作用就是不用写template模板了，其实template模板最后也是转换为render渲染函数。这个h可以理解为createElement。
+
+```html
+<!-- <template></template> -->
+<script>
+import {h} from 'vue'
+export default {
+  data(){
+    return {
+      msg:'xx'
+    }
+  },
+  render(){
+    return h('h1',{},'xx')
+  }
+}
+</script>
+<style>
+
+</style>
+```
 
 ## 快速开始
 https://vuejs.org/guide/quick-start.html#quick-start
