@@ -128,7 +128,7 @@ function flatten(arr) {
 ```
 
 ## 模板编译函数
-最为精妙之处: 利用new Function（）将普通字符串转为木板字符串。
+最为精妙之处: 利用new Function（）将普通字符串转为模板字符串，通过`${xx}`渲染出变量
 ```js
 function compile(template) {
     template = template.replace(/\{\{(.+)\}\}/g, (x, key) => {

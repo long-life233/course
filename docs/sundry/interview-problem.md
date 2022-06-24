@@ -3,6 +3,7 @@
 我怎么忘记录音了呀？？
 ```shell
 自我介绍？
+我是在20年来到上海进入前端领域，这期间的经历让我对HTMl和css非常熟悉，能够高度还原设计稿。然后对于原生js，我也能熟练的应用。但我主要使用JS框架Vue，
 
 深克隆、浅克隆。
 基本数据类型存放在栈内存中。引用数据类型存放在堆内存中。
@@ -24,7 +25,7 @@ flat
 低版本浏览器不兼容。。。不过到是
 
 vue的理解：
-vue是一个构建用户界面的JavaScript框架。它建立在标准的HTML，CSS，JavaScript之上。并且提供一个声明式的、基于组件的编程模式，以帮助开发人员快速有效的开发用户界面，不管它是简单的还是复杂的。
+vue是一个构建用户界面的JS框架。它建立HTML，CSS，JS之上。并且提供一个声明式的、基于组件的编程模式，以帮助开发人员快速有效的开发用户界面。
 
 Vue2实例挂载过程中发生了什么？
 首先找到Vue构造函数，传入参数为options，options就是用户传入的配置项，比如props，methods，data
@@ -32,13 +33,13 @@ Vue2实例挂载过程中发生了什么？
 在init方法里面，有个initState方法，作用是初始化用户传入的配置项，然后就可以通过this获取访问到它们。
 由此可知在beforeCreate钩子里不能获取到props、methods等配置项。在created钩子里可以获取到。
 
-然后我们点到initState方法里面，可以看到Vue初始化用户传入配置项的顺序依次为props、methods、data、computed、watch。
-然后有个初始化data的方法，名叫initData，在initData里面，会判断data的值是一个对象还是一个函数返回一个对象。data的属性名是不是和props、methods重复。最后会将data转换为响应式数据。
+# 然后我们点到initState方法里面，可以看到Vue初始化用户传入配置项的顺序依次为props、methods、data、computed、watch。
+# 然后有个初始化data的方法，名叫initData，在initData里面，会判断data的值是一个对象还是一个函数返回一个对象。data的属性名是不是和props、methods重复。最后会将data转换为响应式数据。
 
 然后init方法结尾，会执行mount挂载方法。
 在mount方法里，会看到vue不允许将模板直接挂载到body或document标签上。在mount方法里，会把template模板解析为ast虚拟语法树，再将其转换为render语法字符串，并生成render方法。
 
-mount方法最后会去执行mountComponent方法，在里面会触发beforeMount钩子；会定义updateComponent渲染页面视图的方法，主要执行render、update方法，render方法返回虚拟dom，update方法主要功能是调用patch方法，将虚拟dom转为真实dom，并更新到页面；会监听组件数据变化，一旦变化触发beforeUpdate钩子；
+mount方法最后会去执行mountComponent方法，在里面会触发beforeMount钩子；会定义updateComponent渲染页面视图的方法，主要执行render、update方法，render方法返回虚拟dom，update方法主要功能是调用patch方法，将虚拟dom转为真实dom，并更新到页面；会监听组件数据变化，一旦变化触发beforeUpdate钩子，然后又去执行updateComponent方法；还会new 一个watcher对vm也就是vue实例进行监听，并执行updateComponent方法。最后调用mounted生命周期钩子，至此vue的组件实例化结束。
 
 vue给对象添加新属性界面不刷新？
 vue2使用object.defineProperty实现数据响应式，当获取、修改属性时能被拦截到，但是当动态添加、删除某个属性时不会被拦截到。这时候可以使用Vue.set、$forceUpdate、方法来使页面刷新。
@@ -69,4 +70,7 @@ watchEffect是第一次就会执行回调函数，后面回调里的响应式数
 
 怎么缓存一个组件
 keepAlive。组件就不会重建和销毁，也不会触发对应的生命周期钩子
+
+你有什么想问我的？
+公司使用什么技术栈？我要是去公司能为公司做什么事情呢？公司的发展方向是什么呀？公司有帮带计划吗？
 ```
