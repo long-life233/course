@@ -135,6 +135,10 @@ export default defineConfigWithTheme<Config>({
                             link: '/sundry/quasar-record'
                         },
                         {
+                            text: 'read-interview',
+                            link: '/sundry/read-interview'
+                        },
+                        {
                             text: 'regular-expression',
                             link: '/sundry/regular-expression'
                         },
@@ -145,6 +149,10 @@ export default defineConfigWithTheme<Config>({
                         {
                             text: 'resume',
                             link: '/sundry/resume'
+                        },
+                        {
+                            text: "tailwind-css-record",
+                            link: '/sundry/tailwind-css-record'
                         }
                     ]
                 }
