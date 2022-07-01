@@ -21,7 +21,7 @@ export default defineConfigWithTheme<Config>({
         nav: [
             { text: 'Vue', activeMatch: `^/(vue)/`, link: '/vue/fly-card-component' },
             { text: 'JavaScript', activeMatch: `^/(js)/`, link: '/js/canvas-particle-effect' },
-            { text: 'Sundry', activeMatch: `^/(sundry)/`, link: '/sundry/interview-problem' },
+            { text: 'Sundry', activeMatch: `^/(sundry)/`, link: '/sundry/tailwind-css-record' },
         ],
         algolia: {
             indexName: 'cli_vuejs',
