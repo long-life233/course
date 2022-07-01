@@ -1,15 +1,33 @@
 # 记录
 ## npm与yarn相关
+
+nvm，切換nodejs、npm版本
+npm -g nrm，切換鏡像
+
 yarn镜像
 
 yarn config set registry https://registry.npm.taobao.org/
 
-npm清除缓存`npm cache clean -f`
+yarn cache dir
+yarn cache clean
 
+npm config get registry
+
+npm config set registry https://registry.npm.taobao.org
+
+npm config set registry https://registry.npmjs.org
+
+npm清除缓存`npm cache clean -f`
+npm config list --json
 获取缓存`npm config get cache`
 
 验证是否还有缓存`npm cache verify`
 
+npm install时报错，pathy2
+https://blog.csdn.net/qq_24788629/article/details/103819561
+要以管理员身份运行powerShell
+
+https://blog.csdn.net/weixin_29307799/article/details/105553834?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-105553834-blog-107587043.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-105553834-blog-107587043.pc_relevant_default&utm_relevant_index=2
 ## 配置ssh
 1. 
 ```shell
