@@ -28,10 +28,21 @@ https://blog.csdn.net/qq_24788629/article/details/103819561
 要以管理员身份运行powerShell
 
 https://blog.csdn.net/weixin_29307799/article/details/105553834?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-105553834-blog-107587043.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-105553834-blog-107587043.pc_relevant_default&utm_relevant_index=2
+
+## script脚本
+&和&&区别
+
+https://blog.csdn.net/MYspegale/article/details/117556628
+
+阮一峰
+https://blog.csdn.net/weixin_41697143/article/details/104029573
+
+https://blog.csdn.net/qq_23334071/article/details/114736831
 ## 配置ssh
 1. 
 ```shell
 git config --global user.name "你的用户名"
+
 git config --global user.email "你的邮箱"
 ```
 2. 
