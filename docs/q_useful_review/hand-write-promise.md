@@ -93,7 +93,7 @@ Promise.prototype.then = function (onResolved, onRejected) {
 
 ## 当前已完成代码
 
-现在我发现有 this 指针的问题
+现在发现有 this 指针的问题
 
 ```js
 const PENDING = 'pending';

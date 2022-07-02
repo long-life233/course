@@ -6,10 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #btn:hover {
+            background-color: #bfa;
+        }
+    </style>
 </head>
 
 <body>
-
+    <button id="btn" style="position:absolute;border:1px solid red;">hello</button>
 </body>
 <script>
     // 获取浏览器宽高
@@ -43,15 +48,13 @@
         ctx = canvasNode.getContext("2d")
         document.body.appendChild(canvasNode)
         // 绘制点
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 200; i++) {
             points.push(new Point(Math.random() * screenWidth, Math.random() * screenHeight))
         }
         // 需要判断清空上一次的动画window.requestAnimationFrame
         if (animationID) {
             window.cancelAnimationFrame(animationID)
         }
-        // 判断主题色
-        isDark = document.documentElement.classList.contains('dark')
 
         gameloop(); //进行
     }
@@ -69,7 +72,7 @@
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI)
         ctx.closePath()
-        ctx.fillStyle = isDark ? '#fff' : '#000'
+        ctx.fillStyle = '#000'
         ctx.fill()
         ctx.stroke();
     }
@@ -91,7 +94,7 @@
             ctx.moveTo(this.x, this.y)
             ctx.lineTo(p.x, p.y)
             ctx.closePath()
-            ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, ' + alpha + ')' : 'rgba(0, 0, 0, ' + alpha + ')'
+            ctx.strokeStyle = 'rgba(0, 0, 0, ' + alpha + ')'
             ctx.strokeWidth = 1
             ctx.stroke()
         }

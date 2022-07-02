@@ -1,5 +1,5 @@
 # Easy Chat Room
-app.js,作为服务端
+创建app.js,作为服务端
 ```js
 var ws = require("nodejs-websocket")
 

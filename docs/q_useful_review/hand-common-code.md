@@ -41,11 +41,10 @@ console.log(a);
 
 解决函数属性丢失和循环引用会报错两个问题
 ```js
-    // 强化二
     // 解决函数属性丢失(运用递归遍历)
-    // 解决循环引用会报错问题(deepClone2(p),Uncaught RangeError: Maximum call stack size exceeded)
+    // 解决循环引用会报错问题(Uncaught RangeError: Maximum call stack size exceeded)
     // 将克隆的相同对象缓存起来
-    function deepClone3(target,map = new Map()){
+    function deepClone(target,map = new Map()){
         // 如果是引用数据类型（对象，数组）
         if (target !== null && typeof target === "object") {
             if(map.get(target)){
@@ -72,20 +71,20 @@ console.log(a);
 ```
 
 ## 数组扁平化
-
+1、直接用es6的语法。
 ```js
 let arr = [1, 2, 3, [4, 5, 6, [7, 8, [9, 10, 11]]]];
 arr.flat(Infinity);
 ```
-toSting，split
 
-如果都是数字，可再进行遍历讲字符串转为数字
+
+2、针对都是数字，使用toSting，split，再进行遍历将字符串转为数字
 ```js
 let arr = [1, 2, 3, [4, 5, 6, [7, 8, [9, 10, 11]]]];
 arr.toString().split(',')
 ```
-三点运算符
 
+3、使用while判断数组元素是否含有数组，有就使用`[].concat`方法将其连接起来。
 ```js
 function flatten(arr) {
     while (arr.some(item => Array.isArray(item))) {
@@ -96,7 +95,7 @@ function flatten(arr) {
 }
 ```
 
-## 真正的冒泡排序
+## 冒泡排序
 ```js
         function bubbleSort(array) {
             // 1.获取数组的长度
@@ -110,7 +109,7 @@ function flatten(arr) {
                 // 这才是冒泡排序！！
                 // 里面是从左往右
                 for (var j = 0; j < i; j++) {
-                    // 4.如果j位置比j+1位置的数据大, 那么就交换
+                    // 4.如果要升序就用 > 大于符号；降序用小于 < 符号。
                     if (array[j] > array[j + 1]) {
                         // 交换
                         // const temp = array[j+1]
@@ -137,6 +136,7 @@ function compile(template) {
     let returnStr = ''
     // 最为精妙之处: 利用new Function（）将普通字符串转为模板字符串。
     const fnBody = "with(obj){ returnStr = `" + template + "` }; console.log(returnStr); return returnStr"
+    // 参数：形参名，函数体字符串
     return new Function("obj", fnBody)
 }
 compile('<div>{{a}}</div>')({ a: "aValue" })
@@ -146,6 +146,8 @@ compile('<div>{{a}}</div>')({ a: "aValue" })
 节流是多次只执行一次，节省流量。
 
 防抖更厉害了，只执行最后一次。
+
+感觉就是使用闭包，记录一个变量。
 ```js
 // 防抖
 function debounce(fn, delay) {
@@ -159,6 +161,9 @@ function debounce(fn, delay) {
         }, delay)
     }
 }
+// debounce(fn,1000)()
+
+
 // 节流
 function throttle(fn, delay) {
     let past = 0;
@@ -179,24 +184,15 @@ const tFn = throttle(testLog,1000)
 setInterval(()=>{
     tFn()
 },10)
+// throttle(fn,1000)()
 ```
 
 ## 数据响应式
-ref实现。根据自己的理解。
+ref实现。
 
 所谓响应式数据，就是指当这个数据发生改变时，会触发一个回调函数（这个回调里面一定使用到了这个响应式数据）
 ```html
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
     <script>
         let currentFn = null
         class Dep {
@@ -285,9 +281,6 @@ ref实现。根据自己的理解。
             data.a = 10
         }, 1000)
     </script>
-</body>
-
-</html>
 ```
 
 ## 统一状态管理

@@ -1,4 +1,6 @@
-# 飞卡组件（仿知乎）
+# fly-card-component
+vue仿知乎飞卡组件
+
 ```vue
 <script setup>
   import { ref, reactive, onMounted } from 'vue'
