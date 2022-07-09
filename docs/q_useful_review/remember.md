@@ -2,7 +2,7 @@
 ## npm与yarn相关
 
 nvm，切換nodejs、npm版本
-npm -g nrm，切換鏡像
+npm -g nrm/yrm，切換鏡像
 
 yarn镜像
 
@@ -38,6 +38,12 @@ https://blog.csdn.net/MYspegale/article/details/117556628
 https://blog.csdn.net/weixin_41697143/article/details/104029573
 
 https://blog.csdn.net/qq_23334071/article/details/114736831
+
+## git 命令
+删除远程分支
+```shell
+git push origin --delete [branch_name]
+```
 ## 配置ssh
 1. 
 ```shell

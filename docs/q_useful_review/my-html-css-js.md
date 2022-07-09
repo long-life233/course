@@ -152,3 +152,21 @@ https://blog.csdn.net/qq_28918357/article/details/116493371
 
 ## 网格布局
 http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html
+
+## `?`,`??`,`||`使用及区别
+```shell
+? 是三位运算符, 为真返回左值，为假返回右值
+
+?? 是空值合并操作符，`xxx` ?? `yyy` , 只有当xxx为null或undefined时，才会返回yyy，否者返回xxx
+
+|| 或运算符
+
+&& 与运算符
+
+其他类型数据转为 Boolean 规则:
+    数字转为布尔值： 0转为false；其他都是true
+    字符串转为布尔值：  空字符串转为false， 其他都是true
+    字符串转为布尔值：  空字符串转为false， 其他都是true
+    对象始终是true，比如Boolean(false)
+```
+
