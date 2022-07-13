@@ -17,6 +17,97 @@
 添加编译模式，不用再点好几个页面才到要调试的页面了。
 ```
 
+## 授权获取位置信息
+```js
+1、如果用户拒绝授权后，短期内调用不会出现弹窗，而是直接进入 fail 回调。如果是开发环境，请点击开发工具左侧 缓存-清除授权数据；如果是手机，请进入小程序后点击右上菜单-关于xx-右上角菜单-设置中进行权限的手动设置，或删除小程序后重新添加。
+```
+## `authorize`、`getSetting`、`openSetting`区别和选择使用
+
+我一直对uni.authorize、uni.getSetting、uni.openSetting的使用感到纠结。
+
+以获取位置授权为例，
+
+大多数人判断用户是否授权都是先使用getSetting判断用户已授权的列表，
+
+    如果需要授权的那一项为true可以直接使用uni.getLocation获取用户位置信息；
+    
+    但如果为false，就使用authorize进行授权，
+    
+    但因为之前已经拒绝授权，所以会直接走失败回调，
+    
+    然后我们在失败回调里使用uni.openSetting提示用户打开位置权限。
+
+我就感觉这里有点多余，直接使用uni.authorize或者uni.getSetting判断是否授权，然后是否需要使用uni.openSetting就好了，为什么要判断两次呢？
+```js
+uni.authorize
+
+如果是第一次，会弹框让用户判断是否授权。
+会去判断某个权限是否已经授权。已授权走成功回调，没授权走失败回调。
+
+uni.getSetting
+
+会去获取用户已经授权的权限。成功回调的参数res是授权的列表。
+
+uni.openSetting
+
+是打开设置，开启或关闭某个权限。
+
+微信中在manifest.json中必须配置如下，然后在用户打开小程序时自动弹框提示用户是否授权小程序使用位置信息。
+  "mp-weixin": {
+    "appid": "wx58a7869155c1d656",
+    "permission": {
+        "scope.userLocation": {
+        "desc": "你的位置信息将用于院区自动选择"
+        }
+   },
+
+最后我个人认为如果某个功能必须要用户打开某个权限，直接使用uni.authorize即可。
+
+uni.getSetting也行，只不过多一次判断。然后再根据业务需求使用uni.openSetting让用户打开某项设置权限即可。
+```
+
+
+
+
+## 频繁调用wx.getLocation方法会失败
+如题。
+
+微信开发文档如下：
+
+https://developers.weixin.qq.com/community/develop/doc/000aee91a98d206bc6dbe722b51801
+
+
+
+## 选择城市组件
+首页中的城市选择组件
+
+首页会混入common、city的mixin。
+
+混入里面有：
+```js
+state: 
+    user
+    lang 语言
+    location
+    cityCode
+computed：
+    lbsId  就是cityCode
+
+openPage方法、
+getLabel方法
+getDictLabel方法
+```
+
+```html
+/**
+lang: string   zh 或者 en
+theme: string   white 或者 black
+value:  lbsId   location base servce id（位置id）
+openCityPopup   触发混入的事件
+*/
+<city-picker id="city-picker-1" :lang="lang" theme="white" :value="lbsId" @tap="openCityPopup('city-picker-1')" />
+```
+
 ## bug
 1
 ```shell

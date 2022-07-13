@@ -169,4 +169,20 @@ http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html
     字符串转为布尔值：  空字符串转为false， 其他都是true
     对象始终是true，比如Boolean(false)
 ```
+## 可选链`?.`
+可以通过[]访问变量
+```js
+let user1 = {
+  firstName: "John"
+};
 
+let user2 = null; // 假设，我们不能授权此用户
+
+let key = "firstName";
+
+alert(user1?.[key]); // John
+alert(user2?.[key]); // undefined
+
+alert(user1?.[key]?.something?.not?.existing); // undefined
+
+```
