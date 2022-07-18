@@ -67,7 +67,7 @@ uni.getSetting也行，只不过多一次判断。然后再根据业务需求使
 ```
 
 
-
+## 在组件上写class属性
 
 ## 频繁调用wx.getLocation方法会失败
 如题。
@@ -142,10 +142,67 @@ openCityPopup   触发混入的事件
 预约医生的地图图标点击进入地图
 ```
 
+4
+```shell
+input输入框的focus属性不能自动聚焦。触发了focus事件的打印，但是没有看见闪烁的光标
+
+input点击不能聚焦。。
+
+解决：开发工具上显示有问题。真机调试则没有问题。
+```
+
+5
+```shell
+radio单选框的值只能是string类型吗？
+
+好像是的
+
+```
+
+6
+watch属性监视计算属性。
+
+当计算属性改变时，
+
+此时watch监视属性的回调也会相应执行，此时要注意，如果需要将异步返回的数据赋值给响应式数据，响应式数据可能不只有前后两个状态，还有中间等待异步数据返回的状态。
+```js
+frontKey: {
+  async handler(value, oldValue) {
+    if (value) {
+      this.frontPicUrl = value ? await getPrivateUrl(value) : null;
+    }
+  },
+},
+```
+
 ## 路由跳转规则
-路由URL必须使用constants.ts文件里的常量, 禁止手写。
+方法：
 
 跳转路由必须使用封装的路由跳转方法: navigateTo、openPage
+
+路由URL必须使用constants.ts文件里的常量, 禁止手写。
+
+## 数据通信
+1、跳转路由时，携带参数。
+
+2、全局事件总线eventBus（main.js文件里全局注册）
+
+3、全局混入（mixins/mixin.js）
+
+4、全局仓库store。仓库的方法最好直接触发mutation，改变仓库的数据更方便。
+
+5、本地存储
+## 全局仓库store
+```js
+// main.js
+import './utils/store';
+
+// ./utils/store
+在这个文件中，会使用require.context实现对其他目录下store仓库的自动导入
+以及vue安装vuex
+```
+
+## 地址管理
 
 ## src\composition\logic.ts文件
 里面写有一些发请求逻辑功能的函数
