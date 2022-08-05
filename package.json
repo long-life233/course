@@ -11,6 +11,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.4",
+    "marked": "^4.0.18",
     "pinia": "^2.0.16",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2"
