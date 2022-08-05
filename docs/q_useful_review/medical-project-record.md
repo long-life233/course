@@ -1,4 +1,4 @@
-# 彦渊医疗项目
+# 和睦家医疗项目
 
 ## npm i 下载依赖
 可能会出现关于node-sass、python27、gyp等错误，这时需要根据node-sass版本切换node版本。
@@ -79,6 +79,8 @@ https://developers.weixin.qq.com/community/develop/doc/000aee91a98d206bc6dbe722b
 
 
 ## 选择城市组件
+
+
 首页中的城市选择组件
 
 首页会混入common、city的mixin。
@@ -108,7 +110,25 @@ openCityPopup   触发混入的事件
 <city-picker id="city-picker-1" :lang="lang" theme="white" :value="lbsId" @tap="openCityPopup('city-picker-1')" />
 ```
 
-## bug
+
+## 列表组件。
+看似一个简单的列表，里面要涉及的东西可不少。
+
+因为后端返回的数据都是分页数据，所以我们得做下拉刷新、上啦加载跟多，使用scroll-view组件（因为它能触发触顶、触底事件）
+
+组件的最外层是view，宽高是100%。
+## 业务逻辑
+
+1、v-patient-filter-menu-v2组件怎么使用？
+```shell
+
+```
+
+2、怎么判断是否授权，申请授权是跳到哪个页面？
+```shell
+返回的code为·1010103·
+```
+## 问题
 1
 ```shell
 跳转到注册页面，发请求判断是否登录，然后判断是否注册。留在注册页还是重定向到登录页。
@@ -160,12 +180,13 @@ radio单选框的值只能是string类型吗？
 ```
 
 6
+```shell
 watch属性监视计算属性。
 
 当计算属性改变时，
 
 此时watch监视属性的回调也会相应执行，此时要注意，如果需要将异步返回的数据赋值给响应式数据，响应式数据可能不只有前后两个状态，还有中间等待异步数据返回的状态。
-```js
+
 frontKey: {
   async handler(value, oldValue) {
     if (value) {
@@ -173,6 +194,126 @@ frontKey: {
     }
   },
 },
+```
+
+7、
+```shell
+搜索历史搜索扩展按钮。
+
+一开始去获取本地的搜索历史数据。
+
+再mouted钩子里获取搜索历史节点，判断有几行，是否大于3行，得到第三行最后一个节点的索引。
+
+然后计算截取历史数据slice(0, lastIndex)。
+
+是否展示扩展按钮取决于搜索历史行数。
+
+一开始历史数据是收缩状态，然后点击扩展按钮可以切换收缩、扩展状态。
+```
+
+7、
+```shell
+
+uniapp获取节点只能在mouted钩子里获取一次吗？
+
+以后当数据改变时，再去获取节点信息，就不会执行？
+
+错误原因：v-if为false，找不到对应节点。但是就算我改为使用v-show，获取到的节点属性很多都是0。
+
+解决思路：我可不可以结合固定高度、和计算行数来判断是否折叠？
+```
+
+
+
+7
+mounted 和 onLoad生命周期钩子有什么区别？onLoad和onShow执行的先后顺序？
+```shell
+onLoad先与onShow执行
+```
+
+8
+forEach和for循环有什么区别？
+
+forEach里不能些break；
+
+9
+有时候组件上写一些样式不会生效。比如 --tw-mt-24--
+
+10
+```shell
+reactive结合Object.assign使用不会触发响应式
+
+    const msg = reactive({})
+
+    setTimeout(()=>{
+    Object.assign(msg, {a:2})
+    },2000)
+    
+    watch(msg,()=>{
+    console.log(1231)
+    })
+解决：我们项目版本比较低不可以，但最新版可以。
+```
+11、
+```shell
+有一些组件样式差不多，可以内部需要渲染的字段不同，该怎么解决呢？
+
+插槽？
+
+12、
+常见的新闻列表组件，有多少个tab，就使用多少个swiper-item，不要计算当前显示的列表，后面会很麻烦。
+```
+
+12、不要再模板上做太多判断，可能会意想不到的出现问题。
+
+13、scroll-view组件可以覆盖原生组件。也就是说，scroll-view可以配合背景使用。
+
+14、scroll-view组件可能出现子元素显示不全的问题。？当scroll-view设置高度100%的时候，就会有问题。。。唉。
+
+解决办法：我知道原因了，scroll-view是可以配合高度使用的，只不过当scroll-view的父容器里还有另外固定高度的元素时，scroll-view的百分比高度不会考虑兄弟元素的。这时可以使用flex弹性盒，flex：1 1 auto解决高度不确定问题。
+
+100%和calc(100%)有什么不一样？
+
+不要做无用功了，最后还是要确定高度，费了10个小时。。最后。。
+
+
+
+15、screenHeight和windowHeight区别？
+
+https://blog.csdn.net/tangyuan97/article/details/103604680
+
+16、lodash的uniq函数，去重。
+
+17、
+
+分享时带上activeTab的索引。
+
+在useOnLoad里改变tab的索引值，然后tuiTab组件的当前激活item的下划线没有对应索引值的位置。
+
+18、上啦加载跟多、下拉刷新的内在逻辑是什么？
+
+是刷新：请求第一页、列表数据赋值第一页数据
+
+是加载跟多：请求下一页、列表追加数据
+
+19、跳转页面传递参数使用stringfyUrl
+
+`import { stringifyUrl } from 'query-string';`
+
+20、页面怎么复用？
+直接跳转到当前页面。。
+
+21、vue的template模板上不能使用可选链.
+
+然后我选择使用lodash的get方法。例如
+```vue
+<view v-if="get(couponDetailState, 'coupon.couponUseUserName')"></view>
+```
+但是这好像会导致触发不了响应式。
+
+22、uniapp使用wx自定义组件
+```
+根或src创建wxcomponents目录，pages.json配置useComponents
 ```
 
 ## 路由跳转规则
@@ -192,6 +333,16 @@ frontKey: {
 4、全局仓库store。仓库的方法最好直接触发mutation，改变仓库的数据更方便。
 
 5、本地存储
+
+## 排版问题
+居中对齐
+```shell
+1、利用flex布局，合理利用align-items、justify-content属性。
+    有些文本不确定宽高，但要使他们的起始行对齐，可以设置他们的父元素一个固定宽或高，并设置overflow: visible；
+
+2、文字对齐
+    利用行高。
+```
 ## 全局仓库store
 ```js
 // main.js
