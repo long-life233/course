@@ -408,7 +408,7 @@ float-left	  float: left;
 float-none	  float: none;
 ```
 
-### 清楚浮动
+### 清除浮动
 https://tailwindcss.com/docs/clear
 
 ```shell
