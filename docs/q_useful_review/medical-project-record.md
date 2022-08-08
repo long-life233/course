@@ -337,6 +337,22 @@ msgBoxRef.value
           showCancelButton: true,
           html: true,
         })
+
+
+
+```
+24、中英文替换
+```js
+再setup里的返回对象里访问不到$t
+set() {
+    return {
+        // @ts-ignore
+        // text1: $vm?.$t(`非常感谢您选择和睦家医疗为您提供医疗服务，我们将竭诚守护您和家人的健康！`),
+        // text2: $vm?.$t('为了改善患者的就医体验，我们真诚的希望了解到您就医的真实感受，我们感谢您就近期的就诊给予我们反馈。')
+        text1: 'asdf',
+        text2: 'fasdf'
+    }
+}
 ```
 ## 路由跳转规则
 方法：
