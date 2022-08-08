@@ -316,6 +316,28 @@ https://blog.csdn.net/tangyuan97/article/details/103604680
 根或src创建wxcomponents目录，pages.json配置useComponents
 ```
 
+23、替换多语言变量方式：
+```shell
+<text class="top-tips">{{ $t('i18n_7webnuhg_1651741146219_info', { var: buyNum }) }}</text>
+
+<view class="tw-font-300 tw-text-28 tw-text-333333 tw-ml-16 tw-mt-8">{{$t('%{var}可用').replace('%{var}', hospitalNameSetString)}}</view>
+
+# 含有样式
+msgBoxRef.value
+        .show({
+          pTitle: $vm.$t('i18n_y5vq3a6c_1651741146206_info'),
+          content: `<div style="font-size: 16px;line-height: 21px;color: #333333;">
+                ${$vm
+                  .$t('i18n_kjqsu98d_1651741146215_info')
+                  .replace('%{var1}', `<span style="color: var(--primary-color-hex)">${patient.hisMergeMrn}</span>`)
+                  // @ts-ignore
+                  .replace('%{var2}', patient.hisMergeMrn)}
+                </div>`,
+          confirmText: $vm.$t('i18n_xncf6jez_1651741146211_info'),
+          showCancelButton: true,
+          html: true,
+        })
+```
 ## 路由跳转规则
 方法：
 
