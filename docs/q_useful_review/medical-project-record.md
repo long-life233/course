@@ -65,7 +65,7 @@ uni.openSetting
 
 uni.getSetting也行，只不过多一次判断。然后再根据业务需求使用uni.openSetting让用户打开某项设置权限即可。
 ```
-
+上述想法可能是错误的，直接使用openSetting可能找不到对应的权限设置。
 
 ## 在组件上写class属性
 
@@ -75,7 +75,6 @@ uni.getSetting也行，只不过多一次判断。然后再根据业务需求使
 微信开发文档如下：
 
 https://developers.weixin.qq.com/community/develop/doc/000aee91a98d206bc6dbe722b51801
-
 
 
 ## 选择城市组件
@@ -210,31 +209,19 @@ frontKey: {
 
 一开始历史数据是收缩状态，然后点击扩展按钮可以切换收缩、扩展状态。
 ```
+添加新的历史搜索，重新触发组件的销毁重建生命周期，再mounted里重新计算
 
 7、
-```shell
 
-uniapp获取节点只能在mouted钩子里获取一次吗？
-
-以后当数据改变时，再去获取节点信息，就不会执行？
-
-错误原因：v-if为false，找不到对应节点。但是就算我改为使用v-show，获取到的节点属性很多都是0。
-
-解决思路：我可不可以结合固定高度、和计算行数来判断是否折叠？
-```
-
-
-
-7
 mounted 和 onLoad生命周期钩子有什么区别？onLoad和onShow执行的先后顺序？
 ```shell
-onLoad先与onShow执行
+onLoad先于onShow执行
 ```
 
 8
 forEach和for循环有什么区别？
 
-forEach里不能些break；
+forEach里不能写break；
 
 9
 有时候组件上写一些样式不会生效。比如 --tw-mt-24--
@@ -270,13 +257,7 @@ reactive结合Object.assign使用不会触发响应式
 
 14、scroll-view组件可能出现子元素显示不全的问题。？当scroll-view设置高度100%的时候，就会有问题。。。唉。
 
-解决办法：我知道原因了，scroll-view是可以配合高度使用的，只不过当scroll-view的父容器里还有另外固定高度的元素时，scroll-view的百分比高度不会考虑兄弟元素的。这时可以使用flex弹性盒，flex：1 1 auto解决高度不确定问题。
-
-100%和calc(100%)有什么不一样？
-
-不要做无用功了，最后还是要确定高度，费了10个小时。。最后。。
-
-
+解决办法：我知道原因了，scroll-view是可以使用100%高度的，只不过当scroll-view的父容器里还有另外固定高度的元素时，scroll-view的百分比高度不会考虑兄弟元素的。这时可以使用flex弹性盒，flex：1 1 auto解决高度不确定问题。
 
 15、screenHeight和windowHeight区别？
 
@@ -354,6 +335,40 @@ set() {
     }
 }
 ```
+
+25、vue中的setup，computed，filters，props，methods等执行顺序
+setup应该是比filter早。
+
+
+26、搜索中文正则
+
+`[\u4e00-\u9fa5].*`
+
+27、flex布局下省略号css样式不生效问题
+
+文本的父元素需要固定宽度，所以可以使用flex：1；width：0；配和使用
+
+28、100%和calc(100%)有什么不一样？
+
+29、微信小程序模态框换行
+```js
+
+wx.showModal({
+      title:'提示',
+      content:'第一行内容\r\n第二行内容\r\n第三行内容\r\n第四行内容',
+      success:function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        }else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })1
+```
+
+30、滚动条影响页面宽度
+
+在最外层盒子加：margin-right: calc(100% - 100vw);即可。
 ## 路由跳转规则
 方法：
 

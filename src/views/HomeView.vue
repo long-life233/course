@@ -10,7 +10,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex w-full h-screen">
+  <div class="flex w-full h-full" style="margin-right: calc(100% - 100vw)">
     <div class="shadow-lg shadow-green-500 flex-1 h-full shadow-inner p-3 rounded-lg" style="width:calc(50% - 10rem)">
       <div class="px-4 my-3 flex items-center">
         <div class="w-1 h-10 bg-green-600 rounded-lg"></div>
