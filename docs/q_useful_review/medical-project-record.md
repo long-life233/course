@@ -113,9 +113,168 @@ openCityPopup   触发混入的事件
 ## 列表组件。
 看似一个简单的列表，里面要涉及的东西可不少。
 
-因为后端返回的数据都是分页数据，所以我们得做下拉刷新、上啦加载跟多，使用scroll-view组件（因为它能触发触顶、触底事件）
+因为后端返回的数据都是分页数据，所以我们得做分页处理。我们还得做下拉刷新、上啦加载跟多、日期筛选等处理。
 
-组件的最外层是view，宽高是100%。
+一般都是要用到scroll-view组件的。
+
+先看看别人是怎么做的：
+
+假设有一个请求列表的接口，可传page、size、time等参数
+
+法一：
+```js
+// 定义数据结构
+const swiperData = reactive<SwiperItemType[]>([
+  {
+    name: $vm.$t('待评价'),
+    current:1,
+    loading:true,
+    isAuth:true,
+    list:[],
+    firstLoad:true
+  },
+  {
+    name:$vm?.$t('i18n_gj7dtk49_1651741146226_info'),
+    current:1,
+    loading:true,
+    isAuth:true,
+    list:[],
+    firstLoad: true
+  }
+])
+
+// 有一个请求列表方法， index代表请求哪个列表（SwiperItem）的数据，flag代表请求下一页数据还是刷新（1是下一页，2是刷新）
+async function requestEvaluateList(index, flag = 1) { 
+  let requestPage // 定义请求的页码。
+  if(flag === 1) { // 1，请求下一页数据；2，刷新
+    // @ts-ignore
+    requestPage = swiperData[index].current + 1
+  } else { // 刷新
+    requestPage = 1
+  }
+
+  // @ts-ignore
+  const {code, data} = await apiService.get(`episode/evaluation/list`,{
+    params:{
+      patientRelationId: selectedPatient.value.patientRelationId,
+      searchMethod: index + 1,
+      current: requestPage,
+      size:swiperData[index].size
+    }
+  })
+  if(code === 0 ) { // 请求成功了
+    if(flag === 1) { // 是追加数据
+      swiperData[index].list.push(...data.records ?? [])
+    }else { // 是刷新数据
+      swiperData[index].list = data.records ?? []
+    }
+    // @ts-ignore
+    swiperData[index].current = requestPage
+    //
+    swiperData[index].isAuth = true
+  } else if(code === 1010103) {
+    swiperData[index].isAuth = false
+  }
+}
+
+```
+
+法二：
+
+```js
+// 定义一个state
+const state = reactive({
+  currentTab: 1, // 当前的tab索引
+  listPaging: computed(() => state.currentTab === 1 ? listPaging1 : listPaging2), // 根据currentTab计算出使用哪个listPaging
+  ...
+})
+
+// 使用usePaging hook。
+const listPaging1 = usePaging(
+  (paging) => fetchBillList(paging, { searchMethod: 1, patientRelationId: `${state.selectPatient?.patientRelationId}` }),
+  {
+    manual: true,
+  }
+)
+// listPaging2同理
+
+// usePaging钩子
+export function usePaging<T>(
+  api: (params: any) => any, // 请求列表的api
+  options?: { // 配置选项
+    manual?: boolean;
+    pageSize?: number;
+    transformData?: (data: T) => T[];
+  }
+): PagingRes<T> {
+  // @ts-ignore
+  const paging = reactive({
+    refreshing: options?.manual ?? true, // 如果不指定manual是true还是false，则默认为true
+    isLoadMore: false, // 正在加载更多中
+    noMore: false, // 没有跟多了
+    dataSource: [], // 数据
+    pages: { // 分页参数
+      current: 1,
+      size: options?.pageSize ?? 8,
+    },
+    isEmpty: computed(() => !paging.refreshing && paging.dataSource.length <= 0), // 没在刷新中、返回数据源长度小于等于0就为空
+    code: 0,
+  });
+
+  function loadMore() {
+    if (!paging.refreshing && !paging.isLoadMore && !paging.noMore) { // 如果没有正在刷新中、没有正在加载跟多、还有数据，就去请求下一页数据。
+      loadData({ current: paging.pages.current + 1 }).catch(catchEmpty);
+    }
+  }
+
+  async function onRefresh(cb?: Function) { // 刷新就是去请求第一页数据
+    try {
+      await loadData({ current: 1 });
+      // 接口成功回调
+      cb?.();
+    } catch (e) {
+      //
+    }
+  }
+
+  async function loadData(params: { current: number }) {
+    paging.refreshing = params.current === 1; // 如果参数的current为1，就设置刷新状态为true
+    paging.isLoadMore = params.current > 1;// 如果参数的current > 1, 就设置 正在加载更多 为true
+    try {
+      const { code, data = {}, msg } = await api({ ...paging.pages, current: params.current });
+      paging.code = code;
+      if (isSuccess(code)) { // 成功请求
+        if (data) { // 如果有数据
+          const { records = [], current, pages } = data;
+          if (current === 1) { // 如果请求的第一页数据就就重新赋值
+            paging.dataSource = (options?.transformData ? options.transformData(records) : records) ?? [];
+          } else { // 请求下一页数据就连接（有可能连接的空数组）
+            // 更多
+            paging.dataSource = paging.dataSource.concat((options?.transformData ? options.transformData(records) : records) ?? []);
+          }
+          paging.pages.current = current;    // 将请求的current赋值给前端的current
+          paging.noMore = current >= pages; // 当前的页数大于等于总页数，就设置 没有更多 为true
+        }
+      } else {
+         // TODO: [DYLAN] 就应该从 http请求层面去控制是否要显示错误提示,因此要屏蔽这里
+        // errorModal(msg);
+      }
+    } catch (e) {
+      //
+    } finally { // 最后设置 正在加载跟多、正在刷新中为false
+      paging.isLoadMore = false;
+      paging.refreshing = false;
+    }
+  }
+
+  !options?.manual && onRefresh();
+
+  return { paging, loadMore, onRefresh };
+}
+
+```
+
+
 ## 业务逻辑
 
 1、v-patient-filter-menu-v2组件怎么使用？
@@ -175,7 +334,6 @@ input点击不能聚焦。。
 radio单选框的值只能是string类型吗？
 
 好像是的
-
 ```
 
 6
@@ -221,7 +379,7 @@ onLoad先于onShow执行
 8
 forEach和for循环有什么区别？
 
-forEach里不能写break；
+forEach里break无效。
 
 9
 有时候组件上写一些样式不会生效。比如 --tw-mt-24--
@@ -251,7 +409,7 @@ reactive结合Object.assign使用不会触发响应式
 常见的新闻列表组件，有多少个tab，就使用多少个swiper-item，不要计算当前显示的列表，后面会很麻烦。
 ```
 
-12、不要再模板上做太多判断，可能会意想不到的出现问题。
+12、不要在模板上做太多判断，可能会意想不到的出现问题。
 
 13、scroll-view组件可以覆盖原生组件。也就是说，scroll-view可以配合背景使用。
 
@@ -348,7 +506,7 @@ setup应该是比filter早。
 
 文本的父元素需要固定宽度，所以可以使用flex：1；width：0；配和使用
 
-28、100%和calc(100%)有什么不一样？
+<!-- 28、100%和calc(100%)有什么不一样？ -->
 
 29、微信小程序模态框换行
 ```js
@@ -369,6 +527,154 @@ wx.showModal({
 30、滚动条影响页面宽度
 
 在最外层盒子加：margin-right: calc(100% - 100vw);即可。
+
+31、1px像素问题
+
+高清屏幕下 1px 对应更多的物理像素，所以 1 像素边框看起来比较粗，解决方法如下
+
+1. 边框使用伪类选择器，或者单独的元素实现。例如底部边框
+
+```css
+.box2::after {
+  content: "";
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #000;
+}
+```
+
+2. 在高清屏幕下设置
+
+```css
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .box2::after {
+    transform: scaleY(0.5);
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+  .box2::after {
+    transform: scaleY(0.33333);
+  }
+}
+```
+
+32、安全区域
+
+```shell
+iPhoneX 的出现将手机的颜值带上了一个新的高度，它取消了物理按键，改成了底部的小黑条，但是这样的改动给开发者适配移动端又增加了难度。
+
+这些手机和普通手机在外观上无外乎做了三个改动：圆角（corners）、刘海（sensor housing）和小黑条（Home Indicator）。为了适配这些手机，安全区域这个概念变诞生了：安全区域就是一个不受上面三个效果的可视窗口范围。
+
+为了保证页面的显示效果，我们必须把页面限制在安全范围内，但是不影响整体效果。
+
+viewport-fit
+   viewport-fit 是专门为了适配 iPhoneX 而诞生的一个属性，它用于限制网页如何在安全区域内进行展示。
+
+   ![image-20201003143632994](http://qn.chinavanes.com/qiniu_picGo/WIVOie19qaN6yT8.png)contain: 可视窗口完全包含网页内容
+
+   cover：网页内容完全覆盖可视窗口
+
+   默认情况下或者设置为 auto 和 contain 效果相同。
+
+```
+
+33、安全区域
+
+
+```css
+.avatar {
+    background-image: url(sample.png);
+    width: 300px;
+    height: 200px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    .avatar {
+    	background-image: url(sample@2x.png);
+    }
+}
+@media only screen and (-webkit-min-device-pixel-ratio:3){
+    .avatar{
+    	background-image: url(sample@3x.png);
+    }
+}
+```
+
+34、设置省略号的简单css属性
+
+一个css属性搞定
+```css
+text-overflow: ellipsis;
+```
+
+35、关于小程序精确的高度的问题
+
+```js
+// 1. 小程序的胶囊按钮到屏幕顶部的距离：
+    const menuButtonRect =wx.getMenuButtonBoundingClientRect()
+        menuButtonRect.top + menuButtonRect.height
+```
+
+36、直接再自定义组件上设置style高度可以生效。。
+
+
+38、rpx、px互转
+```js
+/**
+ * px to rpx
+ * @param {number} px
+ * @returns {number}
+ */
+export function px2rpx(px: number) {
+  const systemInfo = getApp()!.globalData!.systemInfo as UniApp.GetSystemInfoResult;
+  return px * (750 / systemInfo.windowWidth);
+}
+
+/**
+ * rpx to px
+ * @param {number} rpx
+ * @returns {number}
+ */
+export function rpx2px(rpx: number) {
+  return rpx / (750 / uni.getSystemInfoSync().windowWidth);
+}
+
+```
+39、展示医生信息卡片的地方：
+```shell
+pages/appt/apptConfirm/index
+
+pages/evaluation/evaluationDetail
+
+pages/evaluation/evaluationSubmit
+```
+
+40、插槽里写v-if判断，v-if只会判断一次，数据更新视图不会更新
+
+应该是低版本vue的bug
+```html
+  <ufh-form-item-v2
+    v-model="state.invoiceForm.buyerName"
+    show-bottom-border
+    disable-default-padding
+    style="--form-text-empty-body-fw: bold"
+    :label="$t('i18n_ikenc67y_1651741146223_info')"
+    border-radius-type="top"
+    :placeholder="$t('i18n_pr49wht2_1651741146207_info')"
+    :type="FORM_ITEM_TYPE.INPUT"
+    layout="vertical"
+  >
+    <template #labelRightIcon>
+      <view v-if="state.invoiceForm.buyerType == INVOICE_TYPE_ENUM.COMPANY" @click="getInvoiceHeaderFromWechat">
+        <text class="tw-text-28-42 tw-text-333333">{{ $t('i18n_ikenc67y_1651741146223_info') }}</text>
+      </view>
+    </template>
+  </ufh-form-item-v2>
+```
+
 ## 路由跳转规则
 方法：
 
