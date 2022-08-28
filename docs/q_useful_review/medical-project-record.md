@@ -274,6 +274,10 @@ export function usePaging<T>(
 
 ```
 
+法三：
+```js
+// tab
+```
 
 ## 业务逻辑
 
@@ -582,7 +586,7 @@ viewport-fit
 
 ```
 
-33、安全区域
+33、几倍图
 
 
 ```css
@@ -673,6 +677,27 @@ pages/evaluation/evaluationSubmit
       </view>
     </template>
   </ufh-form-item-v2>
+```
+
+41、通过正则表达式换行
+```shell
+$t('i18n_tfpa568q_1651741146222_info').replace(/\\n/g, '\n')
+```
+42、uniapp获取安全区域的bottom为负数的bug
+```shell
+3.4.8.20220428-alpha
+
+微信小程序平台 修复 uni.getSystemInfoSync() 获取的 safeAreaInsets.bottom 为负数的Bug。
+
+另一种方法也可以获取到安全区域：
+
+    // 手机底部的非安全区域高度
+    this.globalData.safeBottom = systemInfo.screenHeight - systemInfo.safeArea.bottom;
+```
+
+43、js字符串添加空格
+```js
+ '\xa0\xa0\xa0'
 ```
 
 ## 路由跳转规则
