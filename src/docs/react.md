@@ -1,6 +1,11 @@
 # react
 
-## JSX
+## 安装
+
+## 核心概念
+
+### HelloWorld
+### JSX 简介
 一种语法。类似下面这种形式：
 ```jsx
 const element = <h1>Hello, world!</h1>;
@@ -24,7 +29,7 @@ const element = (
 );
 ```
 
-## 元素渲染
+### 元素渲染
 
 ```html
 <!-- 假设html中有一个标签 -->
@@ -43,7 +48,7 @@ const element = (
 </script>
 ```
 
-## 组件、props
+### 组件、props
 
 函数组件、class组件。
 
@@ -67,7 +72,7 @@ class Welcome extends React.Component {
 <Welcome name="Sara" />
 ```
 
-## state & 生命周期
+### state & 生命周期
 使用state
 
 就要把函数式组件改为class组件，继承React.Component, 添加一个空的render方法, 并添加一个类型为对象的state
@@ -143,7 +148,7 @@ class Clock extends React.Component {
 }
 ```
 
-## 事件处理
+### 事件处理
 
 react的事件命名为小驼峰形式；
 
@@ -168,7 +173,7 @@ class LoggingButton extends React.Component {
 }
 ```
 
-## 条件渲染
+### 条件渲染
 
 1，一个组件会根据props返回不同的组件。
 
@@ -193,7 +198,7 @@ function WarningBanner(props) {
 }
 ```
 
-## 列表、key
+### 列表、key
 
 ```js
 function NumberList(props) {
@@ -209,7 +214,7 @@ function NumberList(props) {
 }
 ```
 
-## 表单
+### 表单
 
 受控组件：没有自己的state，使用传递的props
 
@@ -299,6 +304,310 @@ class NameForm extends React.Component {
 （不用写处理烦人的处理函数了），不过这样怎么赋初始值呢？
 
 使用`defaultValue defaultChecked`
+
+
+### 状态提示
+
+react官网这里使用了摄氏度、华氏摄氏度相互转换的一个例子。
+
+有空可以和用vue写对比一下。
+
+### 组合、继承
+
+类似于vue的插槽
+
+`props.chilren`可以将组件里内容渲染到页面上。
+
+react基本上不使用继承。
+
+### react哲学
+
+该如何使用，和vue如出一辙：
+
+数据从上往下流；
+
+分割组件；
+
+组件通信。
+
+不过我看react的组件通信方式较少，都是props。
+
+
+## 高级指引
+
+### 无障碍
+
+以下部分是高级指引部分
+
+讲了无障碍辅助功能的应用，不过开发中几乎不使用。
+
+认识了`Fragment`标签。可以传递属性，不需要传可以简写为`<></>`
+```html
+<Fragment key={item.id}>
+  <dt>{item.term}</dt>
+  <dd>{item.description}</dd>
+</Fragment>
+```
+
+### 代码分割
+
+通过动态import语法实现代码分割
+```js
+import("./math").then(math => {
+  console.log(math.add(16, 26));
+});
+```
+
+通过React.lazy函数处理动态导入
+
+```js
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+// 应该在suspense组件中使用该组件
+
+import React, { Suspense } from 'react';
+
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
+function MyComponent() {
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <OtherComponent />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+某些情况下展示旧的UI，使用`startTransition`API
+
+```js
+  function handleTabSelect(tab) {
+    startTransition(() => {
+      setTab(tab);
+    });
+  }
+
+  return (
+    <div>
+      <Tabs onTabSelect={handleTabSelect} />
+      <Suspense fallback={<Glimmer />}>
+        {tab === 'photos' ? <Photos /> : <Comments />}
+      </Suspense>
+    </div>
+  );
+```
+
+异常捕获：在外面套一层出现异常时会展示的组件。
+
+```js
+import MyErrorBoundary from './MyErrorBoundary';
+
+  <MyErrorBoundary>
+    <Suspense fallback={<div>Loading...</div>}>
+      <section>
+        <OtherComponent />
+        <AnotherComponent />
+      </section>
+    </Suspense>
+  </MyErrorBoundary>
+```
+
+基于路由的代码分割：
+
+```js
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
+
+const App = () => (
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Suspense>
+  </Router>
+);
+```
+
+命名导出：懒加载组件只支持默认导出，不支持命名导出。可以借助中间文件实现命名导出：
+```js
+// ManyComponents.js
+export const MyComponent = /* ... */;
+export const MyUnusedComponent = /* ... */;
+
+// MyComponent.js
+export { MyComponent as default } from "./ManyComponents.js";
+
+// MyApp.js
+import React, { lazy } from 'react';
+const MyComponent = lazy(() => import("./MyComponent.js"));
+```
+
+
+### Context（部分）
+
+上下文。一棵组件树可以共用一个状态。
+
+怎么使用呢？
+
+```js
+// 1 创建一个上下文，最好是单独放在一个文件里，不然会出现重复引用报错问题。
+import React from "react";
+
+export const ThemeContext = React.createContext();
+
+// 2 使用上下文包裹App组件
+import React from "react";
+import A from "../components/A";
+// 主题上下文
+import { ThemeContext } from "../context/theme";
+
+export default function App() {
+  return (
+    // 上下文包裹组件
+    <ThemeContext.Provider value="dadd123sd">
+      <div className="App">
+        <h1>Hello CodeSandbox</h1>
+        <h2>Start editing to see some magic happen!</h2>
+        <A />
+      </div>
+    </ThemeContext.Provider>
+  );
+}
+
+// 3 其中A组件内容
+import { Component } from "react";
+import B from "./B";
+
+export default class A extends Component {
+  render() {
+    return (
+      <div>
+        <div>我是a组件</div>
+        <B />
+      </div>
+    );
+  }
+}
+
+// 4 B组件中使用到了上下文
+import React from "react";
+import { ThemeContext } from "../context/theme";
+
+export default class B extends React.Component {
+  // 写了这行代码，就可以使用this.context来获取上下文了。
+  static contextType = ThemeContext;
+
+  render() {
+    return (
+      <div>
+        <div>我是B组件，我接受了context：</div>
+        <div>{this.context}</div>
+      </div>
+    );
+  }
+}
+
+```
+
+API以下部分就有点难理解了。
+
+### 错误边界
+
+不知道应用场景
+
+### Refs转发
+
+允许获取一个组件内部的dom ref，来操作dom api，比如input输入框，聚焦，失焦。
+```js
+const FancyButton = React.forwardRef((props, ref) => (
+  <button ref={ref} className="FancyButton">
+    {props.children}
+  </button>
+));
+
+// 你可以直接获取 DOM button 的 ref：
+const ref = React.createRef();
+<FancyButton ref={ref}>Click me!</FancyButton>;
+```
+
+### Fragments
+
+片段。
+
+```js
+// 不支持key
+<>
+  <td>Hello</td>
+  <td>World</td>
+</>
+
+// 支持key
+<React.Fragment key={item.id}>
+  <dt>{item.term}</dt>
+  <dd>{item.description}</dd>
+</React.Fragment>
+```
+
+### 高阶组件
+高阶函数：一个函数返回另一个函数。
+
+高阶组件：一个组件返回另一个组件。
+
+```js
+// 此函数接收一个组件...
+function withSubscription(WrappedComponent, selectData) {
+  // ...并返回另一个组件...，匿名类。
+  return class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.handleChange = this.handleChange.bind(this);
+      this.state = {
+        data: selectData(DataSource, props)
+      };
+    }
+
+    componentDidMount() {
+      // ...负责订阅相关的操作...
+      DataSource.addChangeListener(this.handleChange);
+    }
+
+    componentWillUnmount() {
+      DataSource.removeChangeListener(this.handleChange);
+    }
+
+    handleChange() {
+      this.setState({
+        data: selectData(DataSource, this.props)
+      });
+    }
+
+    render() {
+      // ... 并使用新数据渲染被包装的组件!
+      // 请注意，我们可能还会传递其他属性
+      return <WrappedComponent data={this.state.data} {...this.props} />;
+    }
+  };
+}
+```
+
+### 与第三方库协同
+
+
+
+
+
+
+
+
+
+
+
 
 
 
