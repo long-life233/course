@@ -598,6 +598,105 @@ function withSubscription(WrappedComponent, selectData) {
 
 ### 与第三方库协同
 
+没怎么看
+
+### 深入JSX
+
+只是`React.createElement(component, props, ...children)`的语法糖
+
+```js
+<MyButton color="blue" shadowSize={2}>
+  Click Me
+</MyButton>
+
+// ===>
+
+React.createElement(
+  MyButton,
+  {color: 'blue', shadowSize: 2},
+  'Click Me'
+)
+```
+
+大写字母开头的标签代表着React组件。
+
+使用JSX，react必须在作用于内。虽然并没有使用React
+```js
+import React from 'react';
+import CustomButton from './CustomButton';
+
+function WarningButton() {
+  // return React.createElement(CustomButton, {color: 'red'}, null);
+  return <CustomButton color="red" />;
+}
+```
+
+JSX使用点语法。当导出一个模块有很多组件时，这会很方便。
+```js
+import React from 'react';
+
+const MyComponents = {
+  DatePicker: function DatePicker(props) {
+    return <div>Imagine a {props.color} datepicker here.</div>;
+  }
+}
+
+function BlueDatePicker() {
+  return <MyComponents.DatePicker color="blue" />;
+}
+```
+
+动态选择渲染的组件：
+
+不能通过这种方式动态选择：
+```js
+import React from 'react';
+import { PhotoStory, VideoStory } from './stories';
+
+const components = {
+  photo: PhotoStory,
+  video: VideoStory
+};
+
+function Story(props) {
+  // 错误！JSX 类型不能是一个表达式。
+  return <components[props.storyType] story={props.story} />;
+}
+```
+而是赋值给一个大写字母开头的变量：
+```js
+import React from 'react';
+import { PhotoStory, VideoStory } from './stories';
+
+const components = {
+  photo: PhotoStory,
+  video: VideoStory
+};
+
+function Story(props) {
+  // 正确！JSX 类型可以是大写字母开头的变量。
+  const SpecificStory = components[props.storyType];
+  return <SpecificStory story={props.story} />;
+}
+```
+
+
+可以展开传递传递props：
+```js
+function App1() {
+  return <Greeting firstName="Ben" lastName="Hector" />;
+}
+
+function App2() {
+  const props = {firstName: 'Ben', lastName: 'Hector'};
+  return <Greeting {...props} />;
+}
+```
+> tips: 选择接受对象属性：`const { kind, ...other } = props;`
+
+JSX标签之间的元素：组件可以通过props.chilren获取到。
+
+布尔类型、Null 以及 Undefined将被忽略
 
 
 
