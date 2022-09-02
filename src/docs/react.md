@@ -699,7 +699,111 @@ JSX标签之间的元素：组件可以通过props.chilren获取到。
 布尔类型、Null 以及 Undefined将被忽略
 
 
+### 性能优化
+  
+虚拟滚动列表：
 
+https://react-window.now.sh/
+
+https://bvaughn.github.io/react-virtualized/
+
+使用`shouldComponentUpdate`生命周期钩子来让React是否重新渲染视图。
+
+```js
+class CounterButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {count: 1};
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.color !== nextProps.color) {
+      return true;
+    }
+    if (this.state.count !== nextState.count) {
+      return true;
+    }
+    return false;
+  }
+
+  render() {
+    return (
+      <button
+        color={this.props.color}
+        onClick={() => this.setState(state => ({count: state.count + 1}))}>
+        Count: {this.state.count}
+      </button>
+    );
+  }
+}
+```
+有一种更简单的方法检查当state，props改变时才更新组件。继承`React.PureComponent`
+> 问题：当state、props改变时，组件不是本来就会更新组件吗？
+```js
+class CounterButton extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {count: 1};
+  }
+
+  render() {
+    return (
+      <button
+        color={this.props.color}
+        onClick={() => this.setState(state => ({count: state.count + 1}))}>
+        Count: {this.state.count}
+      </button>
+    );
+  }
+}
+```
+注意使用纯组件不能直接改变state的值，而是应该先创建一个副本。
+
+比如使用`concat, 扩展运算符, Object.assign方法`。
+
+### Protal
+有点类似Vue的瞬移组件，典型应用场景：模态框。
+
+```js
+  componentDidMount() {
+    modalRoot.appendChild(this.el);
+  }
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el);
+  }
+  render() {
+    return ReactDOM.createPortal(
+      this.props.children,
+      this.el
+    );
+  }
+```
+
+### Profiler
+
+一个用来测量渲染的效率、时间的组件。
+
+### 不使用ES6
+
+一般都会使用。
+
+### 不使用JSX
+
+一般都会使用。
+
+### 协调
+
+讲了一些React底层的实现原理，思想。
+
+diffing算法，首先比较两颗树的根节点。
+
+对比不同类型，
+
+对比相同类型，
+
+递归遍历子组件，
+
+使用key来标记列表。
 
 
 
