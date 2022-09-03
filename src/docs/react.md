@@ -806,23 +806,514 @@ diffing算法，首先比较两颗树的根节点。
 使用key来标记列表。
 
 
+### Refs & Dom
 
+适合使用Refs的地方：管理输入框焦点，文本选择，媒体播放。触发强制动画，集成第三方库。
 
+创建refs
+```js
+class MyComponent extends React.Component {
+  myRef = React.createRef();
+  render() {
+    return <div ref={this.myRef} />;
+  }
+}
+```
+访问ref
+```js
+const node = this.myRef.current;
 
+// 当ref添加到组件上，node是组件实例。添加到dom，node是Html元素。
+// 不能给函数式组件添加ref，因为函数组件没有实例。
+// 不过可以再函数组件内部使用ref，只要它指向一个class组件或dom元素。
+```
 
+ref回调函数。传给ref一个回调函数，参数为组件实例或dom元素。
+```js
+class CustomTextInput extends React.Component {
 
+  textInput = null;
 
+  setTextInputRef = element => {
+    this.textInput = element;
+  };
 
+  focusTextInput = () => {
+    // 使用原生 DOM API 使 text 输入框获得焦点
+    if (this.textInput) this.textInput.focus();
+  };
 
+  componentDidMount() {
+    // 组件挂载后，让文本框自动获得焦点
+    this.focusTextInput();
+  }
 
+  render() {
+    // 使用 `ref` 的回调函数将 text 输入框 DOM 节点的引用存储到 React
+    // 实例上（比如 this.textInput）
+    return (
+      <div>
+        <input
+          type="text"
+          ref={this.setTextInputRef}
+        />
+        <input
+          type="button"
+          value="Focus the text input"
+          onClick={this.focusTextInput}
+        />
+      </div>
+    );
+  }
+}
+```
 
+获取组件内部的ref。 parent里的this.inputElement就是子组件里的input输入框了。
+```js
+function CustomTextInput(props) {
+  return (
+    <div>
+      <input ref={props.inputRef} />
+    </div>
+  );
+}
 
+class Parent extends React.Component {
+  render() {
+    return (
+      <CustomTextInput
+        inputRef={el => this.inputElement = el}
+      />
+    );
+  }
+}
+```
 
+### Render Props
 
+```jsx
+class Cat extends React.Component {
+  render() {
+    const mouse = this.props.mouse;
+    return (
+      <img src="/cat.jpg" style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />
+    );
+  }
+}
 
+class Mouse extends React.Component {
 
+  state = { x: 0, y: 0 };
 
+  handleMouseMove = (event) => {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
 
+  render() {
+    return (
+      <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
+
+        {/*
+          调用props.render(), 把自身的state作为参数传入。
+          这样render方法返回的组件就可以接收使用Mouse组件的state了。
+        */}
+        {this.props.render(this.state)}
+      </div>
+    );
+  }
+}
+
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>移动鼠标!</h1>
+        <Mouse render={mouse => (
+          <Cat mouse={mouse} />
+        )}/>
+      </div>
+    );
+  }
+}
+
+```
+其实如果以children的形式传入组件一个props，且该prop的类型是一个函数，react会默认将组件的state作为参数传入。
+这样就更方便了，不用写render方法(不一定命名render)。
+```js
+class Cat extends React.Component {
+  render() {
+    const mouse = this.props.mouse;
+    return (
+      <img src="/cat.jpg" style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />
+    );
+  }
+}
+
+class Mouse extends React.Component {
+
+  state = { x: 0, y: 0 };
+
+  handleMouseMove = (event) => {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+
+  render() {
+    return (
+      <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>移动鼠标!</h1>
+        // <Mouse children={mouse => (
+        //   <Cat mouse={mouse} />
+        // )}/>
+        // 或者
+        <Mouse>
+          {mouse => (
+            <p>鼠标的位置是 {mouse.x}，{mouse.y}</p>
+          )}
+        </Mouse>
+      </div>
+    );
+  }
+}
+```
+
+### 静态类型检查
+
+主要是TypeScrpt。
+
+### 严格模式
+
+开启严格模式，被包裹的组件将被检查
+```js
+import React from 'react';
+
+function ExampleApplication() {
+  return (
+    <div>
+      <Header />
+      <React.StrictMode>
+        <div>
+          <ComponentOne />
+          <ComponentTwo />
+        </div>
+      </React.StrictMode>
+      <Footer />
+    </div>
+  );
+}
+```
+
+### 使用 PropTypes 进行类型检查
+
+在大型项目中可以使用Typescript，但vue和react其实也内置了一些类型检查，但只会在开发阶段生效。
+
+```js
+// 引入类型检查库
+import PropTypes from 'prop-types';
+
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+Greeting.propTypes = {
+  name: PropTypes.string
+};
+```
+一个验证器例子：
+```js
+import PropTypes from 'prop-types';
+
+MyComponent.propTypes = {
+  // 你可以将属性声明为 JS 原生类型，默认情况下
+  // 这些属性都是可选的。
+  optionalArray: PropTypes.array,
+  optionalBool: PropTypes.bool,
+  optionalFunc: PropTypes.func,
+  optionalNumber: PropTypes.number,
+  optionalObject: PropTypes.object,
+  optionalString: PropTypes.string,
+  optionalSymbol: PropTypes.symbol,
+
+  // 任何可被渲染的元素（包括数字、字符串、元素或数组）
+  // (或 Fragment) 也包含这些类型。
+  optionalNode: PropTypes.node,
+
+  // 一个 React 元素。
+  optionalElement: PropTypes.element,
+
+  // 一个 React 元素类型（即，MyComponent）。
+  optionalElementType: PropTypes.elementType,
+
+  // 你也可以声明 prop 为类的实例，这里使用
+  // JS 的 instanceof 操作符。
+  optionalMessage: PropTypes.instanceOf(Message),
+
+  // 你可以让你的 prop 只能是特定的值，指定它为
+  // 枚举类型。
+  optionalEnum: PropTypes.oneOf(['News', 'Photos']),
+
+  // 一个对象可以是几种类型中的任意一个类型
+  optionalUnion: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Message)
+  ]),
+
+  // 可以指定一个数组由某一类型的元素组成
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
+
+  // 可以指定一个对象由某一类型的值组成
+  optionalObjectOf: PropTypes.objectOf(PropTypes.number),
+
+  // 可以指定一个对象由特定的类型值组成
+  optionalObjectWithShape: PropTypes.shape({
+    color: PropTypes.string,
+    fontSize: PropTypes.number
+  }),
+
+  // An object with warnings on extra properties
+  optionalObjectWithStrictShape: PropTypes.exact({
+    name: PropTypes.string,
+    quantity: PropTypes.number
+  }),
+
+  // 你可以在任何 PropTypes 属性后面加上 `isRequired` ，确保
+  // 这个 prop 没有被提供时，会打印警告信息。
+  requiredFunc: PropTypes.func.isRequired,
+
+  // 任意类型的必需数据
+  requiredAny: PropTypes.any.isRequired,
+
+  // 你可以指定一个自定义验证器。它在验证失败时应返回一个 Error 对象。
+  // 请不要使用 `console.warn` 或抛出异常，因为这在 `oneOfType` 中不会起作用。
+  customProp: function(props, propName, componentName) {
+    if (!/matchme/.test(props[propName])) {
+      return new Error(
+        'Invalid prop `' + propName + '` supplied to' +
+        ' `' + componentName + '`. Validation failed.'
+      );
+    }
+  },
+
+  // 你也可以提供一个自定义的 `arrayOf` 或 `objectOf` 验证器。
+  // 它应该在验证失败时返回一个 Error 对象。
+  // 验证器将验证数组或对象中的每个值。验证器的前两个参数
+  // 第一个是数组或对象本身
+  // 第二个是他们当前的键。
+  customArrayProp: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
+    if (!/matchme/.test(propValue[key])) {
+      return new Error(
+        'Invalid prop `' + propFullName + '` supplied to' +
+        ' `' + componentName + '`. Validation failed.'
+      );
+    }
+  })
+};
+```
+
+这样会限制传入的元素只能是单个
+```js
+import PropTypes from 'prop-types';
+
+class MyComponent extends React.Component {
+  render() {
+    // 这必须只有一个元素，否则控制台会打印警告。
+    const children = this.props.children;
+    return (
+      <div>
+        {children}
+      </div>
+    );
+  }
+}
+
+MyComponent.propTypes = {
+  children: PropTypes.element.isRequired
+};
+
+```
+
+默认的props值。
+
+```js
+class Greeting extends React.Component {
+  // 也可以声明为静态属性。
+  static defaultProps = {
+    name: 'Stranger'
+  };
+
+  
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+// 函数式组件只能采用这种方式指定默认值。
+// 指定 props 的默认值：
+// Greeting.defaultProps = {
+//   name: 'Stranger'
+// };
+```
+
+### 非受控组件
+
+受控组件和非受控组件的区别在于，在处理表单的时候，
+受控组件会写很多表单处理函数，儿非受控组件不用。
+
+非受控组件
+```js
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.input = React.createRef();
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.input.current.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" ref={this.input} defaultValue="Bob" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+```
+
+文件类型表单永远只能是非受控组件。
+
+### Web Components
+
+https://www.ruanyifeng.com/blog/2019/08/web_components.html
+
+### Hook 简介
+
+复用state的一项技术。和vue的composition API类似。
+
+### Hook 概览
+hook只能在函数式组件中使用。
+
+useState例子
+```js
+import React, { useState } from 'react';
+
+function Example() {
+  // 声明一个叫 “count” 的 state 变量。
+  // setCount函数接受新的count值。如果声明的state变量为对象，set函数不会做合并处理。
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+useEffect例子。和vue的watchEffect类似。
+
+```js
+import React, { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+
+  // 相当于 componentDidMount 和 componentDidUpdate:
+  useEffect(() => {
+    // 使用浏览器的 API 更新页面标题
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
+自定义hook。
+```js
+import React, { useState, useEffect } from 'react';
+
+// 一般自定义hook以use开头。
+function useFriendStatus(friendID) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() => {
+    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
+    };
+  });
+
+  return isOnline;
+}
+
+// 在函数组件中使用
+function FriendStatus(props) {
+  const isOnline = useFriendStatus(props.friend.id);
+
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+  return isOnline ? 'Online' : 'Offline';
+}
+```
+
+其他内置hook：
+
+订阅使用context
+```js
+function Example() {
+  const locale = useContext(LocaleContext);
+  const theme = useContext(ThemeContext);
+  // ...
+}
+
+// 使用reducer
+function Todos() {
+  const [todos, dispatch] = useReducer(todosReducer);
+  // ...
+```
 
 
 
