@@ -290,6 +290,40 @@ export function usePaging<T>(
 ```shell
 返回的code为·1010103·
 ```
+
+3、体检预约模块：
+```shell
+
+  垂直导航（模仿colorUI，之前写的一个demo）
+
+  预约医生页面的分页、医生擅长和语言筛选、日期筛选
+
+  日期组件的使用
+
+  预约确认页面的带入参数、表单检查
+
+  预约体检要涉及到支付吗？
+
+  预约成功申请发送消息
+
+  预约改期页面
+```
+
+4、微店订单预约模块：
+```shell
+预约医生列表页面，好好看看
+```
+
+5、会员权益模块：
+```shell
+生成条形码、二维码库。
+```
+
+6、优惠券模块：
+```shell
+登录注册流程
+```
+
 ## 问题
 1
 ```shell
@@ -566,6 +600,10 @@ wx.showModal({
 }
 ```
 
+或者只缩小0.5倍，0.3倍太小了，手机上根本看不出来。
+
+
+
 32、安全区域
 
 ```shell
@@ -658,7 +696,9 @@ pages/evaluation/evaluationSubmit
 
 40、插槽里写v-if判断，v-if只会判断一次，数据更新视图不会更新
 
-应该是低版本vue的bug
+应该是低版本vue的bug。
+
+解决办法：在最外层包一层view标签，不要写v-if指令。
 ```html
   <ufh-form-item-v2
     v-model="state.invoiceForm.buyerName"
@@ -699,6 +739,24 @@ $t('i18n_tfpa568q_1651741146222_info').replace(/\\n/g, '\n')
 ```js
  '\xa0\xa0\xa0'
 ```
+
+44、使用多余内容用省略号显示的css，注意高度不能确定，否者省略号后面还有内容。
+```css
+.tw-line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+}
+```
+
+45、view和text标签里写文本，有什么区别？
+
+46、为什么微店订单预约main页中的tui-icon组件，将它作为伸缩项目会不显示？
+
+47、匹配`t('中文')`或`t("中文")`的正则是什么样子？
+
 
 ## 路由跳转规则
 方法：
