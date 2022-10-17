@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>create-vue</title>
+</head>
+<body>
+  <div id="#app">
+    {{msg}}
+  </div>
+  <script>
+
+    createApp({
+      setup() {
+        const msg = 'hello, world'
+
+        return {msg}
+      }
+    }).mount("#app")
+
+    // 1
+    function createApp(options) {
+
+      const app = ensureRenderer().createApp(options)
+    
+      return {
+        mount: function() {
+        
+        }
+      }
+    }
+
+    // 2
+    let renderer = null
+    function ensureRenderer() {
+      return (renderer || (renderer = createRenderer()))
+    }
+
+    function createRenderer() {
+      return baseCreateRenderer()
+    }
+
+    function baseCreateRenderer() {
+      function patch() {}
+      function processText() {}
+      function processCommentNode() {}
+      function mountStaticNode() {}
+      function patchStaticNode() {}
+      function moveStaticNode() {}
+      function removeStaticNode() {}
+      function processElement() {}
+      function mountElement() {}
+      function setScopeId() {}
+      function mountChildren() {}
+      function patchElement() {}
+      function patchBlockChildren() {}
+      function patchProps() {}
+      function processFragment() {}
+      function processComponent() {}
+      function mountComponent() {}
+      function updateComponent() {}
+      function setupRenderEffect() {}
+      function updateComponentPreRender() {}
+      function patchChildren()
+      function patchUnkeyedChildren()
+      function patchKeyedChildren()
+      function move()
+      function unmount()
+      function remove()
+      function removeFragment()
+      function unmountComponent()
+      function unmountChildren()
+      function getNextHostNode()
+      function render()
+
+      let hydrate
+      if(true) {
+        hydrate = {} || []
+      }
+
+      return {
+        render,
+        hydrate,
+        createApp: createAppApi(render, hydrate)
+      }
+    }
+
+    function createAppApi(render, hydrate) {
+      return function createApp(rootComponent, rootProps) {
+        const app = {
+          use() {},
+
+          mixin() {},
+
+          component() {},
+
+          directive() {},
+
+          mount() {},
+
+          unmount() {},
+
+          provide() {}
+        }
+        
+        return app;
+      }
+    }
+  </script>
+</body>
+</html>
