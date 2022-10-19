@@ -1,4 +1,4 @@
-uniapp中vue-i18n的简单使用
+# 在uniapp中使用vue-i18n
 
 ## 安装
 
@@ -42,7 +42,7 @@ new Vue({ i18n }).$mount('#app')
 ## 使用
 在vue的template模板中进行内容替换，使用如下：
 
-*具名格式*
+**具名格式**
 ```js
 <p>{{ $t('i18n_tpje7hyr_1651741146224_info', { var: 'hello' }) }}</p>
 // 显示：测试hello
@@ -52,7 +52,7 @@ new Vue({ i18n }).$mount('#app')
 // 测试nice (注意这种方式不会在小程序上起作用，因为小程序不支持v-html指令。)
 ```
 
-*列表格式*
+**列表格式**
 ```js
 const messages = {
   en: {
@@ -68,9 +68,9 @@ or
 <p>hello world， hello2 world</p>
 ```
 
-*message的翻译值可以是HTML字符串*
+**message的翻译值可以是HTML字符串**
 
-(注意这种方式不会在小程序上起作用，因为小程序不支持v-html指令。)
+但是，这种方式不会在小程序上起作用，因为小程序不支持v-html指令。
 ```js
 const messages = {
   en: {
@@ -105,9 +105,8 @@ module.exports = {
   vueFiles: './src/**/*.?(js|vue|ts|jsx|tsx)', // The Vue.js file(s) you want to extract i18n strings from. It can be a path to a folder or to a file. It accepts glob patterns. (ex. *, ?, (pattern|pattern|pattern)
   languageFiles: './src/locale/**/*.?(json)', // The language file(s) you want to compare your Vue.js file(s) to. It can be a path to a folder or to a file. It accepts glob patterns (ex. *, ?, (pattern|pattern|pattern)
   output: 'output.json', // false | string => Use if you want to create a json file out of your report. (ex. output.json)
-  add: false,
-  remove: false,
-  dynamic: false
+  add: false, // 是否在翻译文件中添加没有的key
+  remove: false, // 是否移除没有使用的key
 }
 
 // 执行脚本，就可以检查出没有翻译的内容了。

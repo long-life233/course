@@ -793,6 +793,173 @@ $t('i18n_tfpa568q_1651741146222_info').replace(/\\n/g, '\n')
 
 感觉和混入有点类似，数据来源不清晰。希望有一个更好的替代方案。
 
+60、哪些东西适合封装为hook？
+
+有setInterval定时器的操作，需要再组件或页面卸载时清除定时器。
+
+61、有哪些封装好比较好用的钩子？
+
+请求钩子，统一封装请求的状态，每一个请求都有对应的加载、错误状态，写起来更方便。
+```js
+export function useHttp<T extends any>(api: (params?: any) => Promise<BaseResponseBody<T>>, options?: UseHttpOptions<T>): UseHttpResult<T> {
+  const state = reactive<HttpState<T>>({
+    data: (options?.initialValue ?? []) as any,
+    loading: !options?.manual,
+    error: null,
+  });
+
+  async function reload(params?: any) {
+    state.error = null;
+    state.loading = true;
+    try {
+      const { code, data, msg } = await api(params);
+      if (isSuccess(code)) {
+        // @ts-ignore
+        state.data = data;
+      } else {
+        state.error = { code, data, msg };
+      }
+    } catch (e) {
+      //
+    } finally {
+      state.loading = false;
+    }
+  }
+
+  !options?.manual && reload();
+
+  return {
+    ...toRefs(state),
+    // @ts-ignore
+    state,
+    reload,
+  };
+}
+```
+
+分页钩子，封装一些分页请求重复的逻辑。
+```js
+export function usePaging<T>(
+  api: (params: any) => any,
+  options?: {
+    manual?: boolean;
+    pageSize?: number;
+    transformData?: (data: T) => T[];
+  }
+): PagingRes<T> {
+  // @ts-ignore
+  const paging = reactive({
+    refreshing: options?.manual ?? true,
+    isLoadMore: false,
+    noMore: false,
+    dataSource: [], // 数据
+    pages: {
+      current: 1,
+      size: options?.pageSize ?? 8,
+    },
+    isEmpty: computed(() => !paging.refreshing && paging.dataSource.length <= 0),
+    code: 0,
+    total: 0
+  });
+
+  function loadMore() {
+    if (!paging.refreshing && !paging.isLoadMore && !paging.noMore) {
+      loadData({ current: paging.pages.current + 1 }).catch(catchEmpty);
+    }
+  }
+
+  async function onRefresh(cb?: Function) {
+    try {
+      await loadData({ current: 1 });
+      // 接口成功回调
+      cb?.();
+    } catch (e) {
+      //
+    }
+  }
+
+  async function loadData(params: { current: number }) {
+    paging.refreshing = params.current === 1;
+    paging.isLoadMore = params.current > 1;
+    try {
+      const { code, data = {}, msg } = await api({ ...paging.pages, current: params.current });
+      paging.code = code;
+      if (isSuccess(code)) {
+        if (data) {
+          const { records = [], current, pages, size, total } = data;
+          if (current === 1) {
+            paging.dataSource = (options?.transformData ? options.transformData(records) : records) ?? [];
+          } else {
+            // 更多
+            paging.dataSource = paging.dataSource.concat((options?.transformData ? options.transformData(records) : records) ?? []);
+          }
+          paging.total = total
+          paging.pages.current = current;
+          paging.noMore = current >= pages;
+        }
+      } else {
+        //  就应该从 http请求层面去控制是否要显示错误提示,因此要屏蔽这里
+        // errorModal(msg);
+      }
+    } catch (e) {
+      //
+    } finally {
+      paging.isLoadMore = false;
+      paging.refreshing = false;
+    }
+  }
+
+  !options?.manual && onRefresh();
+
+  return { paging, loadMore, onRefresh };
+}
+```
+批量请求，可以以对象或疏忽格式
+```js
+export async function requestEvery(collection: Array<any> | Object) {
+  if(Array.isArray(collection)) {
+    return await Promise.all(collection)
+  } else {
+    const valueRes = await Promise.all(Object.values(collection))
+    const keys = Object.keys(collection)
+    return Object.fromEntries(keys.map((item, index) => {
+      return [item, valueRes[index]]
+    }))
+  }
+}
+```
+
+反馈请求，在请求过程中显示loading模态框。
+```js
+export const callWithFeedback = async (fn: () => Promise<void>, msg?: string) => {
+  await wx.showToast({
+    title: '',
+    icon: 'loading',
+  });
+  try {
+    await fn();
+    if (msg) {
+      await wx.showToast({
+        title: msg,
+        icon: 'success',
+      });
+    }
+  } catch (e: any) {
+    await wx.showModal({
+      content: stringOf(e.message ?? e.msg ?? e),
+      showCancel: false,
+    });
+  } finally {
+    await wx.hideToast();
+  }
+};
+```
+
+62、看看请求？
+
+63、看看store？
+
+
 ## 路由跳转规则
 方法：
 
