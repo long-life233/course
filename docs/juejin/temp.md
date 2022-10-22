@@ -38,6 +38,8 @@ const i18n = new VueI18n({
 // 通过 `i18n` 选项创建 Vue 实例
 new Vue({ i18n }).$mount('#app')
 ```
+## 切换语言
+
 
 ## 使用
 在vue的template模板中进行内容替换，使用如下：

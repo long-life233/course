@@ -955,9 +955,45 @@ export const callWithFeedback = async (fn: () => Promise<void>, msg?: string) =>
 };
 ```
 
-62、看看请求？
+62、公司请求的封装
 
-63、看看store？
+```js
+function createRequest(options) {
+  // 使用了launch-request库。
+  const instance = new Request({
+    ...options,
+  });
+
+  // 其实也是请求或者响应拦截
+  _applyRefreshExpiredToken(instance);
+
+  // 请求拦截
+  instance.interceptors.request.use(
+    async (config) => {
+      return config;
+    },
+    (config) => config
+  );
+
+  // 响应请求
+  instance.interceptors.response.use(
+    async (response) => {
+      return response?.data;
+    },
+    (response) => {
+      return { code: -10000, error: response };
+    }
+  );
+}
+
+export const apiService = createRequest({
+  baseURL: process.env.VUE_APP_API_BASE_URL,
+});
+```
+
+63、全局状态管理库
+
+
 
 
 ## 路由跳转规则
@@ -987,94 +1023,3 @@ export const callWithFeedback = async (fn: () => Promise<void>, msg?: string) =>
 2、文字对齐
     利用行高。
 ```
-## 全局仓库store
-```js
-// main.js
-import './utils/store';
-
-// ./utils/store
-在这个文件中，会使用require.context实现对其他目录下store仓库的自动导入
-以及vue安装vuex
-```
-
-## 地址管理
-
-## src\composition\logic.ts文件
-里面写有一些发请求逻辑功能的函数
-## src\composition\http.ts文件
-有个useHttp函数，传入要执行的函数，返回需要使用到的data、loading、error。
-
-可以选择是否手动执行api，默认是自动。
-```ts
-export function useHttp<T extends any>(
-    api: (params?: any) => Promise<BaseResponseBody<T>>,
-    options?: UseHttpOptions<T>
-): UseHttpResult<T> {
-    const state = reactive<HttpState<T>>({
-        data: (options?.initialValue ?? []) as any,
-        loading: !options?.manual,
-        error: null,
-    });
-    
-    async function reload(params?: any) {
-        state.error = null;
-        state.loading = true;
-        try {
-            const { code, data, msg } = await api(params);
-            if (isSuccess(code)) {
-                // @ts-ignore
-                state.data = data;
-            } else {
-                state.error = { code, data, msg };
-            }
-        } catch (e) {
-            //
-        } finally {
-            state.loading = false;
-        }
-    }
-
-    !options?.manual && reload();
-
-    return {
-        ...toRefs(state),
-        // @ts-ignore
-        state,
-        reload,
-    };
-}
-```
-## src/http/misc.ts文件
-
-里面有个函数`callWithFeedback`, 在请求到请求成功之间会toast提示
-
-有回馈的调用一个函数
-```js
-// msg: fn函数执行成功后的提示。
-export const callWithFeedback = async (fn: () => Promise<void>, msg?: string) => {
-    await wx.showToast({
-        title: "",
-        icon: "loading",
-    });
-    try {
-        await fn();
-        await wx.hideToast();
-        if (msg) {
-            await wx.showToast({
-                title: msg,
-                icon: "success",
-            });
-        }
-    } catch (e: any) {
-        await wx.hideToast();
-        await wx.showModal({
-            content: stringOf(e.message ?? e.msg ?? e),
-            showCancel: false,
-            ...ModelStyle,
-        });
-    }
-};
-```
-
-## 验收
-
