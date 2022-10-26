@@ -1,4 +1,4 @@
-# 在uniapp中使用vue-i18n
+# vue-i18n入门介绍
 
 ## 安装
 
@@ -39,7 +39,21 @@ const i18n = new VueI18n({
 new Vue({ i18n }).$mount('#app')
 ```
 ## 切换语言
+```js
+const i18n = new VueI18n({
+  locale: 'ja', // 设置语言环境
+  ...
+})
 
+// 创建 Vue 根实例
+new Vue({
+  i18n,
+  ...
+}).$mount('#app')
+
+// 更改为其它的 locale
+i18n.locale = 'en'
+```
 
 ## 使用
 在vue的template模板中进行内容替换，使用如下：

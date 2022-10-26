@@ -993,8 +993,11 @@ export const apiService = createRequest({
 
 63、全局状态管理库
 
+就是vuex，然后使用了context.require来批量引入仓库模块。
 
+64、消息订阅与发布的原理？
 
+$on，$once，$off的原理？
 
 ## 路由跳转规则
 方法：

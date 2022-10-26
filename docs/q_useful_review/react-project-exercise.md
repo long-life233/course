@@ -181,7 +181,27 @@ REACT_APP_API_URL=http://localhost:3000
 
 ## JS神助攻-强类型
 用Hook + TS + 泛型实现useArray，要求如下：
-```shell
+```js
 
 const {value, clear, removeIndex, add} = useArray(person)
+
+function useArray(arr: Array<T>) {
+  const [value, setValue] = useState(arr)
+
+  function clear(index: number) {
+    const copy = [...arr]
+    copy.length = 0
+    setValue(copy)
+  }
+
+  // 其他方法类似
+
+  return {
+    value,
+    clear
+  }
+}
 ```
+
+## 安装和使用antd组件库
+
