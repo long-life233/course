@@ -999,6 +999,8 @@ export const apiService = createRequest({
 
 $on，$once，$off的原理？
 
+65、小程序上的div、text标签有什么区别？什么标签可以让用户长按可复制？
+
 ## 路由跳转规则
 方法：
 
