@@ -25,28 +25,27 @@
 
 我一直对uni.authorize、uni.getSetting、uni.openSetting的使用感到纠结。
 
-以获取位置授权为例，
-
-大多数人判断用户是否授权都是先使用getSetting判断用户已授权的列表，
-
-    如果需要授权的那一项为true可以直接使用uni.getLocation获取用户位置信息；
-    
-    但如果为false，就使用authorize进行授权，
-    
-    但因为之前已经拒绝授权，所以会直接走失败回调，
-    
-    然后我们在失败回调里使用uni.openSetting提示用户打开位置权限。
-
-我就感觉这里有点多余，直接使用uni.authorize或者uni.getSetting判断是否授权，然后是否需要使用uni.openSetting就好了，为什么要判断两次呢？
 ```js
+// 获取设置
+uni.getSetting
+
+// 申请授权
+authorize
+
+// 打开授权
+openSetting
+```
+
+
+```js
+uni.getSetting
+
+会去获取用户已经授权的权限。成功回调的参数res是授权的列表。
+
 uni.authorize
 
 如果是第一次，会弹框让用户判断是否授权。
 会去判断某个权限是否已经授权。已授权走成功回调，没授权走失败回调。
-
-uni.getSetting
-
-会去获取用户已经授权的权限。成功回调的参数res是授权的列表。
 
 uni.openSetting
 
@@ -60,15 +59,7 @@ uni.openSetting
         "desc": "你的位置信息将用于院区自动选择"
         }
    },
-
-最后我个人认为如果某个功能必须要用户打开某个权限，直接使用uni.authorize即可。
-
-uni.getSetting也行，只不过多一次判断。然后再根据业务需求使用uni.openSetting让用户打开某项设置权限即可。
 ```
-上述想法可能是错误的，直接使用openSetting可能找不到对应的权限设置。
-
-## 在组件上写class属性
-
 ## 频繁调用wx.getLocation方法会失败
 如题。
 
@@ -76,41 +67,8 @@ uni.getSetting也行，只不过多一次判断。然后再根据业务需求使
 
 https://developers.weixin.qq.com/community/develop/doc/000aee91a98d206bc6dbe722b51801
 
-
-## 选择城市组件
-
-
-首页中的城市选择组件
-
-首页会混入common、city的mixin。
-
-混入里面有：
-```js
-state: 
-    user
-    lang 语言
-    location
-    cityCode
-computed：
-    lbsId  就是cityCode
-
-openPage方法、
-getLabel方法
-getDictLabel方法
-```
-
-```html
-/**
-lang: string   zh 或者 en
-theme: string   white 或者 black
-value:  lbsId   location base servce id（位置id）
-openCityPopup   触发混入的事件
-*/
-<city-picker id="city-picker-1" :lang="lang" theme="white" :value="lbsId" @tap="openCityPopup('city-picker-1')" />
-```
-
-
 ## 列表组件。
+
 看似一个简单的列表，里面要涉及的东西可不少。
 
 因为后端返回的数据都是分页数据，所以我们得做分页处理。我们还得做下拉刷新、上啦加载跟多、日期筛选等处理。
@@ -121,7 +79,7 @@ openCityPopup   触发混入的事件
 
 假设有一个请求列表的接口，可传page、size、time等参数
 
-法一：
+法一：不用分页hook
 ```js
 // 定义数据结构
 const swiperData = reactive<SwiperItemType[]>([
@@ -179,7 +137,7 @@ async function requestEvaluateList(index, flag = 1) {
 
 ```
 
-法二：
+法二：使用分页 hook
 
 ```js
 // 定义一个state
@@ -274,88 +232,49 @@ export function usePaging<T>(
 
 ```
 
-法三：
-```js
-// tab
-```
-
-## 业务逻辑
-
-1、v-patient-filter-menu-v2组件怎么使用？
-```shell
-
-```
-
-2、怎么判断是否授权，申请授权是跳到哪个页面？
-```shell
-返回的code为·1010103·
-```
-
-3、体检预约模块：
-```shell
-
-  垂直导航（模仿colorUI，之前写的一个demo）
-
-  预约医生页面的分页、医生擅长和语言筛选、日期筛选
-
-  日期组件的使用
-
-  预约确认页面的带入参数、表单检查
-
-  预约体检要涉及到支付吗？
-
-  预约成功申请发送消息
-
-  预约改期页面
-```
-
-4、微店订单预约模块：
-```shell
-预约医生列表页面，好好看看
-```
-
-5、会员权益模块：
-```shell
-生成条形码、二维码库。
-```
-
-6、优惠券模块：
-```shell
-登录注册流程
-```
-
 ## 问题
-1
-```shell
-跳转到注册页面，发请求判断是否登录，然后判断是否注册。留在注册页还是重定向到登录页。
+1，登录注册后怎么回到被拦截的页面？
 
-如果重定向到登录页，会发现是先显示从首页跳转到注册页的首页，然后跳转显示登录页。
-原因可能是注册页得视图已经关闭了，二js还没关闭。
+```js
+/**
+ * 回到首页或者任何进来的地方
+ */
+export function goBackHomeOrAnywhere() {
+  // 进入登录模块前存储的地址
+  const redirectUrl = UFHStorage.getStorageData(STORAGE_KEY.REDIRECT_URL);
+  UFHStorage.removeStorageData(STORAGE_KEY.REDIRECT_URL);
 
-搜索去往登录页的方式：'PAGES.REGISTER','/pages/register/main'
+  if (redirectUrl) {
+    const pages = getCurrentPages().reverse();
+    let delta = 0;
+    for (let i = 0; i < pages.length; i++) {
+      if (pages[i].route.startsWith('pages/login') || pages[i].route.startsWith('pages/register')) {
+        delta += 1;
+      }
+    }
 
-去往register页面的方式有navigateTo、reLaunch、[redirectTo]
-```
-2
-```shell
-   病人信息页面 patient/info/index
-        |
-        ↓
-   点击授权详情
-        |
-        ↓
-   授权详情页面 patient/info/auth/detail/index
-        授权详情页面有个授权时间，可以根据此判断，五分钟内不能再授权申请
-        |
-        ↓
-   重新申请授权
-        |
-        ↓
-   申请授权页面(表单) patient/info/auth/index
-```
-3
-```shell
-预约医生的地图图标点击进入地图
+    console.log('delta:', delta);
+    navigateBack({
+      delta: delta,
+      success: function () {
+        console.log('navigateBack:', 'success');
+        navigateTo(redirectUrl);
+      },
+      fail: function () {
+        // 当pages 为1 的时候，会执行失败
+        console.log('navigateBack:', 'fail');
+        redirectTo(redirectUrl);
+      },
+      complete: function () {
+        console.log('navigateBack:', 'complete');
+      },
+    });
+  } else {
+    uni.switchTab({
+      url: PAGES.TABS.HOME,
+    });
+  }
+}
 ```
 
 4
@@ -375,20 +294,37 @@ radio单选框的值只能是string类型吗？
 ```
 
 6
-```shell
 watch属性监视计算属性。
 
 当计算属性改变时，
 
-此时watch监视属性的回调也会相应执行，此时要注意，如果需要将异步返回的数据赋值给响应式数据，响应式数据可能不只有前后两个状态，还有中间等待异步数据返回的状态。
-
-frontKey: {
-  async handler(value, oldValue) {
-    if (value) {
-      this.frontPicUrl = value ? await getPrivateUrl(value) : null;
-    }
+此时watch监视属性的回调也会相应执行。
+```js
+watch: {
+  frontKey: {
+    async handler(value, oldValue) {
+      if (value) {
+        // 会等await getPrivateUrl(value)有值了再执行下面这行代码
+        this.frontPicUrl = value ? await getPrivateUrl(value) : null;
+      }
+    },
   },
-},
+}
+
+```
+比如下面的代码
+```js
+async function noName() {
+    const p = new Promise(resolve => {
+        setTimeout(() => {
+            resolve(100)
+        }, 2000)
+    })
+
+    // console.log(await p); // 2s后打印100
+}
+
+console.log(noName()); // 值为undefined的Promise
 ```
 
 7、
@@ -407,22 +343,43 @@ frontKey: {
 ```
 添加新的历史搜索，重新触发组件的销毁重建生命周期，再mounted里重新计算
 
+其实也就是组件的重建、销毁可以用v-if控制。
+
 7、
 
 mounted 和 onLoad生命周期钩子有什么区别？onLoad和onShow执行的先后顺序？
 ```shell
 onLoad先于onShow执行
+
+1.渲染完成之前，即mounted之前
+组件（父子组件都是）生命周期优先于页面生命周期；父组件，子组件直接的顺序是父组件优先于子组件。
+执行过程：
+父beforeCreate=>父created=>父beforeMount=>子beforeCreate=>子created=>子beforeMount=>页面onLoad=>页面onShow；
+2.渲染完成时，即beforeDestroy之前
+组件（父子组件都是）生命周期优先于页面生命周期；父组件，子组件直接的顺序是子组件优先于父组件。
+子mounted=>父mounted=>页面onReady；
+3.销毁过程：
+页面生命周期优先于组件生命周期（父子组件都是）；父组件，子组件直接的顺序是子组件优先于父组件
+页面onUnload=>子beforeDestroy=>子destroyed=>父beforeDestroy=>父destroyed
+————————————————
+版权声明：本文为CSDN博主「黄不逗」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_45172119/article/details/120866068
 ```
 
-8
+8、
 forEach和for循环有什么区别？
 
 forEach里break无效。
 
 9
-有时候组件上写一些样式不会生效。比如 --tw-mt-24--
+有时候组件上写一些样式不会生效。
+
+小程序组件不支持直接在外部写class
+
+https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/wxml-wxss.html#%E5%A4%96%E9%83%A8%E6%A0%B7%E5%BC%8F%E7%B1%BB
 
 10
+
 ```shell
 reactive结合Object.assign使用不会触发响应式
 
@@ -437,35 +394,37 @@ reactive结合Object.assign使用不会触发响应式
     })
 解决：我们项目版本比较低不可以，但最新版可以。
 ```
+
 11、
 ```shell
 有一些组件样式差不多，可以内部需要渲染的字段不同，该怎么解决呢？
 
-插槽？
+插槽。
+```
 
 12、
 常见的新闻列表组件，有多少个tab，就使用多少个swiper-item，不要计算当前显示的列表，后面会很麻烦。
-```
 
-12、不要在模板上做太多判断，可能会意想不到的出现问题。
+不一定，用计算当前的列表可能也很简单。
 
 13、scroll-view组件可以覆盖原生组件。也就是说，scroll-view可以配合背景使用。
 
-14、scroll-view组件可能出现子元素显示不全的问题。？当scroll-view设置高度100%的时候，就会有问题。。。唉。
+14、scroll-view组件可能出现子元素显示不全的问题。
 
-解决办法：我知道原因了，scroll-view是可以使用100%高度的，只不过当scroll-view的父容器里还有另外固定高度的元素时，scroll-view的百分比高度不会考虑兄弟元素的。这时可以使用flex弹性盒，flex：1 1 auto解决高度不确定问题。
+解决办法：scroll-view是可以使用100%高度的，只不过当scroll-view的父容器里还有另外固定高度的元素时，scroll-view的百分比高度不会考虑兄弟元素的。这时可以使用flex弹性盒，flex：1 1 auto解决高度不确定问题。
 
 15、screenHeight和windowHeight区别？
 
+```js
 https://blog.csdn.net/tangyuan97/article/details/103604680
+
+1.作用域不同：screenHeight是整合手机屏幕的高度，windowHeight是webview（不包括手机通知栏、小程序标题栏和tabBar）的高度；
+
+2.单位不同：screenHeight的单位是rpx，windowHeight的单位是px；
+```
 
 16、lodash的uniq函数，去重。
 
-17、
-
-分享时带上activeTab的索引。
-
-在useOnLoad里改变tab的索引值，然后tuiTab组件的当前激活item的下划线没有对应索引值的位置。
 
 18、上啦加载跟多、下拉刷新的内在逻辑是什么？
 
@@ -478,7 +437,10 @@ https://blog.csdn.net/tangyuan97/article/details/103604680
 `import { stringifyUrl } from 'query-string';`
 
 20、页面怎么复用？
+
 直接跳转到当前页面。。
+
+其实页面也可以看作是一个组件。
 
 21、vue的template模板上不能使用可选链.
 
@@ -494,12 +456,13 @@ https://blog.csdn.net/tangyuan97/article/details/103604680
 ```
 
 23、替换多语言变量方式：
-```shell
+```html
 <text class="top-tips">{{ $t('i18n_7webnuhg_1651741146219_info', { var: buyNum }) }}</text>
 
 <view class="tw-font-300 tw-text-28 tw-text-333333 tw-ml-16 tw-mt-8">{{$t('%{var}可用').replace('%{var}', hospitalNameSetString)}}</view>
-
-# 含有样式
+```
+```js
+//  含有样式
 msgBoxRef.value
         .show({
           pTitle: $vm.$t('i18n_y5vq3a6c_1651741146206_info'),
@@ -514,11 +477,10 @@ msgBoxRef.value
           showCancelButton: true,
           html: true,
         })
-
-
-
 ```
+
 24、中英文替换
+
 ```js
 再setup里的返回对象里访问不到$t
 set() {
@@ -533,8 +495,10 @@ set() {
 ```
 
 25、vue中的setup，computed，filters，props，methods等执行顺序
-setup应该是比filter早。
 
+有时候想到这个问题，其实好像知道了意义也不是很大。
+
+setup应该是比filter早。
 
 26、搜索中文正则
 
@@ -544,7 +508,9 @@ setup应该是比filter早。
 
 文本的父元素需要固定宽度，所以可以使用flex：1；width：0；配和使用
 
-<!-- 28、100%和calc(100%)有什么不一样？ -->
+28、100%和calc(100%)有什么不一样？
+
+后者可以计算。
 
 29、微信小程序模态框换行
 ```js
@@ -602,30 +568,7 @@ wx.showModal({
 
 或者只缩小0.5倍，0.3倍太小了，手机上根本看不出来。
 
-
-
-32、安全区域
-
-```shell
-iPhoneX 的出现将手机的颜值带上了一个新的高度，它取消了物理按键，改成了底部的小黑条，但是这样的改动给开发者适配移动端又增加了难度。
-
-这些手机和普通手机在外观上无外乎做了三个改动：圆角（corners）、刘海（sensor housing）和小黑条（Home Indicator）。为了适配这些手机，安全区域这个概念变诞生了：安全区域就是一个不受上面三个效果的可视窗口范围。
-
-为了保证页面的显示效果，我们必须把页面限制在安全范围内，但是不影响整体效果。
-
-viewport-fit
-   viewport-fit 是专门为了适配 iPhoneX 而诞生的一个属性，它用于限制网页如何在安全区域内进行展示。
-
-   ![image-20201003143632994](http://qn.chinavanes.com/qiniu_picGo/WIVOie19qaN6yT8.png)contain: 可视窗口完全包含网页内容
-
-   cover：网页内容完全覆盖可视窗口
-
-   默认情况下或者设置为 auto 和 contain 效果相同。
-
-```
-
 33、几倍图
-
 
 ```css
 .avatar {
@@ -646,6 +589,8 @@ viewport-fit
 ```
 
 34、设置省略号的简单css属性
+
+参考27
 
 一个css属性搞定
 ```css
@@ -685,14 +630,6 @@ export function rpx2px(rpx: number) {
 }
 
 ```
-39、展示医生信息卡片的地方：
-```shell
-pages/appt/apptConfirm/index
-
-pages/evaluation/evaluationDetail
-
-pages/evaluation/evaluationSubmit
-```
 
 40、插槽里写v-if判断，v-if只会判断一次，数据更新视图不会更新
 
@@ -723,7 +660,9 @@ pages/evaluation/evaluationSubmit
 ```shell
 $t('i18n_tfpa568q_1651741146222_info').replace(/\\n/g, '\n')
 ```
-42、uniapp获取安全区域的bottom为负数的bug
+
+42、uniapp获取安全区域的bottom
+
 ```shell
 3.4.8.20220428-alpha
 
@@ -736,6 +675,7 @@ $t('i18n_tfpa568q_1651741146222_info').replace(/\\n/g, '\n')
 ```
 
 43、js字符串添加空格
+
 ```js
  '\xa0\xa0\xa0'
 ```
@@ -753,25 +693,23 @@ $t('i18n_tfpa568q_1651741146222_info').replace(/\\n/g, '\n')
 
 45、view和text标签里写文本，有什么区别？
 
-46、为什么微店订单预约main页中的tui-icon组件，将它作为伸缩项目会不显示？
+text组件适合包裹文本，有长按选择文本等属性
 
-47、匹配`t('中文')`或`t("中文")`的正则是什么样子？
+46、为什么tui-icon组件，将它作为伸缩项目会不显示？
+
+图标组件的父元素应用flex，图标组件就不显示了。
 
 48、一行文字，横向与一个居中图标对齐，很简单。但是多行文字，只有第一行与文字居中对齐，有没有什么普适性方案呢？
 
-49、怎么用数据字典？
-
-50、i18n的简单使用？
+分为两列，第一列的高度与第二列第一行的高度一样。
 
 51、scroll-view组件能作为绝对定位的父组件吗？
 
+可以
+
 52、box-sizing：box-border对scroll-view有用吗？
 
-53、设置scroll-view的margin，padding，style的字符串形式不生效，对象形式才生效？
-
-54、有这样一个场景，一行文字，和一个"+"符号，设置它们得行高相等，然后设置flex布局的align-items: center, 但是却发现副轴并不居中对齐。
-
-为什么会这样子呢？
+有
 
 55、小程序富文本解析，原生的rich-text组件有很多限制，不能点击图片 , 有<等特殊字符格式会解析失败。
 ```js
@@ -780,22 +718,35 @@ $t('i18n_tfpa568q_1651741146222_info').replace(/\\n/g, '\n')
       return checkupDetail.value.selectItem.commentDetail?.replaceAll('<', '＜')
     })
 ```
+这种方法时错误的，应该使用社区通用的小程序富文本解析组件。
+
 
 56、v-visibilty指令。使用css的v-visibilty实现？
 
 感觉在某些场景下应该会很方便？
 
+小程序暂不支持自定义指令
+
 57、一般的登录注册逻辑是什么样的？
 
 58、怎么做到用户去往某页面时，若未登录，去登录页登录成功后自动跳转到目标页面？
+
+先记录用户要去的页面。登录成功后在跳往记录的页面。
 
 59、事件总线的替代解决方案为？
 
 感觉和混入有点类似，数据来源不清晰。希望有一个更好的替代方案。
 
+好像没有，还是少用。追查数据来源比较麻烦。
+
 60、哪些东西适合封装为hook？
 
 有setInterval定时器的操作，需要再组件或页面卸载时清除定时器。
+
+比如处理一个列表。
+
+把对列表的增删改查操作都封装为方法，再导出去。
+
 
 61、有哪些封装好比较好用的钩子？
 
@@ -999,14 +950,7 @@ export const apiService = createRequest({
 
 $on，$once，$off的原理？
 
-65、小程序上的div、text标签有什么区别？什么标签可以让用户长按可复制？
-
-## 路由跳转规则
-方法：
-
-跳转路由必须使用封装的路由跳转方法: navigateTo、openPage
-
-路由URL必须使用constants.ts文件里的常量, 禁止手写。
+这个暂时做不了。。。以后吧。
 
 ## 数据通信
 1、跳转路由时，携带参数。
