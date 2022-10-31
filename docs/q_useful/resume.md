@@ -1,6 +1,7 @@
 # 简历
 
 掘金（柯尔）：[https://juejin.cn/user/1742041823325422]
+github：[https://github.com/long-life233]
 
 ## 和睦家医疗UnitedFamily特别版小程序
 2021.09 - 2022.11
