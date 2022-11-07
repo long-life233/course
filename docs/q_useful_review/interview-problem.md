@@ -1,4 +1,26 @@
 # 面试问题
+
+## 自动介绍
+```shell
+我差不多进入前端领域3年，以往的工作让我对自身所拥有的技术有了更深的理解。我觉得技术和业务是相辅相成的，抛开业务空谈技术没有任何意义；而业务又能够驱动技术的进步。
+
+作为一个前端工程师，我对HTML5、CSS3、JavaScript的使用非常熟悉，还原设计稿，完善页面的交互和动画效果是我的基本职责，也是我擅长的。
+
+我熟悉js的执行进程，es6的新语法、api，操作基本数据类型、数组、对象的api，
+比如操作数组的常见方法比如forEach、map、reduce、filter、some、every、find、findindex、flat、concat等等
+比如操作对象的常见方法比如Object.keys、values、entries、hasOwnProperty
+能熟练的使用Promise、async、await将异步代码转化为同步代码。
+
+前端脚手架这块，我接触vue的时间更长，对vue的语法，api，组件化开发思维，脚手架的创建，周边生态vue-router、vuex、pinia、一些第三方库都比较了解。
+曾经我也看过vue的源码，对vue的初始化渲染过程，响应式，组件更新，nextTick方法的原理有了更深的理解。
+
+
+除了开发PC端项目，移动端的H5，微信小程序我也有开发过。我一般使用uniapp来快速开发上线小程序。
+
+除了这些，我一般使用git进行团队协作，对git的工作流比较熟，
+
+```
+## 其它
 http://caibaojian.com/vue-design/
 
 https://vue3js.cn/interview/
