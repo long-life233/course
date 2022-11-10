@@ -119,6 +119,8 @@ app.use(FightingDesign)
 
 ## 组件是如何按需引入的？
 
+## 组件的样式需要作初始化处理吗？
+比如所有的标签盒模型都为border-box，ul、li没有默认的样式
 
 
 
