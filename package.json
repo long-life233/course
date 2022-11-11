@@ -1,6 +1,7 @@
 {
   "name": "vue-project",
   "version": "0.0.0",
+  "homepage": "https://long-life233.github.io/course/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -8,7 +9,11 @@
     "test:unit": "vitest --environment jsdom",
     "test:e2e": "start-server-and-test preview http://localhost:4173/ 'cypress open --e2e'",
     "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.4",
@@ -38,6 +43,7 @@
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^3.1.7",
     "vite": "^3.0.1",
+    "vitepress": "^1.0.0-alpha.28",
     "vitest": "^0.18.1"
   }
 }

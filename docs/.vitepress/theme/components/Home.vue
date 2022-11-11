@@ -1,6 +1,5 @@
 <script setup>
-// import {useParticle} from '../hooks/useParticle.js'
-// useParticle()
+
 </script>
 <template>
   <section id="hero">
@@ -11,17 +10,12 @@
 
     <div class="actions">
 
-      <a class="get-started" href="/vue/vue3-init-process  ">
+      <a class="get-started" href="/_juejin/github-flow-course">
         Get Started
         <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24">
           <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
         </svg>
       </a>
-      <p class="description">打开微信扫一扫</p>
-      <div style="display: flex;align-items:center;">
-        <img style="margin-right:18px;" src="/public/qrcode.jpg" alt="" />
-        <p class="description" style="color:#333 ;">模仿蔚来小程序</p>
-      </div>
     </div>
   </section>
 </template>
@@ -68,12 +62,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .actions a {
     font-size: 16px;
-    /* display: inline-block; */
+    display: inline-block;
     background-color: var(--vt-c-bg-mute);
     padding: 8px 18px;
     font-weight: 500;
@@ -82,12 +76,11 @@
   }
 
   .actions .get-started {
-    /* position: absolute; */
+    position: absolute;
     z-index: 999999;
     font-weight: 600;
-    background-color: var(--vt-c-green);
-    color: #fff;
-    /* margin-right: 18px; */
+    background-color: #42d392;
+    color: #000;
   }
 
   .actions .icon {
@@ -104,7 +97,7 @@
   }
 
   .actions .get-started:hover {
-    background-color: var(--vt-c-green-dark);
+    background-color: #04f88a;
     transition-duration: 0.2s;
   }
 

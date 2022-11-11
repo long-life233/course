@@ -1,4 +1,4 @@
-name: test github workflow
+name: GitHub Actions Build and Deploy Demo
 
 # 当 master 分支 push 代码的时候触发 workflow
 on:
@@ -7,13 +7,20 @@ on:
       - master
 
 jobs:
-  my-test-job-id:
-    name: 这是一个描述字段，我是测试用的
+  # job-id:
+  build-and-deploy:
+    name: 构建并部署
     runs-on: ubuntu-18.04
     steps:
-      - name: print a hello world
-        env: 
-          FIRST_NAME: 卢
-          LAST_NAME: 课程
-        run:
-          echo hello, my name is $FIRST_NAME $LAST_NAME
+      # 获取源码
+      - name: Checkout
+        uses: actions/checkout@master
+
+      # 构建并部署
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.MY_COURSE_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs/.vitepress/dist
+          BUILD_SCRIPT: npm install && npm run build:docs
