@@ -21,4 +21,6 @@ jobs:
       # 安装依赖项（bats就是一个npm包）
       - name: Install
         run: npm install -g bats
-      - run: bats -v
+      # 查看bats包版本
+      - name: Show version
+        run: bats -v
