@@ -6,14 +6,14 @@
 
 ### HelloWorld
 ### JSX 简介
-花括号{}里能使用js表达式（有返回值），花括号里不能写js语句。
+花括号`{}`里能使用js表达式（有返回值）,花括号里不能写js语句。
 
 使用类使用className关键字
 
-使用style行内样式使用双花括号key和value形式 {{key:value}}
+使用style行内样式使用双花括号key和value形式 `{d{key:value}}`
 
 一种语法。类似下面这种形式：
-```jsx
+```js
 const element = <h1>Hello, world!</h1>;
 
 const name = 'Josh Perez';
@@ -958,7 +958,7 @@ class Parent extends React.Component {
 
 ### Render Props
 
-```jsx
+```js
 class Cat extends React.Component {
   render() {
     const mouse = this.props.mouse;
