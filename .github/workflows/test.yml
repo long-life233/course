@@ -20,7 +20,7 @@ jobs:
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@master
         env:
-        ACCESS_TOKEN: ${{ secrets.MY_COURSE_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: docs/.vitepress/dist
-        BUILD_SCRIPT: npm install && npm run build:docs
+          ACCESS_TOKEN: ${{ secrets.MY_COURSE_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs/.vitepress/dist
+          BUILD_SCRIPT: npm install && npm run build:docs
