@@ -1,37 +1,24 @@
-name: GitHub Actions Build and Deploy Demo
-
-# 当 master 分支 push 代码的时候触发 workflow
-on:
-  push:
-    branches:
-      - master
-
+# 每个workflow文件的说明
+name: learn-github-actions
+# 在push代码后触发jobs工作流
+on: [push]
+# 工作流（工作流中的所有job组合在一起形成了这个workflow文件）
 jobs:
-  # job-id:
-  build-and-deploy:
-    name: 构建并部署
+  # 一个工作的id（key）
+  check-bats-version:
+    # 运行的环境
     runs-on: ubuntu-latest
+    # 一个工作分为很多步骤（下面的每个步骤都是一个单独的操作或则脚本）
     steps:
-      # 获取源码
+      # 将你的仓库迁出到运行器上操作，每当你的工作将对仓库的代码操作时，都应该使用 checkout 操作。
       - name: Checkout
         uses: actions/checkout@v3
-
-      # 安装 node
+      # 安装node，可以指定版本
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-
-      # 安装依赖项
+          node-version: '14'
+      # 安装依赖项（bats就是一个npm包）
       - name: Install
-        run: npm i
-
-      # 打打包文档
-      - name: Build docs
-        run: npm run docs:build
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.MY_COURSE_TOKEN }}
-          publish_dir: docs/.vitepress/dist
+        run: npm install -g bats
+      - run: bats -v

@@ -1,0 +1,37 @@
+name: GitHub Actions Build and Deploy Demo
+
+# 当 master 分支 push 代码的时候触发 workflow
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  # job-id:
+  build-and-deploy:
+    name: 构建并部署
+    runs-on: ubuntu-latest
+    steps:
+      # 获取源码
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 安装 node
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      # 安装依赖项
+      - name: Install
+        run: npm i
+
+      # 打打包文档
+      - name: Build docs
+        run: npm run docs:build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.MY_COURSE_TOKEN }}
+          publish_dir: docs/.vitepress/dist
