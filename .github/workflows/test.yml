@@ -16,11 +16,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 构建并部署
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@master
-        env:
-          ACCESS_TOKEN: ${{ secrets.MY_COURSE_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: docs/.vitepress/dist
-          BUILD_SCRIPT: npm install && npm run build:docs
+      # 安装 node
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      # 安装依赖项
+      - name: Install
+        run: npm i
+
+      # 打打包文档
+      - name: Build docs
+        run: npm build:docs
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.MY_COURSE_TOKEN }}
+          publish_dir: docs/.vitepress/dist
