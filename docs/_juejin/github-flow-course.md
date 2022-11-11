@@ -1,5 +1,17 @@
 # github flow 入门教程
 
+## 前言
+
+可能对你有用的参考链接：
+
+- [https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html](阮一峰GitHub Actions 入门教程)
+
+- [https://juejin.cn/post/7006524441798639653](掘金)
+
+- [https://juejin.cn/post/7108615649777156104](掘金)
+
+## 术语（看看就好）
+
 GitHub Actions 有一些自己的术语。
 
 （1）workflow （工作流程）：持续集成一次运行的过程，就是一个 workflow。（一个workflow对应一个.github/workflows/*.yml文件）
