@@ -12,14 +12,14 @@ jobs:
     name: 构建并部署
     runs-on: ubuntu-latest
     steps:
-    # 获取源码
-    - name: Checkout
-      uses: actions/checkout@master
+      # 获取源码
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    # 构建并部署
-    - name: Build and Deploy
-      uses: JamesIves/github-pages-deploy-action@master
-      env:
+      # 构建并部署
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@master
+        env:
         ACCESS_TOKEN: ${{ secrets.MY_COURSE_TOKEN }}
         BRANCH: gh-pages
         FOLDER: docs/.vitepress/dist
