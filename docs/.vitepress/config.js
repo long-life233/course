@@ -1,6 +1,7 @@
 export default {
   title: 'VitePress',
   description: 'Just playing around.',
+  base: '/course/',
   themeConfig: {
     siteTitle: '科尔',
     logo: '/logo.png',
@@ -12,6 +13,5 @@ export default {
         ]
       }
     ]
-  },
-  base: '/course/'
+  }
 }
