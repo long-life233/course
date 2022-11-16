@@ -21,6 +21,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          # 缓存依赖项
+          cache: 'npm'
 
       # 安装依赖项
       - name: Install

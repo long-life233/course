@@ -9,7 +9,7 @@ export default {
       {
         text: 'USEFULL',
         items: [
-          { text: '0', link: '/_juejin/github-flow-course' },
+          { text: '0', link: '/_juejin/emotion_collection' },
         ]
       }
     ]
