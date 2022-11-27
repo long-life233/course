@@ -6,6 +6,8 @@ import router from './router'
 
 import './assets/index.css'
 
+// import './_utils/waterfall'
+
 const app = createApp(App)
 
 app.use(createPinia())
