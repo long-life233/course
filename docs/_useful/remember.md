@@ -13,8 +13,10 @@ yarn cache clean
 
 yarn config get registry
 npm config get registry
+pnpm config get registry
 
 npm config set registry https://registry.npm.taobao.org
+pnpm config set registry https://registry.npm.taobao.org
 
 npm config set registry https://registry.npmjs.org
 
