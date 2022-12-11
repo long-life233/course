@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import commits from '@/views/example/classic/commits.vue'
+import commits from '@/views/example/commits.vue'
 
 type exampleType = 'commits'
 
