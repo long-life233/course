@@ -27,14 +27,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-          # 缓存依赖项
-          cache: 'pnpm'
 
       # 安装依赖项
       - name: Install
         run: pnpm i
 
-      # 打打包文档
+      # 打包文档
       - name: Build docs
         run: pnpm run docs:build
 
