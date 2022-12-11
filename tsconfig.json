@@ -10,9 +10,29 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
+    "types": ["node"],
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    // 原来要配置在这里
+    "baseUrl": "./",
+    "paths": { // 配置导出路径
+      "@/*": [
+        "./src/*"
+      ]
+    },
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  // 最开始写在这里，试了半天没效果
+  // "baseUrl": "./",
+  // "paths": { // 配置导出路径
+  //   "@/*": [
+  //     "./src/*"
+  //   ]
+  // },
+  "include": [
+    "src/**/*.ts", 
+    "src/**/*.d.ts", 
+    "src/**/*.tsx", 
+    "src/**/*.vue"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
