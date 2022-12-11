@@ -7,12 +7,9 @@ import router from './router'
 
 import './assets/index.css'
 
-// import './_utils/waterfall'
-
 const app = createApp(App)
 
-const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
+const pinia = createPinia().use(piniaPluginPersistedstate)
 
 app.use(pinia)
 app.use(router)
