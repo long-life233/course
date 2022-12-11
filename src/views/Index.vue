@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import commits from '@/views/example/commits.vue'
+import grid from '@/views/example/grid.vue'
 
-type exampleType = 'commits'
+type exampleType = 'commits' | 'grid'
 
 const examples: Record<string, any> = {
-  commits
+  commits,
+  grid
 }
 
-const current = 'commits' as exampleType
+const current = 'grid' as exampleType
 
 </script>
 <template>
