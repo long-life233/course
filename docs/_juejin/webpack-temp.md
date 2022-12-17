@@ -3,14 +3,15 @@
 
 有什么用？chunk 是什么？
 
-肤浅理解，多个模块构成一个 chunk，一个 chunk 对应一个 bundle
+多个模块构成一个 chunk，一般来讲，一个 chunk 对应一个 bundle。
+什么时候不一般？比如我配置了 devtool: 'source-map'，这时候虽然只有一个 chunk，但是却有两个 bundle（包含一个 source-map 文件）。
 
 动态导入会单独生成一个 chunk
 
 
 2. 在设置 publicPath 为 / 时会导致直接打开打包后的 index.html 找不到图片、字体等资源。
 
-但通过 live-server 打卡可以找到对应资源。
+但通过 live-server 打开可以找到对应资源。
 
 ```js
   output: {
@@ -31,6 +32,8 @@ static 默认值为 'public'。
 假设你使用 webpack-dev-server 启动了一个服务器地址 localhost:8080，然后你还在 public 目录下放了一张名为 test.png
 的图片。
 你就可以直接通过 localhost:8080/test.png 访问到这张图片。
+
+5. defer 脚本的作用
 
 ## 注意事项
 运行 webpack5 最低 nodejs 版本为 10.13.0
@@ -97,3 +100,13 @@ module.exports = {
 ## 代码分离
 
 一般使用 Entry dependencies 或则 SplitChunksPlugin 去重和分离 chunk。
+
+## 配置 eslint
+
+可以配置 eslint，每次打包的时候会检查代码规范，不符会报错。
+
+还可以安装 vscode 的 eslint 检查工具，这样还未打包的时候就会提示报错。
+
+## 配置 babel
+处理 js 兼容性
+
