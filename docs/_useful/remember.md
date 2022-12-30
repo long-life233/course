@@ -1,4 +1,12 @@
 # 记录
+## 删除文件夹
+```
+rm rf name
+
+-r 就是向下递归，不管有多少级目录，一并删除
+
+-f 就是直接强行删除，不作任何提示的意思
+```
 ## npm与yarn相关
 
 nvm，切換nodejs、npm版本
@@ -25,6 +33,30 @@ npm config list --json
 获取缓存`npm config get cache`
 
 验证是否还有缓存`npm cache verify`
+
+## 删除 node_modules
+
+安装 rimraf
+ npm install rimraf -g 
+使用命令删除
+rimraf node_modules
+
+```
+# 删除 package-lock.json
+rm -rf package-lock.json
+
+# 递归删除下工程内的所有node_modules
+find . -name "node_modules" -type d -exec rm -rf '{}' +
+# 命令拆解注释
+# . 当前目录
+# -name 名字匹配，指定字符串作为寻找文件或目录的范本样式；
+# -type 查询文件类型。 -d 就是目录
+# -exec 就是匹配后执行一些命令
+# rm -rf '{}' 删除匹配到到('{}')
+# + 是个骚操作
+# 一个-exec只能执行一个命令，而且必须在命令后面加上终结符，终结符有两个：“；”和“+”。
+# 其中";" 会对每一个find到的文件去执行一次cmd命令。而”+“让find到的文件一次性执行完cmd命令。
+```
 
 npm install时报错，pathy2
 https://blog.csdn.net/qq_24788629/article/details/103819561
