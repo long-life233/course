@@ -44,4 +44,10 @@ pnpm link ../demo2
 pnpm link demo2
 ```
 
+
 改变了工作空间的目录后，再运行会发现找不到模块了。原因是 pnpm-lock.yaml 会用相对路径记录工作空间依赖的路径。移动目录后自然就找不到模块了。删掉 lock 文件，从新 pnpm i 就可以了。
+
+
+testse
+
+atsetse
